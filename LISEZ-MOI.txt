@@ -1,0 +1,45 @@
+L'ODYSSEE DE KRYPTOS
+Site d'apprentissage de la cybersecurite, du college au niveau professionnel.
+
+CHIFFRES
+  8 parcours - 57 modules - 503 questions - 48 exercices de code
+  19 moteurs d'exercice - 44 distinctions - 12 rangs
+
+EDITION LIBRE (3 parcours, 25 modules)
+  I   Le Grand Labyrinthe  (9 chapitres + boss)  les fondamentaux
+  II  La Forge de Dedale   (8 ateliers)          apprendre par le code
+  III Le Casque d'Hades    (8 salles)            devenir OPSEC
+
+EDITION PREMIUM (cle + compte, 3 blocs, 32 modules)
+  Le Second Cercle   (18 modules) defense d'organisation, code pro, renseignement
+                     + examen certifiant + trousse + espace metiers
+  Le Cheval de Bois  (9 salles)   hacking ethique, avec une CONSOLE simulee
+  L'Arsenal          (5 etablis)  les logiciels a installer
+
+TRANSVERSAL
+  L'Academie (cours magistraux imprimables), l'Arcade (epreuves libres),
+  le Sanctuaire (remise a niveau adaptative), le Pantheon (distinctions).
+
+COMPTES ET CLES
+  L'ecran "Compte" permet de creer un compte avec une cle premium, puis
+  de se reconnecter. Les 10 cles sont dans CLES.txt (hors depot Git).
+  ATTENTION : cles et comptes sont une DEMONSTRATION cote navigateur, ils
+  ne protegent pas le contenu. Voir NOTE-VENTE.txt.
+
+FICHIERS
+  index.html   Version autonome. Double-clic pour ouvrir. Hors ligne.
+  kryptos.html Meme contenu, sans l'entete HTML (version publiee).
+  serve.js     Serveur local optionnel : node serve.js -> http://localhost:8123
+  _test.js     Controle qualite (voir README).
+  CLES.txt     Les 10 cles premium (NE PAS PUBLIER).
+  NOTE-VENTE.txt  Ce qu'il faut changer pour vendre reellement.
+
+PROGRESSION
+  Enregistree dans le navigateur (localStorage). Ne suit pas d'un
+  appareil a l'autre ; pas de tableau de bord enseignant. Voir NOTE-VENTE.
+
+CONTROLE QUALITE
+  node -e "const f=require('fs');const s=f.readFileSync('kryptos.html','utf8');f.writeFileSync('_check.js',s.slice(s.indexOf('<script>')+8,s.lastIndexOf('</'+'script>')))"
+  node _test.js
+  Verifie 157 assertions, dont que chaque solution de reference passe
+  ses propres tests. A relancer apres toute modification.
