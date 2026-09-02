@@ -6,9 +6,9 @@ Un site complet et ludique pour apprendre la cybersécurité, **du collège au n
 
 ## ✨ En chiffres
 
-- **8 parcours · 57 modules · 503 questions · 48 exercices de code**
+- **9 parcours · 69 modules · 585 questions · 51 exercices de code**
 - **19 moteurs d'exercice** différents (quiz adaptatif, tri, budget, tribunal, **console de hacking simulée**, chasse aux drapeaux, constructeur de labo…)
-- **44 distinctions, 12 rangs, un examen certifiant**
+- **47 distinctions, 12 rangs, un examen certifiant**
 - Thème clair et sombre, responsive, imprimable (cours et diplômes)
 - Progression enregistrée localement (localStorage)
 
@@ -31,6 +31,7 @@ Plus **l'Académie** (cours magistraux imprimables), **l'Arcade** (épreuves lib
 | **Le Second Cercle** | Athéna, Héphaïstos, les Moires | 18 modules pro : défense d'organisation, ingénierie sécurité applicative, renseignement — avec examen certifiant et trousse de modèles |
 | **Le Cheval de Bois** | Ulysse | 9 salles de **hacking éthique**, de débutant à pro, dans l'ordre d'un vrai test d'intrusion, avec une **console simulée** qui répond pour de vrai |
 | **L'Arsenal** | Héphaïstos | 5 établis sur **les logiciels à installer** : laboratoire, outils réseau et web, protections personnelles, hygiène d'installation |
+| **Le Mont Olympe** | Zeus & les Douze | 12 trônes — **la grande synthèse** : un dieu par domaine (identité, réseau, données, défense, détection, chasse, offensive, ingénierie sociale, code, cryptographie, résilience) qui relie **toute** la cybersécurité, le code et le hacking éthique. Épreuve du sommet où l'on voit une cible en attaquant ET en défenseur. |
 
 ## 🎓 Pédagogie
 

@@ -10288,6 +10288,1128 @@ function rendre() {
 
 /* lancerChapitre doit connaître les intros des blocs premium (déjà générique via PARCOURS) */
 
+
+/* ============================================================
+   38. BLOC PREMIUM — LE MONT OLYMPE (la grande synthèse)
+   ============================================================
+   Le sommet. Douze trônes, une divinité par domaine, qui
+   relient TOUT : défense, code et son usage, hacking éthique.
+   Guidé par Zeus, qui convoque le panthéon.
+   ============================================================ */
+
+const OLYMPE_INTRO = [
+  { qui:'recit', t:"Tu n'es plus dans le Labyrinthe. Tu montes. L'air se raréfie, la lumière change, et au sommet t'attend une salle à ciel ouvert, cernée de douze trônes de marbre." },
+  { qui:'zeus', t:"Te voilà. Tu as traversé le Labyrinthe, forgé chez Dédale, porté le casque d'Hadès, appris à défendre, à coder, à entrer par la ruse. Chaque dieu t'a enseigné son art." },
+  { qui:'zeus', t:"Mais un art isolé ne fait pas un maître. Un défenseur qui ne comprend pas l'attaque défend à l'aveugle. Un attaquant qui ignore le code répète des recettes. Un codeur qui néglige l'humain construit des forteresses aux portes ouvertes." },
+  { qui:'kryptos', t:"C'est pour cela que Kryptos t'a mené jusqu'ici. L'Olympe ne t'apprend pas une chose de plus : il te montre comment tout ce que tu sais n'est qu'une seule et même chose, vue sous douze angles." },
+  { qui:'zeus', t:"Douze trônes. Héra veille sur l'identité, Poséidon sur les flots du réseau, Déméter sur la moisson des données. Athéna arme la défense, Apollon éclaire, Artémis traque. Arès attaque, Aphrodite séduit, Héphaïstos forge. Hermès scelle les secrets, Dionysos survit au chaos. Et moi, je relie." },
+  { qui:'zeus', t:"C'est le parcours le plus complet de tout ton voyage, parce qu'il ne contient rien de neuf et tout à la fois. On n'apprend pas l'Olympe : on y devient enfin un professionnel entier. Prends place au premier trône." }
+];
+
+const OLYMPE = [
+{
+  id:'ol1', g:'Α', titre:"Le Trône d'Héra", theme:"Identité, authentification et accès", skill:'oly_identite',
+  relique:{ nom:"L'Anneau", em:'💍' }, jeu:'tri3', duree:22, pro:true, premium:true,
+  accroche:"Avant de protéger quoi que ce soit, il faut savoir qui est qui.",
+  scenes:[
+    { qui:'hera', t:"Je veille sur les liens : qui est marié à qui, qui appartient à quel foyer. En sécurité, tout commence là : qui es-tu, et à quoi as-tu droit ?" },
+    { qui:'hera', t:"Tu l'as vu en morceaux — les mots de passe au Labyrinthe, la double authentification chez Cerbère, les sessions chez Talos, le contrôle d'accès partout. Ici, on assemble le tout en une seule idée : l'identité gouverne l'accès." },
+    { qui:'kryptos', t:"Retiens la chaîne complète : on prouve qui l'on est (authentification), on décide ce qu'on peut faire (autorisation), et on garde la trace de qui a fait quoi (traçabilité)." },
+    { qui:'hera', t:"Range chaque situation à sa place. Confondre l'identité, l'autorisation et la preuve, c'est laisser une porte ouverte en croyant l'avoir fermée." }
+  ],
+  cours:{
+    objectifs:["Relier authentification, autorisation et traçabilité","Comprendre le cycle de vie d'une identité","Appliquer le moindre privilège aux personnes","Reconnaître les failles d'identité les plus courantes"],
+    sections:[
+      { t:"Les trois questions de l'identité", h:`
+<p>Toute la sécurité des accès tient en trois questions distinctes, que les débutants confondent sans cesse :</p>
+<ul>
+<li><strong>Qui es-tu ?</strong> — l'<strong>authentification</strong>. On la prouve par ce qu'on sait (mot de passe), ce qu'on a (téléphone, clé), ce qu'on est (empreinte). Deux familles différentes = double authentification.</li>
+<li><strong>Que peux-tu faire ?</strong> — l'<strong>autorisation</strong>. Elle se vérifie <em>à chaque action, sur chaque objet</em>. Être connecté ne donne pas tous les droits.</li>
+<li><strong>Qu'as-tu fait ?</strong> — la <strong>traçabilité</strong>. Sans elle, aucune enquête, aucune preuve. C'est pourquoi les comptes partagés sont un poison.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Le fil de tout ton voyage</div><p style="margin:6px 0 0">Chapitre Α (mots de passe), chapitre Β (2FA), atelier de Talos (sessions et jetons), contrôle d'accès (IDOR) : tout cela répondait déjà à ces trois questions. L'Olympe te montre qu'il n'y en a jamais eu qu'une seule, à trois faces.</p></div>` },
+      { t:"Le cycle de vie d'une identité", h:`
+<p>Une identité n'est pas figée : elle naît, évolue et doit mourir. Les failles se logent dans les transitions :</p>
+<ul>
+<li><strong>Création</strong> — avec quels droits ? Le moindre privilège dès le départ : on ajoute au besoin, on ne retire jamais « au cas où ».</li>
+<li><strong>Changement de rôle</strong> — un agent change de service et <em>garde</em> ses anciens droits en plus des nouveaux. C'est l'<strong>accumulation de privilèges</strong>, un angle mort universel.</li>
+<li><strong>Départ</strong> — le compte d'un ancien agent, encore actif, est l'une des portes d'entrée les plus fréquentes. On l'a vu au Bouclier d'Athéna.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">La revue des accès</div><p style="margin:6px 0 0">Une fois par an, on relit qui a quoi. C'est la mesure la plus ennuyeuse du métier et l'une des plus efficaces : elle rattrape l'accumulation et les comptes oubliés que rien d'autre ne voit.</p></div>` },
+      { t:"Où l'identité se brise", h:`
+<p>Les failles d'identité les plus exploitées, offensive et défense confondues :</p>
+<ul>
+<li>Le <strong>mot de passe réutilisé</strong> : une fuite ailleurs ouvre ici (bourrage d'identifiants).</li>
+<li>La <strong>double authentification par SMS</strong>, détournable, quand une application ou une clé serait plus sûre.</li>
+<li>Le <strong>contrôle d'accès manquant</strong> : on change un identifiant dans l'adresse et on lit les données d'un autre (IDOR).</li>
+<li>Le <strong>jeton de session volé</strong> par une faille XSS : être toi sans ton mot de passe.</li>
+<li>Le <strong>compte à privilèges</strong> utilisé pour des tâches ordinaires, qui offre ses droits au premier logiciel malveillant.</li>
+</ul>
+<p>Le fil commun : <strong>l'identité gouverne tout le reste</strong>. Compromettre une identité, c'est hériter de tout ce qu'elle peut faire. C'est pourquoi un attaquant la vise en premier, et un défenseur la protège en priorité.</p>` }
+    ],
+    vocab:[
+      ["Authentification","Prouver qui l'on est."],
+      ["Autorisation","Décider ce que l'on peut faire, à chaque action."],
+      ["Traçabilité","Garder la trace de qui a fait quoi."],
+      ["Accumulation de privilèges","Garder d'anciens droits après un changement de rôle."],
+      ["Revue des accès","Relecture périodique de qui a quels droits."],
+      ["Moindre privilège","N'accorder que les droits strictement nécessaires."]
+    ],
+    retenir:["Trois questions : qui es-tu, que peux-tu faire, qu'as-tu fait.","Être connecté ne donne pas tous les droits : l'autorisation se vérifie à chaque objet.","Les failles se logent dans les transitions : création, changement, départ.","Un compte partagé détruit la traçabilité.","Compromettre une identité, c'est hériter de tout ce qu'elle peut faire."]
+  },
+  jeuData:{
+    titre:"Chaque chose à sa place",
+    intro:"Pour chaque situation, dis de quoi il s'agit vraiment : une question d'authentification (qui es-tu), d'autorisation (que peux-tu faire), ou de traçabilité (qu'as-tu fait). Les confondre, c'est mal se protéger.",
+    cats:[{ n:"Authentification", d:"prouver qui l'on est" }, { n:"Autorisation", d:"décider ce qu'on peut faire" }, { n:"Traçabilité", d:"savoir qui a fait quoi" }],
+    items:[
+      { t:"Activer une application d'authentification en plus du mot de passe", c:0, e:"On renforce la preuve d'identité avec un second facteur : c'est de l'authentification." },
+      { t:"Vérifier qu'une facture demandée appartient bien à l'utilisateur connecté", c:1, e:"L'utilisateur est authentifié ; la question est ce qu'il a le droit de voir. C'est de l'autorisation — précisément la faille IDOR quand elle manque." },
+      { t:"Un compte partagé « prof » empêche de savoir qui a modifié une note", c:2, e:"Le compte partagé détruit la capacité à attribuer une action : c'est la traçabilité qui tombe." },
+      { t:"Un mot de passe volé lors d'une fuite est réutilisé pour se connecter", c:0, e:"L'attaque porte sur la preuve d'identité elle-même : c'est le bourrage d'identifiants, une faille d'authentification." },
+      { t:"Un stagiaire dispose d'un accès administrateur « au cas où »", c:1, e:"Il est bien identifié ; le problème est l'étendue de ses droits. Autorisation trop large, contraire au moindre privilège." },
+      { t:"Conserver les journaux de connexion pour pouvoir enquêter plus tard", c:2, e:"On garde la trace des actions : c'est la traçabilité, le socle de toute investigation." },
+      { t:"Un jeton de session volé permet d'agir sans retaper le mot de passe", c:0, e:"Le jeton prouve l'identité à la place du mot de passe : le voler, c'est usurper l'authentification déjà validée." },
+      { t:"Un ancien employé se connecte encore un an après son départ", c:1, e:"Le compte existe toujours et garde ses droits : c'est une autorisation qui aurait dû être révoquée au départ." },
+      { t:"Signer chaque action sensible avec l'identifiant nominatif de l'agent", c:2, e:"On rend chaque action attribuable à une personne précise : traçabilité." },
+      { t:"Demander une empreinte digitale pour déverrouiller l'appareil", c:0, e:"« Ce que je suis » : un facteur d'authentification biométrique." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"L'autorisation répond à la question :", c:["Qui es-tu ?","Que peux-tu faire, sur cet objet précis ?","Qu'as-tu fait ?","Où es-tu ?"], a:1, e:"Et elle se vérifie à chaque action. Être connecté ne donne pas tous les droits." },
+    { t:1, q:"Un compte partagé pose problème parce qu'il détruit :", c:["L'authentification","La traçabilité","Le chiffrement","La disponibilité"], a:1, e:"On ne peut plus savoir qui a fait quoi : aucune enquête n'est possible." },
+    { t:1, q:"Compromettre une identité, c'est :", c:["Ralentir un service","Hériter de tout ce qu'elle peut faire","Chiffrer ses fichiers","Effacer les journaux"], a:1, e:"C'est pourquoi l'attaquant la vise en premier et le défenseur la protège en priorité." },
+    { t:2, q:"L'accumulation de privilèges survient surtout :", c:["À la création du compte","Lors d'un changement de rôle, quand on garde les anciens droits","À la déconnexion","Jamais"], a:1, e:"On ajoute les nouveaux droits sans retirer les anciens : un angle mort universel que la revue des accès rattrape." },
+    { t:2, q:"La revue des accès consiste à :", c:["Changer tous les mots de passe","Relire périodiquement qui a quels droits","Chiffrer les comptes","Supprimer les journaux"], a:1, e:"Ennuyeuse et très efficace : elle rattrape l'accumulation et les comptes oubliés." },
+    { t:2, q:"Un jeton de session volé permet à un attaquant de :", c:["Lire le mot de passe","Agir en se faisant passer pour toi, sans mot de passe ni 2FA","Ralentir le site","Rien"], a:1, e:"La 2FA a déjà été franchie au moment où le jeton a été émis." },
+    { t:3, q:"Le fil qui relie mots de passe, 2FA, sessions et contrôle d'accès est :", c:["Le chiffrement","L'identité, qui gouverne tout l'accès","Le réseau","La sauvegarde"], a:1, e:"Ce sont quatre facettes d'une seule idée : prouver qui l'on est et en déduire ce qu'on peut faire." }
+  ]
+},
+{
+  id:'ol2', g:'Β', titre:"Le Trône de Poséidon", theme:"Réseaux, protocoles et flux", skill:'oly_reseau',
+  relique:{ nom:"Le Trident", em:'🔱' }, jeu:'terminal', duree:24, pro:true, premium:true,
+  accroche:"Tout circule. Qui comprend les courants tient la mer.",
+  scenes:[
+    { qui:'poseidon', t:"Je règne sur ce qui circule. Chaque octet qui va d'une machine à une autre traverse mon domaine. Qui ignore les courants se noie ; qui les comprend voit tout." },
+    { qui:'poseidon', t:"Un réseau, ce sont des adresses, des ports, des protocoles. Tu l'as effleuré chez Ulysse en scannant des ports, chez Héphaïstos en observant le trafic. Ici, tu relies : comment un message voyage, et où on peut le voir." },
+    { qui:'kryptos', t:"Retiens la superposition : une adresse pour trouver la machine, un port pour trouver le service, un protocole pour se comprendre, et parfois une couche de chiffrement par-dessus." },
+    { qui:'poseidon', t:"Ouvre la console. On va suivre un message de bout en bout, et découvrir qui, sur le trajet, peut le lire." }
+  ],
+  cours:{
+    objectifs:["Comprendre adresses, ports et protocoles","Suivre le trajet d'une requête","Distinguer ce qui est chiffré de ce qui ne l'est pas","Relier réseau, attaque et défense"],
+    sections:[
+      { t:"Adresse, port, protocole", h:`
+<p>Pour qu'un message arrive, il faut trois choses, comme une lettre :</p>
+<ul>
+<li>L'<strong>adresse IP</strong> — l'immeuble : quelle machine sur le réseau.</li>
+<li>Le <strong>port</strong> — l'appartement : quel service sur cette machine (80 pour le web, 443 pour le web chiffré, 22 pour SSH…).</li>
+<li>Le <strong>protocole</strong> — la langue : comment les deux se comprennent (HTTP, HTTPS, DNS, SSH…).</li>
+</ul>
+<p>Le <strong>DNS</strong> traduit un nom lisible (<span class="mono">kryptos.fr</span>) en adresse. C'est l'annuaire public que tu as interrogé chez Ulysse à la reconnaissance.</p>` },
+      { t:"Le voyage d'une requête", h:`
+<p>Quand tu ouvres une page, ton message traverse une chaîne d'acteurs, et chacun voit quelque chose :</p>
+<ul>
+<li>Ton <strong>appareil</strong> — il voit tout, en clair.</li>
+<li>Le <strong>réseau local</strong> (ton wifi) — voit vers où tu vas ; le contenu dépend du chiffrement.</li>
+<li>Ton <strong>fournisseur d'accès</strong> — voit quels sites tu joins, quand.</li>
+<li>Le <strong>serveur</strong> — voit tout ce que tu lui envoies.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">La leçon d'Hadès, en réseau</div><p style="margin:6px 0 0">Le chiffrement <strong>déplace</strong> ce que chacun voit. En HTTPS, le wifi et le fournisseur voient <em>vers quel site</em> tu vas, mais pas <em>ce que</em> tu écris. Un VPN masque la destination à ton fournisseur… et la donne au fournisseur du VPN. On ne supprime jamais la confiance, on la place.</p></div>` },
+      { t:"Le réseau, terrain d'attaque et de défense", h:`
+<p>Le même savoir sert des deux côtés :</p>
+<ul>
+<li><strong>Offensive</strong> — le scan de ports (Ulysse) cartographie les services ; l'écoute du trafic révèle un mot de passe en clair ; un faux point d'accès wifi intercepte tout.</li>
+<li><strong>Défense</strong> — la <strong>segmentation</strong> (Athéna) découpe le réseau pour qu'une brèche ne se propage pas ; le <strong>pare-feu</strong> filtre les flux ; la <strong>supervision</strong> (Apollon) repère un trafic anormal.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">Le signal qui trahit</div><p style="margin:6px 0 0">Un poste qui contacte une adresse inconnue <strong>à intervalle régulier, à la seconde près</strong>, n'est pas un humain : c'est un programme. Cette régularité est la signature d'un canal de commande d'un logiciel malveillant. Voir le réseau, c'est voir ce que les fichiers cachent.</p></div>` }
+    ],
+    vocab:[
+      ["Adresse IP","Identifie une machine sur le réseau."],
+      ["Port","Identifie un service sur une machine."],
+      ["Protocole","La langue commune de deux machines (HTTP, DNS…)."],
+      ["DNS","Annuaire traduisant les noms en adresses."],
+      ["Segmentation","Découper le réseau en zones isolées."],
+      ["Canal de commande","Liaison régulière entre un malware et son opérateur."]
+    ],
+    retenir:["Adresse, port, protocole : l'immeuble, l'appartement, la langue.","Le chiffrement déplace ce que chaque acteur du trajet peut voir.","Un VPN transfère la confiance, il ne la supprime pas.","Le même savoir réseau sert l'attaque et la défense.","Un trafic parfaitement régulier trahit un programme, pas un humain."]
+  },
+  jeuData:{
+    kind:'terminal',
+    intro:"Console réseau. Suis un message et découvre le domaine, l'adresse, le service, puis récupère le drapeau caché dans le trajet. Cible d'entraînement : kryptos-lab.fr. Tape help, hint si tu bloques.",
+    prompt:"reseau@olympe",
+    cible:"kryptos-lab.fr",
+    objectifs:["Traduire le nom en adresse","Identifier le service web","Observer le trajet du message","Récupérer le drapeau"],
+    flags:["KRYPTOS{l3_r3s34u_r3v3l3_t0ut}"],
+    aide:[
+      "Commence par traduire le nom : 'dig kryptos-lab.fr'.",
+      "Regarde quels services répondent : 'ports 10.20.0.5'.",
+      "Suis le trajet du message : 'trace kryptos-lab.fr'.",
+      "Le drapeau apparaît dans l'analyse du trafic : 'sniff'."
+    ],
+    commandes:"dig <domaine> · ports <ip> · trace <domaine> · sniff · vpn on|off",
+    rep:[
+      { c:/^dig\b/i, o:"kryptos-lab.fr.  IN  A  10.20.0.5\n→ Le nom se traduit en 10.20.0.5. C'est le rôle du DNS.", set:'dig' },
+      { c:/^ports\b/i, o:"10.20.0.5 :\n  80/tcp   http   (web, NON chiffré)\n  443/tcp  https  (web chiffré)\n  22/tcp   ssh\n→ Le port 80 sert du web en clair : tout ce qui y passe est lisible.", set:'ports' },
+      { c:/^trace\b/i, o:"1  ta box            (voit : destination)\n2  fournisseur accès (voit : destination, horaires)\n3  coeur du réseau   (voit : trafic)\n4  serveur 10.20.0.5 (voit : TOUT)\n→ Quatre acteurs sur le trajet. Chacun voit une partie.", set:'trace' },
+      { c:/^sniff\b/i, o:"Capture sur le port 80 (non chiffré) :\n  POST /login  user=admin&note=KRYPTOS{l3_r3s34u_r3v3l3_t0ut}\n→ Sur du trafic NON chiffré, le mot de passe et le drapeau se lisent en clair. Utilise 'submit'.", set:'sniff', flag:"KRYPTOS{l3_r3s34u_r3v3l3_t0ut}" },
+      { c:/^vpn\s+on/i, o:"VPN activé. Ton fournisseur d'accès ne voit plus la destination... mais le fournisseur du VPN, lui, voit tout. La confiance est déplacée, pas supprimée.", set:'vpn' },
+      { c:/^vpn\s+off/i, o:"VPN désactivé." },
+      { c:/^vpn\b/i, o:"Usage : vpn on | vpn off." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Le port identifie :", c:["La machine","Le service sur la machine","Le mot de passe","Le pays"], a:1, e:"L'adresse IP trouve la machine (l'immeuble), le port trouve le service (l'appartement)." },
+    { t:1, q:"Le DNS sert à :", c:["Chiffrer le trafic","Traduire un nom en adresse","Bloquer les attaques","Stocker les mots de passe"], a:1, e:"C'est l'annuaire public du réseau, interrogé dès la reconnaissance." },
+    { t:1, q:"Sur du trafic web NON chiffré (port 80), un mot de passe est :", c:["Protégé","Lisible en clair par qui écoute le trajet","Chiffré","Invisible"], a:1, e:"D'où l'importance du HTTPS : sans lui, tout circule à découvert." },
+    { t:2, q:"En HTTPS, ton fournisseur d'accès voit :", c:["Tout ce que tu écris","Vers quel site tu vas, mais pas le contenu","Rien","Ton mot de passe"], a:1, e:"Le chiffrement protège le contenu, pas la destination. Un VPN masque aussi la destination — au fournisseur du VPN." },
+    { t:2, q:"Un VPN :", c:["Supprime le besoin de confiance","Déplace la confiance vers le fournisseur du VPN","Rend anonyme","Chiffre le serveur"], a:1, e:"On ne supprime jamais la confiance sur le trajet : on choisit à qui l'accorder." },
+    { t:2, q:"La segmentation du réseau sert à :", c:["Accélérer le trafic","Empêcher qu'une brèche se propage à tout le réseau","Chiffrer les données","Cacher les ports"], a:1, e:"Une zone compromise ne doit pas pouvoir en atteindre une autre. C'est le compartimentage, appliqué au réseau." },
+    { t:3, q:"Un poste qui contacte une adresse inconnue à intervalle régulier, à la seconde près, suggère :", c:["Un humain prudent","Un canal de commande d'un logiciel malveillant","Une mise à jour","Un problème de wifi"], a:1, e:"La régularité parfaite est une signature machine : voir le réseau révèle ce que les fichiers cachent." }
+  ]
+},
+{
+  id:'ol3', g:'Γ', titre:"Le Trône de Déméter", theme:"Les données et leur cycle de vie", skill:'oly_donnees',
+  relique:{ nom:"La Gerbe", em:'🌾' }, jeu:'tri3', duree:22, pro:true, premium:true,
+  accroche:"La donnée est la vraie récolte. On la protège de la graine au grenier.",
+  scenes:[
+    { qui:'demeter', t:"Je préside aux moissons. Et la moisson de ton époque, ce sont les données. On sème (on collecte), on cultive (on traite), on engrange (on stocke), et un jour on brûle le chaume (on efface)." },
+    { qui:'demeter', t:"À chaque étape, une menace différente. On ne protège pas une donnée stockée comme une donnée en transit. Tu l'as croisé partout — le chiffrement chez Hermès, la minimisation chez les Moires, le RGPD chez Athéna." },
+    { qui:'kryptos', t:"Retiens la question qui décide de tout : cette donnée, qu'arrive-t-il si elle fuite ? La réponse fixe le niveau de protection, pas l'inverse." },
+    { qui:'demeter', t:"Classe chaque donnée par sa vraie sensibilité. Trop protéger l'anodin épuise ; trop peu protéger l'essentiel expose. La justesse est tout." }
+  ],
+  cours:{
+    objectifs:["Suivre le cycle de vie d'une donnée","Distinguer les états d'une donnée","Classer par sensibilité réelle","Relier données, vie privée et loi"],
+    sections:[
+      { t:"Les trois états d'une donnée", h:`
+<p>Une donnée existe dans trois états, chacun avec sa protection :</p>
+<ul>
+<li><strong>Au repos</strong> — stockée sur un disque. Protection : le <strong>chiffrement du disque</strong>. Un appareil volé devient illisible.</li>
+<li><strong>En transit</strong> — sur le réseau. Protection : le <strong>chiffrement de la connexion</strong> (HTTPS, chiffrement de bout en bout).</li>
+<li><strong>En cours d'usage</strong> — ouverte en mémoire par un programme. La plus dure à protéger : un logiciel espion la voit alors en clair.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Une erreur classique</div><p style="margin:6px 0 0">Chiffrer le disque <em>et</em> la connexion, puis oublier que la donnée transite en clair dans un journal, un cache, une sauvegarde non chiffrée, ou l'écran. La donnée se protège <strong>à chaque état</strong>, pas à un seul.</p></div>` },
+      { t:"Classer par sensibilité", h:`
+<p>On ne protège bien qu'en hiérarchisant. La question qui tranche : <strong>que se passe-t-il si cette donnée fuite ?</strong></p>
+<ul>
+<li><strong>Publique</strong> — déjà destinée à tous. Aucune confidentialité requise (mais son intégrité peut compter).</li>
+<li><strong>Interne</strong> — gênante si elle sort, sans gravité majeure.</li>
+<li><strong>Sensible</strong> — données personnelles, identifiants, santé, finances. Fuite grave, souvent avec obligation légale de notifier.</li>
+</ul>
+<p>Une donnée de mineur, un mot de passe, un numéro de carte relèvent du plus haut niveau, quelle que soit l'apparente banalité du service qui les héberge.</p>` },
+      { t:"Minimiser et oublier", h:`
+<p>La meilleure protection reste celle des Moires : <strong>la donnée qu'on n'a jamais collectée ne peut pas fuiter</strong>. Deux disciplines :</p>
+<ul>
+<li><strong>La minimisation</strong> — ne collecter que le nécessaire. Le RGPD l'impose aux organisations.</li>
+<li><strong>L'effacement</strong> — la donnée a une fin de vie. On la supprime quand elle ne sert plus, on ne l'accumule pas « au cas où ». Une sauvegarde éternelle est une fuite qui dort.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">L'agrégation, encore</div><p style="margin:6px 0 0">Des données anodines, recollées, cessent de l'être : la ville par le club, l'école par une photo, la date par un anniversaire. C'est l'agrégation du Casque d'Hadès. Classer une donnée, c'est aussi imaginer ce qu'elle donne <em>combinée</em> aux autres.</p></div>` }
+    ],
+    vocab:[
+      ["Donnée au repos","Stockée ; protégée par le chiffrement du disque."],
+      ["Donnée en transit","Sur le réseau ; protégée par le chiffrement de la connexion."],
+      ["Donnée en usage","Ouverte en mémoire ; la plus difficile à protéger."],
+      ["Sensibilité","Niveau de gravité en cas de fuite."],
+      ["Minimisation","Ne collecter que le strictement nécessaire."],
+      ["Cycle de vie","De la collecte à l'effacement d'une donnée."]
+    ],
+    retenir:["Trois états : au repos, en transit, en usage — chacun sa protection.","On protège à chaque état, pas à un seul.","La sensibilité se mesure à l'impact d'une fuite.","La donnée jamais collectée ne peut pas fuiter.","Une sauvegarde éternelle est une fuite qui dort."]
+  },
+  jeuData:{
+    titre:"La moisson à trier",
+    intro:"Pour chaque donnée manipulée par un site de collège, décide de sa sensibilité réelle — celle qui fixe le niveau de protection et les obligations légales.",
+    cats:[{ n:"Sensible", d:"fuite grave, souvent à notifier" }, { n:"Interne", d:"gênante, sans gravité majeure" }, { n:"Publique", d:"destinée à tous" }],
+    items:[
+      { t:"La liste nominative des élèves avec leurs adresses", c:0, e:"Données personnelles de mineurs : sensibilité maximale, et notification à la CNIL en cas de fuite." },
+      { t:"Les mots de passe des comptes (même hachés)", c:0, e:"Toujours au plus haut niveau : une fuite, même hachée, permet des attaques sur les mots de passe faibles." },
+      { t:"Le menu de la cantine de la semaine", c:2, e:"Destiné à être diffusé : donnée publique. Aucune confidentialité requise." },
+      { t:"Les coordonnées bancaires pour la cantine", c:0, e:"Données financières : sensibilité maximale, cadre légal strict." },
+      { t:"La note interne sur l'organisation d'une réunion", c:1, e:"Gênante si elle sort, sans gravité : interne." },
+      { t:"Les horaires d'ouverture de l'établissement", c:2, e:"Information publique, affichée à l'entrée." },
+      { t:"Le bulletin de notes d'un élève", c:0, e:"Donnée personnelle sensible : confidentialité et intégrité au plus haut." },
+      { t:"Le nom du logiciel utilisé pour la vie scolaire", c:1, e:"Plutôt interne : sa divulgation aide un attaquant à chercher des failles, sans être une donnée personnelle." },
+      { t:"L'adresse du site public de l'établissement", c:2, e:"Publique par nature." },
+      { t:"La liste des allergies alimentaires des élèves", c:0, e:"Donnée de santé de mineurs : parmi les plus sensibles qui soient." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Une donnée « au repos » est protégée par :", c:["Le chiffrement du disque","Un mot de passe fort uniquement","Le pare-feu","La sauvegarde"], a:1, e:"Chiffrer le stockage rend un appareil volé illisible." },
+    { t:1, q:"La sensibilité d'une donnée se mesure :", c:["À sa taille","À l'impact d'une fuite","À son âge","À son format"], a:1, e:"« Que se passe-t-il si elle fuite ? » fixe le niveau de protection." },
+    { t:1, q:"La meilleure protection d'une donnée est :", c:["De la chiffrer deux fois","De ne jamais l'avoir collectée si elle n'est pas nécessaire","De la sauvegarder partout","De la cacher"], a:1, e:"La minimisation : ce qui n'existe pas ne fuite pas. C'est aussi une obligation du RGPD." },
+    { t:2, q:"L'état le plus difficile à protéger est :", c:["Au repos","En transit","En cours d'usage, ouverte en mémoire","Aucun"], a:2, e:"Un logiciel espion voit alors la donnée en clair, après déchiffrement." },
+    { t:2, q:"Chiffrer disque et connexion, mais laisser un journal en clair :", c:["Suffit","Laisse une fuite : la donnée se protège à chaque état","Est recommandé","Ne change rien"], a:1, e:"Journaux, caches, sauvegardes non chiffrées sont des fuites oubliées." },
+    { t:2, q:"Une sauvegarde conservée éternellement est :", c:["Une bonne pratique","Une fuite qui dort : la donnée a une fin de vie","Obligatoire","Sans risque"], a:1, e:"On efface ce qui ne sert plus ; on n'accumule pas « au cas où »." },
+    { t:3, q:"Des données anodines recollées deviennent sensibles par :", c:["Le chiffrement","L'agrégation","La compression","La sauvegarde"], a:1, e:"Ville, école, date reconstituent une identité. Classer une donnée, c'est imaginer ce qu'elle donne combinée." }
+  ]
+},
+{
+  id:'ol4', g:'Δ', titre:"Le Trône d'Athéna", theme:"Architecture et défense en profondeur", skill:'oly_defense',
+  relique:{ nom:"La Chouette", em:'🦉' }, jeu:'budget', duree:24, pro:true, premium:true,
+  accroche:"Une seule muraille tombe. Plusieurs remparts, jamais tous en même temps.",
+  scenes:[
+    { qui:'athena', t:"Nous nous retrouvons. Au Bouclier, je t'ai appris à défendre une organisation. Ici, sur l'Olympe, je te montre le principe qui traverse toute défense : jamais une seule ligne." },
+    { qui:'athena', t:"On l'appelle la défense en profondeur. Si l'attaquant franchit une barrière, une autre l'attend. Aucune n'est parfaite ; leur superposition l'est presque." },
+    { qui:'kryptos', t:"Et comme toujours, un budget qui ne suffit pas. Défendre, ce n'est pas tout acheter : c'est choisir les couches qui couvrent le plus de scénarios, sans épuiser les gens." },
+    { qui:'athena', t:"Une association va être attaquée. Équipe-la. Souviens-toi : les mesures les plus rentables sont ennuyeuses, et quatre pièges guettent ceux qui achètent du spectaculaire." }
+  ],
+  cours:{
+    objectifs:["Comprendre la défense en profondeur","Superposer prévention, détection et réponse","Prioriser sous contrainte","Reconnaître les fausses protections"],
+    sections:[
+      { t:"Plusieurs remparts", h:`
+<p>La <strong>défense en profondeur</strong> superpose des barrières indépendantes. On part d'un constat lucide, déjà posé au Bouclier : <strong>une intrusion finira par réussir</strong>. La question n'est donc pas « comment tout empêcher », mais « comment faire pour qu'une brèche ne suffise pas ».</p>
+<p>Trois familles de barrières, complémentaires :</p>
+<ul>
+<li><strong>Prévention</strong> — empêcher l'entrée : mises à jour, moindre privilège, double authentification, segmentation.</li>
+<li><strong>Détection</strong> — voir ce qui passe : journalisation, supervision (le trône d'Apollon).</li>
+<li><strong>Réponse</strong> — réagir vite : plan de crise, sauvegardes (le trône de Dionysos).</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Le déséquilibre à éviter</div><p style="margin:6px 0 0">Beaucoup d'organisations investissent tout en prévention et rien en détection ni en réponse. Résultat : quand la prévention cède — et elle cède — personne ne voit rien et personne ne sait quoi faire. Les trois familles se soutiennent ; en négliger une fragilise les deux autres.</p></div>` },
+      { t:"Les mesures qui rapportent le plus", h:`
+<p>À budget égal, certaines mesures couvrent beaucoup de scénarios. Les plus rentables sont, presque toujours, les moins spectaculaires :</p>
+<ul>
+<li>Les <strong>sauvegardes hors ligne testées</strong> — la seule vraie réponse au rançongiciel.</li>
+<li>La <strong>séparation des comptes d'administration</strong> — casse la propagation de la plupart des attaques.</li>
+<li>Les <strong>mises à jour</strong> — ferment les failles déjà connues, par lesquelles passe la majorité des intrusions.</li>
+<li>La <strong>double authentification</strong> sur les accès exposés.</li>
+<li>La <strong>sensibilisation</strong> des personnes — la première barrière, et la plus attaquée.</li>
+</ul>
+<p>On choisit selon trois critères : le <strong>coût</strong> (surtout en temps humain), la <strong>couverture</strong> (combien de scénarios bloqués), le <strong>frottement</strong> (une mesure pénible sera contournée, donc vaudra zéro).</p>` },
+      { t:"Les fausses protections", h:`
+<p>Le marché regorge de solutions qui rassurent sans protéger. À reconnaître :</p>
+<ul>
+<li>Le <strong>boîtier « tout-en-un par l'IA »</strong> — promesse invérifiable, ne remplace aucune mesure de base.</li>
+<li>La <strong>cyber-assurance seule</strong> — indemnise mal si les mesures manquaient ; elle complète, ne remplace pas.</li>
+<li>La <strong>charte signée que personne ne lit</strong> — ne change aucun comportement.</li>
+<li>L'<strong>audit unique</strong> — une photo d'un jour, sans rien corriger ensuite.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">La question qui démasque</div><p style="margin:6px 0 0">Devant toute solution : « <strong>quel scénario précis cela bloque-t-il, et de combien réduit-il le risque ?</strong> ». Si la réponse est floue, c'est du vent. La sécurité n'est pas un objet qu'on achète : c'est une liste de gestes, chacun couvrant une attaque nommée.</p></div>` }
+    ],
+    vocab:[
+      ["Défense en profondeur","Superposer plusieurs barrières indépendantes."],
+      ["Prévention","Empêcher l'entrée."],
+      ["Détection","Voir ce qui se passe."],
+      ["Réponse","Réagir vite et bien."],
+      ["Couverture","Nombre de scénarios qu'une mesure bloque."],
+      ["Frottement","Gêne imposée aux utilisateurs par une mesure."]
+    ],
+    retenir:["Jamais une seule ligne : plusieurs remparts indépendants.","On suppose l'intrusion réussie ; on fait qu'une brèche ne suffise pas.","Prévention, détection, réponse se soutiennent : n'en négliger aucune.","Les mesures les plus rentables sont les moins spectaculaires.","Devant une solution : quel scénario précis bloque-t-elle ?"]
+  },
+  jeuData:{
+    intro:"Tu défends une association qui gère des données d'adhérents. La direction te confie 100 points de budget — surtout du temps humain. Huit attaques suivront. Choisis les couches qui couvrent le plus : quatre options ne bloquent aucun scénario réel.",
+    budget:100,
+    options:[
+      { id:'sauv',  n:"Sauvegardes hors ligne testées", c:20, d:"Dont une copie déconnectée, restauration vérifiée" },
+      { id:'sep',   n:"Séparer les comptes d'administration", c:20, d:"Un compte ordinaire, un compte privilégié dédié" },
+      { id:'maj',   n:"Mises à jour appliquées", c:15, d:"Systèmes, navigateurs, équipements" },
+      { id:'mfa',   n:"Double authentification", c:15, d:"Sur le mail et les accès distants" },
+      { id:'form',  n:"Sensibilisation des bénévoles", c:10, d:"Reconnaître hameçonnage et arnaques" },
+      { id:'chiff', n:"Chiffrement des ordinateurs portables", c:10, d:"Disques chiffrés, verrouillage auto" },
+      { id:'journ', n:"Journalisation centralisée", c:15, d:"Traces conservées hors des machines" },
+      { id:'moindre',n:"Revue des accès", c:10, d:"Retrait des droits inutiles et anciens comptes" },
+      { id:'defaut',n:"Changer les identifiants d'usine", c:5, d:"Box, imprimante, caméra" },
+      { id:'seg',   n:"Segmentation du réseau", c:15, d:"Wifi public isolé des données" },
+      { id:'ia',    n:"Boîtier de sécurité « IA totale »", c:25, d:"« Protection garantie »", leurre:1 },
+      { id:'assur', n:"Cyber-assurance seule", c:20, d:"Sans aucune mesure technique", leurre:1 },
+      { id:'charte',n:"Charte informatique signée", c:5, d:"Que personne ne relira", leurre:1 },
+      { id:'audit', n:"Un audit unique, une fois", c:15, d:"Un rapport, puis plus rien", leurre:1 }
+    ],
+    attaques:[
+      { n:"Rançongiciel", t:"Une pièce jointe piégée chiffre les fichiers partagés.", k:'sauv', e:"Seule une sauvegarde hors ligne testée permet de repartir sans payer." },
+      { n:"Propagation", t:"Depuis un poste infecté, l'attaquant cherche un compte administrateur ouvert.", k:'sep', e:"Sans compte privilégié qui traîne sur les postes, la chaîne casse." },
+      { n:"Faille connue", t:"Une vulnérabilité publique du serveur est exploitée.", k:'maj', e:"Le correctif existait : la majorité des intrusions passent par des failles déjà corrigées ailleurs." },
+      { n:"Mot de passe volé", t:"Un identifiant issu d'une fuite est réutilisé sur le mail.", k:'mfa', e:"Le second facteur bloque : il manque à l'attaquant le téléphone." },
+      { n:"Hameçonnage", t:"Un faux mail demande un virement urgent à un bénévole.", k:'form', e:"La sensibilisation est la seule barrière face à une attaque qui vise l'humain, pas la machine." },
+      { n:"Portable volé", t:"L'ordinateur d'un responsable disparaît dans le train.", k:'chiff', e:"Disque chiffré : le voleur a un presse-papier. Sinon, il a la base des adhérents." },
+      { n:"Compte d'ancien bénévole", t:"Un ancien membre se connecte encore un an après.", k:'moindre', e:"La revue des accès ferme les comptes oubliés — un angle mort universel." },
+      { n:"Rebond depuis le wifi", t:"Un visiteur sur le wifi public scanne le réseau vers le serveur.", k:'seg', e:"La segmentation isole le wifi public des données : le scan ne voit rien." }
+    ],
+    leurreExpl:"Le boîtier « IA totale » ne bloque aucun des scénarios ci-dessus et sa promesse est invérifiable. La cyber-assurance seule refuse souvent d'indemniser quand les mesures de base manquaient. Une charte non lue ne change aucun comportement. Un audit unique photographie un jour sans rien corriger. Ces quatre postes existent dans de vraies organisations et consomment de vrais budgets."
+  },
+  quiz:[
+    { t:1, q:"La défense en profondeur consiste à :", c:["Acheter le meilleur pare-feu","Superposer plusieurs barrières indépendantes","Tout chiffrer","Interdire internet"], a:1, e:"Si l'attaquant franchit une barrière, une autre l'attend. Aucune n'est parfaite ; leur superposition l'est presque." },
+    { t:1, q:"Les trois familles de barrières sont :", c:["Prix, marque, garantie","Prévention, détection, réponse","Pare-feu, antivirus, VPN","Copier, coller, sauver"], a:1, e:"Elles se soutiennent : négliger la détection ou la réponse fragilise tout le reste." },
+    { t:1, q:"Les mesures les plus rentables sont généralement :", c:["Les plus chères","Les moins spectaculaires (sauvegardes, mises à jour, séparation des comptes)","Les plus récentes","Les plus complexes"], a:1, e:"Elles couvrent beaucoup de scénarios pour peu de moyens." },
+    { t:2, q:"Investir tout en prévention et rien en détection conduit à :", c:["Une sécurité parfaite","Ne rien voir quand la prévention cède — et elle cède","Un gain de budget","Moins de faux positifs"], a:1, e:"Une intrusion finit par réussir ; sans détection ni réponse, personne ne voit ni ne réagit." },
+    { t:2, q:"Une mesure de sécurité trop pénible :", c:["Est la plus efficace","Sera contournée, donc vaudra zéro","Coûte moins cher","Doit être imposée quand même"], a:1, e:"Le frottement est un critère technique : une mesure contournée ne protège personne." },
+    { t:2, q:"La seule vraie réponse au rançongiciel est :", c:["Un antivirus premium","Une sauvegarde hors ligne testée","Payer la rançon","Un pare-feu"], a:1, e:"Tout le reste limite les dégâts ; la sauvegarde seule les répare, à condition d'être testée et déconnectée." },
+    { t:3, q:"Devant une solution de sécurité, la bonne question est :", c:["Combien de clients l'utilisent ?","Quel scénario précis bloque-t-elle, et de combien réduit-elle le risque ?","Est-elle récente ?","Est-elle jolie ?"], a:1, e:"Si la réponse est floue, c'est du vent. Chaque geste doit couvrir une attaque nommée." }
+  ]
+},
+{
+  id:'ol5', g:'Ε', titre:"Le Trône d'Apollon", theme:"Détection, journaux et supervision", skill:'oly_detection',
+  relique:{ nom:"La Lyre", em:'🎯' }, jeu:'tri3', duree:22, pro:true, premium:true,
+  accroche:"La lumière ne combat pas l'ombre. Elle la rend visible.",
+  scenes:[
+    { qui:'apollon', t:"Je suis la lumière, et aussi la vérité. En sécurité, la vérité vit dans les journaux : la trace écrite de tout ce qui s'est passé." },
+    { qui:'apollon', t:"Athéna dresse les remparts. Moi, j'allume les torches sur les murs. Car une intrusion invisible dure des mois — tu l'as appris chez les guetteurs du Bouclier." },
+    { qui:'kryptos', t:"Mais trop de lumière aveugle. Une équipe noyée sous les fausses alertes cesse de les lire. Détecter, ce n'est pas tout voir : c'est voir ce qui compte." },
+    { qui:'apollon', t:"Trie ces alertes comme un analyste au petit matin. Sépare l'incident réel du bruit, et ce qui demande enquête de ce qui se corrige. C'est l'essentiel du métier." }
+  ],
+  cours:{
+    objectifs:["Comprendre le rôle des journaux","Distinguer vrai et faux positif","Trier des alertes avec méthode","Éviter la fatigue d'alerte"],
+    sections:[
+      { t:"Les journaux, matière première de la vérité", h:`
+<p>Un <strong>journal</strong> est la trace d'un événement : une connexion, un accès, une règle déclenchée. Sans journaux, il n'y a ni détection, ni enquête, ni preuve. Trois règles, vues au Bouclier :</p>
+<ul>
+<li><strong>Centraliser</strong> — envoyer les journaux ailleurs, en direct. L'attaquant efface les traces locales ; il n'efface pas ce qui est déjà parti.</li>
+<li><strong>Horodater</strong> — toutes les machines à la même heure. Une enquête est d'abord une chronologie.</li>
+<li><strong>Ne jamais journaliser un secret</strong> — un mot de passe ou un jeton dans un journal devient une fuite.</li>
+</ul>
+<p>L'outil qui rassemble et corrèle tout cela s'appelle un <strong>SIEM</strong> ; mais l'outil ne vaut rien sans les deux décisions humaines : quoi journaliser, et quoi chercher.</p>` },
+      { t:"Le vocabulaire qui structure tout", h:`
+<ul>
+<li><strong>Vrai positif</strong> — l'alerte sonne, il se passait vraiment quelque chose. Le but.</li>
+<li><strong>Faux positif</strong> — l'alerte sonne pour rien. Le quotidien.</li>
+<li><strong>Faux négatif</strong> — il se passe quelque chose et <em>rien</em> ne sonne. Le cauchemar, invisible par nature.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">L'arbitrage central</div><p style="margin:6px 0 0">Une détection trop sensible noie sous les faux positifs ; trop laxiste, elle laisse passer les vraies attaques. On ne peut pas optimiser les deux à la fois : toute détection est un <strong>compromis assumé</strong> entre bruit et angle mort. Un professionnel sait dire où il a placé le curseur, et pourquoi.</p></div>` },
+      { t:"Trier sans se noyer", h:`
+<p>Face à une file d'alertes, l'analyste qualifie vite : incident réel, faux positif à corriger, ou cas à investiguer avant de trancher. Les signaux à forte valeur :</p>
+<ul>
+<li>Une <strong>réussite après une longue série d'échecs</strong> — le signal le plus fiable qui soit.</li>
+<li>Un <strong>voyage impossible</strong> — deux connexions du même compte depuis deux continents en quelques minutes.</li>
+<li>Une <strong>régularité parfaite</strong> — un poste qui appelle une adresse à la seconde près (canal de commande).</li>
+<li>Un <strong>volume anormal</strong> — un utilisateur qui télécharge d'un coup des milliers de fichiers.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">La fatigue d'alerte</div><p style="margin:6px 0 0">Trois cents alertes par jour dont deux cent quatre-vingt-quinze fausses, et l'équipe cesse de les lire. C'est ainsi que de vraies intrusions ont été manquées alors que l'alerte avait sonné. La réponse : établir le normal, <strong>supprimer</strong> une alerte inutile plutôt que l'ignorer, et mesurer le taux de faux positifs comme un indicateur de qualité.</p></div>` }
+    ],
+    vocab:[
+      ["Journal (log)","Trace écrite d'un événement système."],
+      ["SIEM","Outil qui centralise et corrèle les journaux."],
+      ["Faux positif","Alerte déclenchée pour rien."],
+      ["Faux négatif","Attaque réelle qui n'a rien déclenché."],
+      ["Voyage impossible","Deux connexions géographiquement incompatibles."],
+      ["Fatigue d'alerte","Épuisement conduisant à ignorer les alertes."]
+    ],
+    retenir:["Sans journaux centralisés et horodatés, aucune enquête possible.","Jamais de secret dans un journal.","Toute détection est un compromis entre bruit et angle mort.","Une alerte inutile se supprime, elle ne s'ignore pas.","Connaître le normal avant de chercher l'anormal."]
+  },
+  jeuData:{
+    titre:"La file du matin",
+    intro:"Neuf heures, dix alertes t'attendent sur la console. Qualifie chacune : incident réel, faux positif à corriger, ou à investiguer avant de trancher. Le tri est l'essentiel du métier, et il se joue en secondes.",
+    cats:[{ n:"Incident réel", d:"il se passe quelque chose" }, { n:"Faux positif", d:"bruit, à corriger" }, { n:"À investiguer", d:"pas assez d'éléments" }],
+    items:[
+      { t:"Un compte se connecte de France à 8h12, puis d'un autre continent à 8h20", c:0, e:"Voyage impossible : deux connexions géographiquement incompatibles. L'une des détections les plus fiables." },
+      { t:"Le serveur de sauvegarde écrit beaucoup de fichiers chaque nuit à 2h", c:1, e:"C'est son travail. Une alerte sur un fonctionnement normal se corrige, elle ne s'ignore pas nuit après nuit." },
+      { t:"Quarante échecs de connexion en trois minutes, puis une réussite", c:0, e:"Force brute réussie : la réussite après la rafale change tout, le compte est compromis." },
+      { t:"Un poste contacte une adresse inconnue toutes les dix minutes exactement", c:0, e:"La régularité parfaite trahit un programme : un canal de commande et de contrôle." },
+      { t:"L'antivirus signale un fichier dans les téléchargements d'un élève", c:2, e:"Il faut savoir ce qu'est le fichier et s'il a été exécuté. Une alerte antivirus est un début d'enquête, pas une conclusion." },
+      { t:"Le pare-feu bloque des tentatives depuis internet sur le port du serveur web", c:1, e:"Tout ce qui est exposé à internet est scanné en permanence. Alerter là-dessus produit du bruit pur." },
+      { t:"Un compte d'administration se connecte à 3h du matin un dimanche", c:2, e:"Suspect mais pas concluant : maintenance planifiée ? On vérifie le calendrier avant de réveiller quelqu'un." },
+      { t:"Un utilisateur télécharge 4000 fichiers du serveur la semaine de son départ", c:0, e:"Exfiltration par un partant : le contexte transforme l'anomalie en incident caractérisé." },
+      { t:"Le certificat du site public expire dans trois jours", c:1, e:"Tâche d'exploitation, pas incident de sécurité. N'a rien à faire dans une file d'alertes." },
+      { t:"Une règle de pare-feu a été modifiée hier soir, personne ne s'en souvient", c:0, e:"Modification non tracée sur un équipement de sécurité : incident tant que le contraire n'est pas prouvé." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Pourquoi centraliser les journaux ailleurs ?", c:["Pour gagner de la place","Parce que l'attaquant efface les traces locales, pas celles déjà parties","Pour aller plus vite","Par obligation"], a:1, e:"L'effacement des traces est une étape standard de toute intrusion." },
+    { t:1, q:"Un faux négatif, c'est :", c:["Une alerte pour rien","Une attaque réelle qui n'a rien déclenché","Un journal manquant","Un utilisateur bloqué à tort"], a:1, e:"Le pire des cas, invisible par nature : on ne sait pas ce qu'on n'a pas vu." },
+    { t:1, q:"Ce qu'il ne faut jamais mettre dans un journal :", c:["Une adresse IP","Un mot de passe ou un jeton","Une date","Un nom de fichier"], a:1, e:"Un secret journalisé devient lisible par tous ceux qui accèdent aux journaux." },
+    { t:2, q:"Deux connexions du même compte depuis deux continents en huit minutes :", c:["Un faux positif","Un voyage impossible : signal fiable de compromission","Un problème de VPN","Sans importance"], a:1, e:"Aucun déplacement humain ne l'explique." },
+    { t:2, q:"Une alerte qui sonne chaque nuit sur une tâche normale doit être :", c:["Ignorée en silence","Corrigée ou supprimée après analyse","Escaladée chaque fois","Effacée du journal"], a:1, e:"L'ignorer crée la fatigue d'alerte, et c'est ainsi qu'on manque la vraie." },
+    { t:2, q:"Toute détection est :", c:["Parfaite si bien réglée","Un compromis entre faux positifs et angles morts","Inutile","Automatique"], a:1, e:"On ne supprime pas les deux à la fois : le professionnel sait où il place le curseur." },
+    { t:3, q:"Un poste qui appelle une adresse à la seconde près suggère :", c:["Un humain","Un canal de commande d'un logiciel malveillant","Une mise à jour","Un cache navigateur"], a:1, e:"La régularité parfaite est une signature machine." }
+  ]
+},
+{
+  id:'ol6', g:'Ζ', titre:"Le Trône d'Artémis", theme:"La chasse et le renseignement", skill:'oly_chasse',
+  relique:{ nom:"L'Arc", em:'🏹' }, jeu:'fuite', duree:24, pro:true, premium:true,
+  accroche:"On n'attend pas toujours que la proie se montre. Parfois, on la traque.",
+  scenes:[
+    { qui:'artemis', t:"Je chasse dans la nuit, sans que le gibier sache que je l'ai déjà repéré. Le meilleur chasseur ne court pas : il lit les traces." },
+    { qui:'artemis', t:"Apollon attend que l'alerte sonne. Moi, je pars à la recherche de ce qui n'a pas encore sonné. C'est la traque : supposer qu'un intrus est déjà là, et chercher ce qu'on verrait s'il l'était." },
+    { qui:'kryptos', t:"Tu as fait ce travail chez les Moires, à démasquer une fuite. Ici, tu recommences, mais du côté du défenseur : reconstituer un chemin d'attaque à partir de traces éparses." },
+    { qui:'artemis', t:"Un dossier t'attend. Une intrusion a réussi. Lis les traces, trouve par où elle est passée, et surtout — ne te laisse pas tromper par l'indice le plus voyant." }
+  ],
+  cours:{
+    objectifs:["Distinguer détection réactive et traque proactive","Reconstituer un chemin d'attaque","Peser un indice par sa rareté","Éviter le biais de confirmation"],
+    sections:[
+      { t:"Attendre, ou traquer", h:`
+<p>Deux postures se complètent :</p>
+<ul>
+<li>La <strong>détection réactive</strong> — on attend que les alertes sonnent (le trône d'Apollon).</li>
+<li>La <strong>traque proactive</strong> (<em>threat hunting</em>) — on cherche <em>sans</em> alerte, en formulant une hypothèse : « si un attaquant était déjà là, que verrais-je ? ».</li>
+</ul>
+<p>La traque part d'un principe lucide : la détection automatique a toujours des angles morts. On va donc regarder activement là où elle ne regarde pas — les connexions inhabituelles, les comptes dormants réveillés, les mouvements latéraux discrets.</p>
+<div class="keybox"><div class="eyebrow">Le langage commun de la chasse</div><p style="margin:6px 0 0"><strong>MITRE ATT&amp;CK</strong>, croisé au Bouclier, catalogue les techniques réellement observées chez les attaquants. Le chasseur s'en sert comme d'une carte : pour chaque technique, « à quoi cela ressemblerait-il dans mes journaux ? ». On ne cherche pas « une attaque » : on cherche une technique précise.</p></div>` },
+      { t:"Reconstituer le chemin", h:`
+<p>Une intrusion est une <strong>chaîne</strong>, pas un événement isolé, comme tu l'as appris chez Ulysse : reconnaissance, accès, escalade, mouvement, exfiltration. Le chasseur remonte cette chaîne à partir de fragments :</p>
+<ul>
+<li>Un <strong>point d'entrée</strong> — la première trace anormale.</li>
+<li>Un <strong>pivot</strong> — comment l'attaquant est passé d'une machine à une autre.</li>
+<li>Un <strong>objectif</strong> — ce qu'il cherchait, révélé par ce qu'il a consulté.</li>
+</ul>
+<p>Chaque trace en éclaire une autre. Bloqué ? On remonte le fil : la réponse est souvent dans un journal déjà consulté.</p>` },
+      { t:"Peser les indices, sans se tromper de gibier", h:`
+<p>La règle du tribunal des Moires vaut ici entièrement : <strong>un indice ne vaut que par sa rareté</strong>.</p>
+<ul>
+<li>Un modèle d'appareil très répandu : indice quasi nul.</li>
+<li>Un compte au périmètre exact d'un prestataire : indice fort.</li>
+<li>Une information interne connue de peu de gens : indice décisif.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">Le biais du chasseur</div><p style="margin:6px 0 0">Le danger n'est pas de manquer l'intrus, c'est d'accuser le mauvais. Le <strong>biais de confirmation</strong> pousse à retenir ce qui conforte notre première idée et à ignorer ce qui la contredit. Le bon chasseur cherche activement ce qui <em>infirmerait</em> son hypothèse. Un faisceau d'indices est une piste, jamais une preuve.</p></div>` }
+    ],
+    vocab:[
+      ["Traque (threat hunting)","Chercher un intrus sans attendre d'alerte."],
+      ["Chemin d'attaque","Enchaînement des étapes d'une intrusion."],
+      ["Pivot","Passage d'une machine compromise à une autre."],
+      ["MITRE ATT&CK","Catalogue des techniques d'attaque observées."],
+      ["Rareté","Ce qui donne sa valeur à un indice."],
+      ["Biais de confirmation","Ne retenir que ce qui conforte son hypothèse."]
+    ],
+    retenir:["La détection attend ; la traque part chercher ce qui n'a pas sonné.","La détection automatique a toujours des angles morts.","Une intrusion est une chaîne : on remonte le fil.","Un indice ne vaut que par sa rareté.","On cherche activement ce qui infirmerait son hypothèse."]
+  },
+  jeuData:{
+    contexte:"Une intrusion a réussi sur le réseau d'une petite entreprise. Ton travail de chasseur : lire les traces, reconstituer le chemin, et désigner à chaque étape l'élément qui compte vraiment. Ne te laisse pas hypnotiser par l'indice le plus voyant.",
+    traces:[
+      { s:"Journal du serveur web", t:"Le 3 mars à 14h02, une requête étrange sur /login contenant ' OR '1'='1, depuis une adresse jamais vue." },
+      { s:"Journal d'authentification", t:"Le 3 mars à 14h05, connexion réussie du compte 'webadmin' depuis cette même adresse, sans aucun échec préalable." },
+      { s:"Activité de webadmin", t:"webadmin, d'ordinaire actif de 9h à 17h, se connecte cette fois à 14h puis à 3h du matin le lendemain." },
+      { s:"Journal réseau interne", t:"Le 4 mars à 3h12, webadmin accède à un serveur de fichiers qu'il n'avait jamais consulté en deux ans." },
+      { s:"Serveur de fichiers", t:"3h15 : téléchargement de l'intégralité du dossier 'comptabilité' (2 300 fichiers)." },
+      { s:"Poste d'un employé", t:"Le même modèle d'ordinateur portable que des millions d'autres entreprises." },
+      { s:"Journal du pare-feu", t:"3h40 : envoi de 2 Go vers une adresse d'hébergement loué à l'heure, à l'étranger." }
+    ],
+    etapes:[
+      { q:"Quel est le point d'entrée le plus probable ?", c:["Le modèle de l'ordinateur portable","L'injection SQL sur /login à 14h02","L'heure de la connexion","L'adresse à l'étranger"], a:1,
+        e:"La requête ' OR '1'='1 est une injection SQL : c'est la porte d'entrée. Elle a permis de contourner l'authentification et d'obtenir le compte webadmin trois minutes plus tard." },
+      { q:"Qu'est-ce qui confirme que le compte webadmin est compromis, et non légitime ?", c:["Il a un nom d'administrateur","La réussite sans aucun échec juste après l'injection, puis une activité à 3h du matin hors de ses horaires","Il utilise un ordinateur récent","Il travaille beaucoup"], a:1,
+        e:"Une réussite immédiate après l'injection, depuis une adresse inconnue, et une activité nocturne hors des habitudes de deux ans : le faisceau est net. Chacun de ces indices est fort par sa rareté." },
+      { q:"Quel indice est ici sans valeur pour la traque ?", c:["L'accès nocturne au serveur de fichiers","Le téléchargement massif","Le modèle d'ordinateur portable, répandu partout","L'envoi de 2 Go à l'étranger"], a:2,
+        e:"Un modèle d'ordinateur partagé par des millions d'entreprises ne discrimine rien. C'est le piège de l'indice voyant mais banal : un indice ne vaut que par sa rareté." },
+      { q:"Quel était l'objectif de l'attaquant ?", c:["Ralentir le site","Exfiltrer les données de comptabilité","Changer le mot de passe de webadmin","Rien de précis"], a:1,
+        e:"L'accès ciblé au dossier comptabilité, son téléchargement intégral puis l'envoi de 2 Go à l'étranger dessinent un objectif clair : l'exfiltration de données financières." },
+      { q:"Quelle contre-mesure aurait le mieux cassé cette chaîne dès le départ ?", c:["Changer le modèle des ordinateurs","Une requête préparée sur /login, qui aurait bloqué l'injection à la racine","Interdire le travail de nuit","Un antivirus plus cher"], a:1,
+        e:"Tout découle de l'injection SQL initiale. Une requête préparée — la leçon de Dédale — l'aurait rendue impossible, et rien de la suite n'aurait eu lieu. On corrige la cause, pas les symptômes." }
+    ],
+    bilan:"Injection SQL → compte webadmin usurpé → connexion nocturne → accès à un serveur jamais consulté → exfiltration de la comptabilité vers l'étranger. Une chaîne complète, reconstituée à partir de sept traces éparses. L'indice le plus voyant — le modèle d'ordinateur — ne valait rien ; les indices décisifs étaient les ruptures d'habitude, rares et donc parlantes."
+  },
+  quiz:[
+    { t:1, q:"La traque (threat hunting) consiste à :", c:["Attendre les alertes","Chercher un intrus sans attendre d'alerte, en formulant une hypothèse","Attaquer les attaquants","Acheter du renseignement"], a:1, e:"On suppose que la détection automatique a des angles morts, et on va regarder là où elle ne regarde pas." },
+    { t:1, q:"Une intrusion est :", c:["Un événement isolé","Une chaîne d'étapes qu'on peut remonter","Toujours invisible","Un simple virus"], a:1, e:"Reconnaissance, accès, escalade, mouvement, exfiltration : chaque trace en éclaire une autre." },
+    { t:1, q:"Un indice ne vaut que par :", c:["Sa précision technique","Sa rareté","Sa date","Sa taille"], a:1, e:"Un modèle d'appareil répandu ne discrimine rien ; une info connue de peu de gens vaut beaucoup." },
+    { t:2, q:"Le principal danger du chasseur est :", c:["De manquer l'intrus","D'accuser le mauvais, à cause du biais de confirmation","D'aller trop lentement","De trop journaliser"], a:1, e:"On cherche activement ce qui infirmerait l'hypothèse ; un faisceau d'indices est une piste, jamais une preuve." },
+    { t:2, q:"MITRE ATT&CK sert au chasseur à :", c:["Chiffrer les journaux","Savoir à quoi ressemble chaque technique d'attaque dans les journaux","Bloquer les attaques","Certifier l'entreprise"], a:1, e:"On ne cherche pas « une attaque » mais une technique précise, cataloguée." },
+    { t:2, q:"Bloqué en pleine traque, le bon réflexe est :", c:["Tout recommencer","Remonter le fil : la réponse est souvent dans un journal déjà consulté","Forcer au hasard","Abandonner"], a:1, e:"Chaque trace en éclaire une autre : la chaîne se reconstitue par recoupement." },
+    { t:3, q:"Face à une intrusion, on corrige en priorité :", c:["Le symptôme le plus visible","La cause racine — ici l'injection SQL par une requête préparée","L'adresse de l'attaquant","Le modèle des ordinateurs"], a:1, e:"Tout découlait de l'injection initiale : la corriger à la racine annule toute la suite." }
+  ]
+},
+{
+  id:'ol7', g:'Η', titre:"Le Trône d'Arès", theme:"L'offensive éthique, de bout en bout", skill:'oly_offensif',
+  relique:{ nom:"La Lance", em:'⚔️' }, jeu:'terminal', duree:26, pro:true, premium:true,
+  accroche:"Attaquer pour défendre. La lance au service du bouclier.",
+  scenes:[
+    { qui:'ares', t:"On me réduit à la brutalité. C'est mal me connaître. La vraie guerre est affaire de méthode : reconnaître, frapper au bon endroit, au bon moment." },
+    { qui:'ares', t:"Ulysse t'a enseigné la ruse salle par salle. Ici, je te demande l'enchaînement complet, d'un souffle : de la reconnaissance au contrôle, sur une cible autorisée, pour prouver et faire réparer." },
+    { qui:'kryptos', t:"Car un défenseur qui n'a jamais attaqué défend à l'aveugle. Penser comme l'assaillant, c'est voir ses propres murs avec ses yeux à lui." },
+    { qui:'ares', t:"Cible d'entraînement, dans ton laboratoire. Enchaîne les phases, prends les deux drapeaux, et souviens-toi de la retenue : on prouve, on ne saccage pas." }
+  ],
+  cours:{
+    objectifs:["Enchaîner les phases d'un engagement","Penser en chemin d'attaque","Relier chaque phase à sa défense","Garder la discipline offensive"],
+    sections:[
+      { t:"L'enchaînement, d'un seul tenant", h:`
+<p>Tout ce qu'Ulysse a décomposé se joue ici en une chaîne continue :</p>
+<ul>
+<li><strong>Reconnaître</strong> — quelles portes, quels services, quelles versions ?</li>
+<li><strong>Énumérer</strong> — que cache chaque service ? Pages, fichiers, identifiants.</li>
+<li><strong>Entrer</strong> — assembler ce qu'on a trouvé, puis <span class="mono">whoami</span>.</li>
+<li><strong>Escalader</strong> — ré-énumérer de l'intérieur, repérer l'échelle vers le compte tout-puissant.</li>
+<li><strong>Prouver</strong> — les drapeaux, et rien de plus.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Attaque et défense, un miroir</div><p style="margin:6px 0 0">Chaque phase offensive répond à une défense précise : la reconnaissance à la gestion de la surface d'attaque, l'accès au moindre privilège et aux mots de passe forts, l'escalade encore au moindre privilège. Penser l'attaque, c'est comprendre pourquoi chaque défense existe. C'est pourquoi les meilleurs défenseurs savent attaquer.</p></div>` },
+      { t:"Le fil qui relie les phases", h:`
+<p>Le débutant cherche le coup d'éclat ; le professionnel relie. Une version notée à la reconnaissance oriente l'énumération ; un identifiant trouvé à l'énumération ouvre l'accès ; une négligence repérée à l'intérieur permet l'escalade.</p>
+<p>Bloqué ? La réponse est presque toujours dans une <strong>sortie déjà obtenue</strong>. On ne devine pas : on relit ce qu'on a récolté.</p>` },
+      { t:"La discipline, même à l'assaut", h:`
+<p>La puissance impose la retenue, comme chez Ulysse :</p>
+<ul>
+<li>On reste <strong>dans le périmètre</strong> — ce qui n'est pas autorisé n'est pas touché.</li>
+<li>On <strong>prouve</strong> avec le minimum : un drapeau, l'identité obtenue. Pas de données réelles lues, rien de détruit.</li>
+<li>On <strong>note tout</strong> : par où, avec quoi, à quelle heure. Le rapport est le vrai livrable.</li>
+<li>On <strong>s'arrête</strong> dès que la démonstration est faite.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">La ligne que rien ne justifie de franchir</div><p style="margin:6px 0 0">Extraire une vraie base, effacer des journaux, installer une porte dérobée persistante : rien de tout cela ne prouve davantage, et tout cela fait basculer dans le délit. La maîtrise se mesure autant à ce qu'on refuse de faire qu'à ce qu'on sait faire.</p></div>` }
+    ],
+    vocab:[
+      ["Engagement","Un test d'intrusion complet, de la reconnaissance au rapport."],
+      ["Chemin d'attaque","Enchaînement des phases menant au contrôle."],
+      ["Pivot","Rebond d'une machine compromise à une autre."],
+      ["Retenue","S'arrêter dès que la preuve est faite."],
+      ["Périmètre","Ce qui peut être testé ; le reste est interdit."],
+      ["Drapeau","Preuve minimale d'un niveau d'accès."]
+    ],
+    retenir:["Cinq phases : reconnaître, énumérer, entrer, escalader, prouver.","Chaque phase offensive répond à une défense précise.","Bloqué ? La réponse est dans une sortie déjà obtenue.","On reste dans le périmètre, on prouve, on s'arrête.","La maîtrise se mesure aussi à ce qu'on refuse de faire."]
+  },
+  jeuData:{
+    kind:'terminal',
+    intro:"Cible d'entraînement autorisée : 10.10.30.7, dans ton laboratoire. Enchaîne toutes les phases et récupère les deux drapeaux, user et root. help pour les commandes, hint si tu bloques.",
+    prompt:"ares@olympe",
+    cible:"10.10.30.7",
+    objectifs:["Scanner et identifier les services","Énumérer le web et trouver des identifiants","Obtenir un accès et le drapeau user","Escalader jusqu'à root et son drapeau"],
+    flags:["KRYPTOS{us3r_l4nce_dar3s}", "KRYPTOS{r00t_g10ire_d3_l0lympe}"],
+    aide:[
+      "Phase 1 : 'nmap -sV 10.10.30.7'. Note les versions.",
+      "Phase 2 : 'gobuster http://10.10.30.7', puis 'curl http://10.10.30.7/dev/'.",
+      "Phase 3 : les identifiants (nikos / Sp4rt3_forever) ouvrent SSH. 'ssh nikos@10.10.30.7' puis 'password Sp4rt3_forever'.",
+      "Phase 4 : 'sudo -l' révèle un programme lançable en root ; sers-t'en pour escalader, puis 'cat root.txt'."
+    ],
+    rep:[
+      { c:/^nmap\s+-sv\b/i, o:"PORT     STATE  SERVICE  VERSION\n22/tcp   open   ssh      OpenSSH 8.9\n80/tcp   open   http     nginx 1.24\n→ SSH et un site web. Énumère le web.", set:'scan' },
+      { c:/^nmap\b/i, o:"22/tcp open ssh\n80/tcp open http\n→ Ajoute '-sV' pour les versions.", set:'nmap' },
+      { c:/^gobuster\b/i, o:"/index.html   (200)\n/dev/         (200  listing autorisé)\n/login        (200)\n→ /dev/ liste ses fichiers. Erreur classique.", set:'gob', need:['scan'] },
+      { c:/^curl\s+.*\/dev\/?\s*$/i, o:"Index of /dev/\n  notes.txt\n→ Un fichier de notes. Ouvre-le.", set:'devlist', need:['gob'] },
+      { c:/^curl\s+.*\/dev\/notes\.txt/i, o:"Mémo : compte SSH de test à retirer avant prod.\n  utilisateur : nikos\n  mot de passe : Sp4rt3_forever\n→ Des identifiants ! Sers-t'en.", set:'creds', need:['devlist'] },
+      { c:/^curl\b/i, o:"Réponse reçue. Précise l'URL : /dev/ ou un fichier découvert." },
+      { c:/^ssh\s+nikos@10\.10\.30\.7/i, o:"nikos@10.10.30.7's password:\n→ Tape 'password Sp4rt3_forever'.", set:'sshp', need:['creds'] },
+      { c:/^ssh\b/i, o:"Il te faut un identifiant valide. As-tu bien énuméré /dev/ ?" },
+      { c:/^password\s+Sp4rt3_forever/i, o:"Bienvenue, nikos.\nnikos@olympe-lab:~$\n→ Réflexe : 'whoami', puis 'ls'.", set:'co', need:['sshp'] },
+      { c:/^password\b/i, o:"Mot de passe incorrect. Relis notes.txt.", need:['sshp'] },
+      { c:/^whoami\b/i, o:"nikos\n→ Compte ordinaire. Le drapeau user est à portée ; root demandera une escalade.", set:'who', need:['co'] },
+      { c:/^ls\b/i, o:"user.txt   travail/\n→ user.txt pour le premier drapeau.", set:'ls', need:['co'] },
+      { c:/^cat\s+user\.txt/i, o:"KRYPTOS{us3r_l4nce_dar3s}\n→ Premier drapeau ! 'submit', puis tente 'sudo -l'.", flag:"KRYPTOS{us3r_l4nce_dar3s}", set:'uf', need:['co'] },
+      { c:/^sudo\s+-l/i, o:"nikos peut exécuter en tant que root :\n  (root) NOPASSWD: /usr/bin/vim\n→ vim lançable en root est un vecteur connu : il peut lancer un interpréteur.", set:'sudol', need:['co'] },
+      { c:/^sudo\s+vim\b/i, o:"Depuis vim lancé en root, tu ouvres un interpréteur.\nroot@olympe-lab:#\n→ Tu es root. 'cat root.txt'.", set:'root', need:['sudol'] },
+      { c:/^cat\s+root\.txt/i, o:function(m,e){ return e.faits.root ? "KRYPTOS{r00t_g10ire_d3_l0lympe}\n→ Second drapeau ! 'submit' pour terminer. Puis on s'arrête : la preuve est faite." : "cat: root.txt: Permission refusée.\n→ Tu n'es pas encore root. Vois 'sudo -l', puis escalade via le programme autorisé."; }, flag:"KRYPTOS{r00t_g10ire_d3_l0lympe}", need:['co'] },
+      { c:/^(whoami|ls|cat|sudo)\b/i, o:"Tu n'es pas connecté à la machine. Obtiens d'abord un accès SSH." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"La première phase d'un engagement est :", c:["L'escalade","La reconnaissance et le scan","Le rapport","L'exfiltration"], a:1, e:"On comprend les portes et les services avant tout le reste." },
+    { t:1, q:"Chaque phase offensive :", c:["Est indépendante","Répond à une défense précise, qu'elle éclaire","Est illégale","Se fait au hasard"], a:1, e:"Penser l'attaque, c'est comprendre pourquoi chaque défense existe. Les meilleurs défenseurs savent attaquer." },
+    { t:1, q:"Bloqué en pleine chaîne, la réponse est le plus souvent :", c:["Dans un nouvel outil","Dans une sortie déjà obtenue","Impossible à trouver","Dans la chance"], a:1, e:"On relit ce qu'on a récolté : version, identifiant, note déjà vus." },
+    { t:2, q:"Après avoir prouvé l'accès, un professionnel :", c:["Lit les données réelles","Récupère le drapeau, note, et ne touche à rien d'autre","Efface les journaux","Installe une porte dérobée"], a:1, e:"La preuve minimale suffit ; aller plus loin fait basculer dans le délit." },
+    { t:2, q:"« vim » lançable en root via sudo est :", c:["Sans danger","Un vecteur d'escalade : il peut lancer un interpréteur root","Un éditeur inoffensif ici","Un antivirus"], a:1, e:"Emprunter les droits d'un programme puissant : le principe de l'escalade." },
+    { t:2, q:"Un compte SSH de test oublié en production illustre :", c:["Un exploit rare","Une négligence d'énumération qui ouvre l'accès","Une coïncidence","Un piège"], a:1, e:"L'accès naît de l'assemblage patient des informations, pas d'un coup d'éclat." },
+    { t:3, q:"La maîtrise offensive se mesure aussi :", c:["Au nombre d'outils","À ce qu'on refuse de faire une fois la preuve établie","À la vitesse","Au nombre de drapeaux"], a:1, e:"Rester dans le périmètre, prouver, s'arrêter : la retenue est une compétence." }
+  ]
+},
+{
+  id:'ol8', g:'Θ', titre:"Le Trône d'Aphrodite", theme:"L'ingénierie sociale et le facteur humain", skill:'oly_social',
+  relique:{ nom:"Le Miroir d'Or", em:'💞' }, jeu:'scenario', duree:22, pro:true, premium:true,
+  accroche:"La faille la plus fiable ne s'écrit pas dans le code. Elle se joue sur la confiance.",
+  scenes:[
+    { qui:'aphrodite', t:"On me croit futile. On a tort. Je règne sur ce qui fait agir les êtres : le désir, la peur, la flatterie, l'urgence. Et c'est là que se brisent toutes les forteresses." },
+    { qui:'aphrodite', t:"L'attaquant le plus efficace ne casse rien. Il demande gentiment. Un mail pressant, un appel rassurant, un inconnu très compréhensif — et la porte s'ouvre de l'intérieur." },
+    { qui:'kryptos', t:"Tu l'as vu au Chant des Sirènes, chez Protée, dans les faux profils. Ici, on relie : toutes ces attaques exploitent les mêmes ressorts humains. Les reconnaître, c'est s'en défendre." },
+    { qui:'aphrodite', t:"Cinq situations où quelqu'un joue sur tes émotions. À chaque fois, le bon réflexe n'est pas d'être plus malin — c'est d'appliquer une règle décidée à froid." }
+  ],
+  cours:{
+    objectifs:["Comprendre l'ingénierie sociale","Reconnaître les leviers émotionnels","Opposer une procédure à la manipulation","Relier les attaques humaines entre elles"],
+    sections:[
+      { t:"Piratage humain", h:`
+<p>L'<strong>ingénierie sociale</strong> manipule une personne plutôt qu'une machine. L'attaquant n'affronte pas tes défenses techniques : il te fait ouvrir la porte toi-même. C'est, de loin, la voie d'intrusion la plus fréquente.</p>
+<p>Elle joue sur quatre leviers, toujours les mêmes :</p>
+<ul>
+<li><strong>L'urgence</strong> — « sous 24 h », « immédiatement » : empêcher de réfléchir.</li>
+<li><strong>La peur</strong> — une amende, un compte bloqué, un danger.</li>
+<li><strong>L'envie</strong> — un cadeau, un gain, une opportunité rare.</li>
+<li><strong>La confiance</strong> — se faire passer pour une autorité, un collègue, un proche.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Le fil de tout ton voyage</div><p style="margin:6px 0 0">Le Chant des Sirènes (hameçonnage), le Masque de Protée (faux profils, deepfakes), l'arnaque au faux proche, le faux modérateur : ce sont toutes des variantes d'une même chose. L'attaque ne vise jamais la machine — elle vise le levier émotionnel. Reconnaître le levier, c'est reconnaître l'attaque, quelle que soit sa forme.</p></div>` },
+      { t:"La procédure contre la ruse", h:`
+<p>On ne se défend pas de la manipulation en étant « plus intelligent » sur le moment : sous pression, tout le monde se trompe. On se défend avec une <strong>règle décidée à froid</strong>, comme Ulysse s'attachant au mât face aux Sirènes.</p>
+<ul>
+<li>Face à l'urgence : <strong>ralentir</strong>. Un vrai service laisse toujours le temps.</li>
+<li>Face à une demande sensible : <strong>vérifier par un autre canal</strong>. On rappelle sur le numéro habituel, on ouvre le site par son propre favori.</li>
+<li>Face à une autorité : se souvenir que <strong>personne de légitime ne demande jamais un mot de passe, un code à usage unique, ou un paiement en cartes cadeaux</strong>.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">La voix et le visage ne prouvent plus rien</div><p style="margin:6px 0 0">Une voix se clone en dix secondes, un visage se fabrique par IA. « J'ai reconnu sa voix » n'est plus une preuve. La seule parade est procédurale : vérifier par un canal indépendant, toujours.</p></div>` },
+      { t:"Le facteur humain, des deux côtés", h:`
+<p>Côté défense, l'humain est à la fois la première cible et la meilleure barrière :</p>
+<ul>
+<li>La <strong>sensibilisation</strong> régulière est la mesure qui protège d'une attaque que nul logiciel n'arrête.</li>
+<li>Une <strong>culture sans honte</strong> : celui qui a cliqué doit pouvoir le dire tout de suite. Le pire ennemi n'est pas l'erreur, c'est le silence par peur d'être jugé.</li>
+</ul>
+<p>Côté offensive éthique, tester le facteur humain (faux hameçonnage) est puissant et <strong>délicat</strong> : cela ne se fait que dans un cadre autorisé, sans piéger ni humilier les personnes, et jamais pour désigner des coupables — seulement pour renforcer la vigilance collective.</p>` }
+    ],
+    vocab:[
+      ["Ingénierie sociale","Manipuler une personne plutôt qu'une machine."],
+      ["Levier émotionnel","Urgence, peur, envie, confiance."],
+      ["Hameçonnage","Se faire passer pour un tiers de confiance."],
+      ["Vérification par un autre canal","Confirmer une demande par un chemin indépendant."],
+      ["Culture sans honte","Pouvoir signaler une erreur sans être jugé."],
+      ["Faux proche","Usurper l'identité d'un parent ou d'un ami."]
+    ],
+    retenir:["L'attaquant le plus efficace ne casse rien : il demande.","Quatre leviers : urgence, peur, envie, confiance.","Contre la manipulation, une règle décidée à froid, pas l'intelligence du moment.","La voix et le visage ne prouvent plus rien : vérifier par un autre canal.","Le pire ennemi n'est pas l'erreur, c'est le silence par honte."]
+  },
+  jeuData:{
+    intro:"Cinq situations où quelqu'un joue sur tes émotions pour te faire agir. À chaque fois, choisis la réaction qui applique une règle plutôt que ton jugement du moment.",
+    sc:[
+      { s:"Un mail « du directeur » réclame un virement urgent à un nouveau fournisseur, avant 17 h, « c'est confidentiel, ne parlez à personne ».",
+        c:[{ t:"Exécuter vite : ça vient du directeur et c'est urgent", p:0, r:"Urgence + autorité + secret : les trois leviers réunis. C'est le scénario type de la fraude au président. On ne se laisse jamais presser." },
+           { t:"Appeler le directeur sur son numéro habituel pour confirmer, malgré la consigne de secret", p:2, r:"Vérification par un autre canal. La consigne de secret est justement là pour t'empêcher de vérifier : raison de plus pour le faire." },
+           { t:"Répondre au mail pour demander confirmation", p:0, r:"Répondre au mail, c'est parler à l'attaquant lui-même. La vérification doit passer par un canal indépendant." }] },
+      { s:"Un SMS : « Votre colis est bloqué, 1,50 € de frais à régler sous 48 h », avec un lien.",
+        c:[{ t:"Payer, la somme est minime", p:0, r:"Le montant dérisoire sert à désarmer la méfiance. La vraie cible, c'est ton numéro de carte complet." },
+           { t:"Ne pas cliquer, vérifier sur le site officiel du transporteur par son propre favori", p:2, r:"On n'utilise jamais le lien du message : on rejoint le service par son chemin habituel." },
+           { t:"Cliquer pour voir, sans rien payer", p:1, r:"Le simple fait d'ouvrir la page peut suffire à certaines attaques, et t'expose. On ne clique pas." }] },
+      { s:"Un appel : « Service sécurité de votre banque. Une fraude est en cours, donnez-moi le code que vous venez de recevoir par SMS pour l'annuler. »",
+        c:[{ t:"Donner le code pour arrêter la fraude", p:0, r:"Aucun service légitime ne demande jamais ce code : il ne sert qu'à valider la connexion de celui qui appelle. C'est l'arnaque elle-même." },
+           { t:"Raccrocher et rappeler la banque par le numéro au dos de la carte", p:2, r:"Vérification par un canal indépendant. Un numéro affiché ou une voix rassurante ne prouvent rien." },
+           { t:"Donner le code mais changer un chiffre", p:0, r:"On ne communique jamais ce code, sous aucune forme. La règle est absolue." }] },
+      { s:"Un « cousin » t'écrit depuis un nouveau numéro : « J'ai cassé mon téléphone, peux-tu m'avancer 200 € ? Je te rembourse ce soir. »",
+        c:[{ t:"Envoyer l'argent, c'est la famille", p:0, r:"Numéro nouveau + urgence financière = arnaque au faux proche. Une voix ou un ton familier peuvent être imités ou clonés." },
+           { t:"L'appeler sur son ancien numéro pour vérifier que c'est bien lui", p:2, r:"Vérification par un autre canal. Une bonne habitude familiale : convenir d'un mot connu de vous seuls." },
+           { t:"Demander une preuve par message écrit", p:1, r:"Mieux que rien, mais un compte piraté peut fournir des détails convaincants. L'appel sur l'ancien numéro est plus sûr." }] },
+      { s:"Tu réalises que tu viens de cliquer sur un lien d'hameçonnage et d'entrer ton mot de passe professionnel.",
+        c:[{ t:"Ne rien dire, par peur d'être jugé, et espérer que rien n'arrive", p:0, r:"Le silence par honte est le pire choix : il laisse à l'attaquant tout le temps d'agir. La rapidité du signalement change tout." },
+           { t:"Le signaler immédiatement au support et changer le mot de passe partout où il servait", p:2, r:"Culture sans honte : on signale tout de suite. Personne n'est à l'abri d'un clic ; ce qui compte, c'est la réaction." },
+           { t:"Changer seulement ce mot de passe, sans prévenir personne", p:1, r:"Bon réflexe partiel, mais le support doit surveiller le compte et d'éventuelles connexions suspectes. On signale." }] }
+    ]
+  },
+  quiz:[
+    { t:1, q:"L'ingénierie sociale attaque :", c:["La machine","La personne, en la faisant ouvrir la porte elle-même","Le réseau","Le chiffrement"], a:1, e:"C'est la voie d'intrusion la plus fréquente : l'attaquant demande plutôt qu'il ne casse." },
+    { t:1, q:"Les quatre leviers émotionnels sont :", c:["Prix, marque, mode, âge","Urgence, peur, envie, confiance","Nord, sud, est, ouest","Voir, entendre, lire, écrire"], a:1, e:"Toutes les arnaques les combinent, sous des formes variées." },
+    { t:1, q:"Aucun service légitime ne demande jamais :", c:["Ton nom","Ton mot de passe, ton code à usage unique, un paiement en cartes cadeaux","Ton adresse mail","La date"], a:1, e:"Ces demandes sont, à elles seules, la preuve de l'arnaque." },
+    { t:2, q:"Contre la manipulation, la vraie défense est :", c:["Être plus malin sur le moment","Une règle décidée à froid, appliquée sans discuter","Répondre vite","Faire confiance à son instinct"], a:1, e:"Sous pression, tout le monde se trompe. Comme Ulysse attaché au mât, on applique une procédure." },
+    { t:2, q:"« J'ai reconnu sa voix au téléphone » :", c:["Prouve son identité","Ne prouve plus rien : une voix se clone en dix secondes","Est une preuve légale","Suffit pour agir"], a:1, e:"La seule parade est de vérifier par un canal indépendant." },
+    { t:2, q:"Une consigne de « secret, n'en parlez à personne » dans une demande urgente :", c:["Est rassurante","Est un signal d'alerte : elle sert à t'empêcher de vérifier","Doit être respectée","Est normale"], a:1, e:"Le secret imposé fait partie de la manipulation. Raison de plus pour vérifier." },
+    { t:3, q:"Après avoir cliqué sur un hameçonnage, le pire est :", c:["De changer son mot de passe","Le silence par honte, qui laisse le temps à l'attaquant","De prévenir le support","De faire une capture"], a:1, e:"Une culture sans honte permet de signaler vite ; la rapidité change tout." }
+  ]
+},
+{
+  id:'ol9', g:'Ι', titre:"Le Trône d'Héphaïstos", theme:"Le code au service de la sécurité", skill:'oly_code',
+  relique:{ nom:"Le Marteau et l'Enclume", em:'⚒️' }, jeu:'code', duree:26, pro:true, premium:true,
+  accroche:"Comprendre une défense, c'est bien. Savoir l'écrire, c'est être maître.",
+  scenes:[
+    { qui:'hephaistos', t:"On se retrouve à ma forge. Dédale t'a appris à coder, Talos à coder sûr. Ici, sur l'Olympe, je te demande de relier : écrire, en trois fonctions, trois défenses que tu connais par cœur." },
+    { qui:'hephaistos', t:"Car savoir dire « il faut une requête préparée » ou « il faut échapper » ne suffit pas. Le professionnel sait l'écrire, le vérifier, et l'expliquer. Le reste est bavardage." },
+    { qui:'kryptos', t:"Trois exercices, trois piliers vus dans tout ton voyage : juger un mot de passe, neutraliser une injection dans une page, décider d'un accès. Le code est l'outil, pas la magie." },
+    { qui:'hephaistos', t:"La console est réelle. Tes fonctions seront exécutées et testées. Une défense qu'on sait écrire est une défense qu'on comprend vraiment. Forge." }
+  ],
+  cours:{
+    objectifs:["Traduire une défense en code","Juger la force d'un mot de passe","Neutraliser une injection dans une page","Écrire un contrôle d'accès correct"],
+    sections:[
+      { t:"Le code, langue commune de la sécurité", h:`
+<p>Tout ce que tu as appris se ramène, au fond, à quelques gestes de code : vérifier une entrée, échapper une sortie, décider d'un droit. Savoir les écrire change tout :</p>
+<ul>
+<li>On <strong>comprend</strong> vraiment une faille quand on sait écrire sa correction.</li>
+<li>On <strong>vérifie</strong> au lieu de croire : un test qui passe vaut mille affirmations.</li>
+<li>On <strong>explique</strong> à une équipe une correction concrète, pas un vœu pieux.</li>
+</ul>
+<p>Les trois fonctions de cette forge résument trois piliers : la force d'un secret, la neutralisation d'une injection, la décision d'un accès. Ce sont, à elles seules, une grande part de la sécurité applicative.</p>` },
+      { t:"Trois règles à graver", h:`
+<ul>
+<li><strong>Longueur d'abord</strong> — un mot de passe se juge surtout à sa longueur : quatre mots valent mieux qu'un mot tordu. La longueur écrase la complexité.</li>
+<li><strong>Échapper toute sortie</strong> — aucune donnée d'utilisateur n'entre dans une page sans être neutralisée. Le <span class="mono">&amp;</span> se remplace en premier, sinon on casse ses propres remplacements.</li>
+<li><strong>Autoriser à chaque objet</strong> — être connecté ne suffit pas : on vérifie, à chaque requête, que l'objet demandé appartient bien à l'utilisateur (ou qu'il est administrateur).</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Écrire, c'est comprendre</div><p style="margin:6px 0 0">Une défense qu'on récite reste une opinion. Une défense qu'on écrit, qu'on teste et qu'on voit passer devient un savoir. C'est pourquoi la forge est le trône où la synthèse devient concrète.</p></div>` }
+    ],
+    vocab:[
+      ["Phrase de passe","Mot de passe fait de plusieurs mots : long, donc solide."],
+      ["Échapper","Neutraliser les caractères spéciaux d'une sortie."],
+      ["Contrôle d'accès","Vérifier le droit sur un objet, à chaque requête."],
+      ["Test","Vérification automatique du comportement d'une fonction."],
+      ["Liste blanche","Décrire ce qui est autorisé plutôt qu'interdit."]
+    ],
+    retenir:["Comprendre une faille, c'est savoir écrire sa correction.","La longueur d'un mot de passe écrase la complexité.","Échapper toute donnée d'utilisateur, le & en premier.","Autoriser se vérifie à chaque objet, pas une fois à la connexion.","Un test qui passe vaut mille affirmations."]
+  },
+  exos:[
+    { titre:"Juger un mot de passe", enonce:"Écris <b>forceMotDePasse</b> : elle renvoie <span class='mono'>\"faible\"</span> si le mot de passe est dans la liste noire <span class='mono'>[\"123456\",\"azerty\",\"motdepasse\",\"password\"]</span> OU s'il fait moins de 8 caractères ; <span class='mono'>\"fort\"</span> s'il fait 16 caractères ou plus ; <span class='mono'>\"moyen\"</span> entre les deux.",
+      depart:"function forceMotDePasse(mdp) {\n  const NOIRE = [\"123456\", \"azerty\", \"motdepasse\", \"password\"];\n  // 1. faible  2. fort  3. moyen\n  \n}",
+      tests:[{ q:'forceMotDePasse("azerty")', r:'"faible"', d:"dans la liste noire" },
+             { q:'forceMotDePasse("court12")', r:'"faible"', d:"moins de 8 caractères" },
+             { q:'forceMotDePasse("orage-biscuit-42")', r:'"fort"', d:"16 caractères ou plus" },
+             { q:'forceMotDePasse("Marseille13")', r:'"moyen"', d:"entre 8 et 15" }],
+      indice:"Teste d'abord NOIRE.indexOf(mdp) >= 0 || mdp.length < 8 → faible. Puis mdp.length >= 16 → fort. Sinon moyen.",
+      solution:"function forceMotDePasse(mdp) {\n  const NOIRE = [\"123456\", \"azerty\", \"motdepasse\", \"password\"];\n  if (NOIRE.indexOf(mdp) >= 0 || mdp.length < 8) { return \"faible\"; }\n  if (mdp.length >= 16) { return \"fort\"; }\n  return \"moyen\";\n}",
+      python:"NOIRE = [\"123456\", \"azerty\", \"motdepasse\", \"password\"]\n\ndef force_mot_de_passe(mdp):\n    if mdp in NOIRE or len(mdp) < 8:\n        return \"faible\"\n    if len(mdp) >= 16:\n        return \"fort\"\n    return \"moyen\"" },
+    { titre:"Neutraliser une injection", enonce:"Écris <b>afficherSur</b> : elle échappe le texte (<span class='mono'>&amp;</span> → <span class='mono'>&amp;amp;</span>, <span class='mono'>&lt;</span> → <span class='mono'>&amp;lt;</span>, <span class='mono'>&gt;</span> → <span class='mono'>&amp;gt;</span>, dans cet ordre) puis renvoie <span class='mono'>&lt;p&gt;TEXTE&lt;/p&gt;</span>. Le troisième test échoue si tu ne commences pas par le &amp;.",
+      depart:"function afficherSur(texte) {\n  // échappe d'abord &, puis < et >, puis enveloppe dans <p>...</p>\n  \n}",
+      tests:[{ q:'afficherSur("bonjour")', r:'"<p>bonjour</p>"' },
+             { q:'afficherSur("<img src=x onerror=vol()>")', r:'"<p>&lt;img src=x onerror=vol()&gt;</p>"' },
+             { q:'afficherSur("a & <b>")', r:'"<p>a &amp; &lt;b&gt;</p>"', d:"le & doit être échappé en premier" }],
+      indice:'texte.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;"), puis "<p>" + ... + "</p>".',
+      solution:"function afficherSur(texte) {\n  const e = texte.split(\"&\").join(\"&amp;\").split(\"<\").join(\"&lt;\").split(\">\").join(\"&gt;\");\n  return \"<p>\" + e + \"</p>\";\n}",
+      python:"def afficher_sur(texte):\n    e = texte.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\").replace(\">\", \"&gt;\")\n    return \"<p>\" + e + \"</p>\"" },
+    { titre:"Décider d'un accès", enonce:"Écris <b>peutAcceder</b> : elle renvoie <span class='mono'>false</span> si la session est absente ; <span class='mono'>true</span> si le rôle est <span class='mono'>admin</span> ; <span class='mono'>true</span> si le document appartient à l'utilisateur (<span class='mono'>doc.proprietaire === session.id</span>) ; sinon <span class='mono'>false</span>.",
+      depart:"function peutAcceder(session, doc) {\n  // 1. pas de session  2. admin  3. propriétaire  4. sinon refus\n  \n}",
+      tests:[{ q:'peutAcceder({id:7, role:"eleve"}, {proprietaire:7})', r:'true' },
+             { q:'peutAcceder({id:7, role:"eleve"}, {proprietaire:9})', r:'false', d:"pas propriétaire : l'IDOR qu'on referme" },
+             { q:'peutAcceder({id:1, role:"admin"}, {proprietaire:9})', r:'true' },
+             { q:'peutAcceder(null, {proprietaire:9})', r:'false', d:"pas de session : refus d'emblée" }],
+      indice:"Quatre if dans l'ordre : if (!session) return false; if (session.role === 'admin') return true; if (doc.proprietaire === session.id) return true; return false;",
+      solution:"function peutAcceder(session, doc) {\n  if (!session) { return false; }\n  if (session.role === \"admin\") { return true; }\n  if (doc.proprietaire === session.id) { return true; }\n  return false;\n}",
+      python:"def peut_acceder(session, doc):\n    if not session:\n        return False\n    if session[\"role\"] == \"admin\":\n        return True\n    return doc[\"proprietaire\"] == session[\"id\"]" }
+  ],
+  quiz:[
+    { t:1, q:"Un mot de passe se juge surtout à :", c:["Sa complexité tordue","Sa longueur","Ses majuscules","Ses chiffres"], a:1, e:"Quatre mots collés valent mieux qu'un mot tordu : la longueur écrase la complexité." },
+    { t:1, q:"En échappant une sortie, on remplace en premier :", c:["Le <","Le &","Le >","Le guillemet"], a:1, e:"Sinon les remplacements suivants réécrivent les & que l'on vient de produire." },
+    { t:1, q:"Le contrôle d'accès se vérifie :", c:["Une fois à la connexion","À chaque requête, sur chaque objet","Jamais","Dans le navigateur"], a:1, e:"Être connecté ne suffit pas : on vérifie que l'objet demandé appartient bien à l'utilisateur." },
+    { t:2, q:"Savoir écrire la correction d'une faille, c'est :", c:["Du bavardage","La preuve qu'on la comprend vraiment","Inutile","Réservé aux experts"], a:1, e:"Une défense récitée est une opinion ; écrite, testée et vue passer, elle devient un savoir." },
+    { t:2, q:"Un test automatique qui passe :", c:["Ne prouve rien","Vaut mieux que mille affirmations","Est décoratif","Ralentit le code"], a:1, e:"On vérifie au lieu de croire : c'est le cœur du métier." },
+    { t:3, q:"Les trois fonctions de cette forge résument :", c:["Le réseau","Trois piliers : force d'un secret, neutralisation d'injection, décision d'accès","Le chiffrement","La détection"], a:1, e:"Trois gestes de code qui couvrent une grande part de la sécurité applicative." }
+  ]
+},
+{
+  id:'ol10', g:'Κ', titre:"Le Trône d'Hermès", theme:"Cryptographie et secrets", skill:'oly_crypto',
+  relique:{ nom:"Le Caducée", em:'📜' }, jeu:'ctf', duree:24, pro:true, premium:true,
+  accroche:"Messager des dieux, gardien des secrets. Ce qu'il scelle, nul ne le lit.",
+  scenes:[
+    { qui:'hermes', t:"Je porte les messages d'un monde à l'autre, à travers des territoires ennemis. Ma question est éternelle : comment transmettre un secret sans qu'il soit lu ?" },
+    { qui:'hermes', t:"Tu as forgé un chiffre chez Dédale, cassé César, compris la clé publique. Ici, on relie tout : coder n'est pas chiffrer, chiffrer n'est pas authentifier, et un secret mal rangé n'est plus un secret." },
+    { qui:'kryptos', t:"Quelques défis t'attendent, comme sur une plateforme. Décoder, casser un vieux chiffre, repérer un secret mal caché. À chaque fois, un drapeau." },
+    { qui:'hermes', t:"Souviens-toi de la distinction qui sauve : le base64 se lit sans clé, César a vingt-cinq clés, et un algorithme public bien utilisé résiste au monde entier. Commence." }
+  ],
+  cours:{
+    objectifs:["Distinguer coder, chiffrer, authentifier","Comprendre la force par la clé, non le secret","Reconnaître un secret mal protégé","Relier toute la cryptographie du voyage"],
+    sections:[
+      { t:"Coder, chiffrer, authentifier", h:`
+<p>Trois mots que les débutants confondent, et dont la confusion coûte cher :</p>
+<ul>
+<li><strong>Coder</strong> — changer de représentation, <em>sans secret</em>. Le base64, le morse, un QR code : tout le monde peut décoder.</li>
+<li><strong>Chiffrer</strong> — rendre illisible <em>sans une clé</em>. C'est la cryptographie.</li>
+<li><strong>Authentifier</strong> — garantir qu'un message n'a pas été modifié. Chiffrer sans authentifier laisse un attaquant altérer le message sans le lire.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">L'erreur la plus exploitée</div><p style="margin:6px 0 0">Prendre un <strong>encodage</strong> pour un chiffrement. Un jeton, un mot de passe « caché » en base64 est en clair : il se lit en une seconde. On l'a vu chez Ulysse — encoder n'est jamais chiffrer.</p></div>` },
+      { t:"La force vient de la clé", h:`
+<p>Le principe de Kerckhoffs, croisé chez Dédale : <strong>un bon système reste sûr même si l'ennemi connaît la méthode</strong>. Seule la clé est secrète.</p>
+<ul>
+<li><strong>César</strong> a 25 clés : on les essaie toutes en secondes. Une serrure en carton.</li>
+<li><strong>Un algorithme moderne</strong> (AES) a plus de clés qu'il n'y a d'atomes dans l'univers observable : hors de portée.</li>
+<li>Les vrais algorithmes sont <strong>publics</strong> et attaqués par des milliers de chercheurs. C'est ce qui prouve leur solidité — jamais leur secret.</li>
+</ul>
+<p>D'où la règle absolue : <strong>on n'invente jamais son propre chiffrement</strong>. On utilise ceux que le monde a essayé de casser pendant vingt ans.</p>` },
+      { t:"Le secret mal rangé", h:`
+<p>Le chiffrement le plus fort ne protège rien si la clé traîne. Les fuites viennent presque toujours de l'<strong>usage</strong>, pas de l'algorithme :</p>
+<ul>
+<li>Une <strong>clé écrite dans le code</strong>, publiée sans y penser (l'atelier de Dédale).</li>
+<li>Un <strong>nonce réutilisé</strong> qui casse un chiffrement pourtant solide (Talos).</li>
+<li>Un <strong>mot de passe stocké en clair</strong> au lieu de son empreinte.</li>
+<li>Un <strong>secret dans un journal</strong>, dupliqué partout (Apollon).</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Le test qui démasque</div><p style="margin:6px 0 0">Si un service peut te <strong>renvoyer</strong> ton mot de passe en clair, c'est qu'il le stocke en clair. Un service correct ne peut que te le faire <em>réinitialiser</em>, car il n'en garde que l'empreinte. C'est le hachage, à sens unique.</p></div>` }
+    ],
+    vocab:[
+      ["Coder","Changer de représentation, sans secret."],
+      ["Chiffrer","Rendre illisible sans la clé."],
+      ["Authentifier","Garantir qu'un message n'a pas été modifié."],
+      ["Kerckhoffs","La sécurité repose sur la clé, pas sur le secret de la méthode."],
+      ["Nonce","Valeur unique accompagnant un chiffrement, jamais réutilisée."],
+      ["Hachage","Empreinte à sens unique, pour stocker les mots de passe."]
+    ],
+    retenir:["Coder n'est pas chiffrer ; chiffrer n'est pas authentifier.","Le base64 se lit sans clé : encoder n'est jamais chiffrer.","La force vient de la clé, jamais du secret de la méthode.","On n'invente jamais son propre chiffrement.","Un service qui renvoie ton mot de passe en clair le stocke en clair : fuis."]
+  },
+  jeuData:{
+    intro:"Cinq défis de cryptographie, comme sur une plateforme d'entraînement. Décode, casse, repère. Tu peux demander un indice, mais essaie d'abord seul.",
+    defis:[
+      { t:"Encodage — Le message d'Hermès", p:"Un jeton capté sur le réseau, encodé en base64 :\n\nS1JZUFRPU3toM3JtM3NfbTNzczRnM3J9\n\nDécode-le pour révéler le drapeau.", rep:"KRYPTOS{h3rm3s_m3ss4g3r}", indice:"Le base64 se décode sans clé. Un outil, ou 'atob' dans une console de navigateur, suffit.", e:"Le base64 n'est qu'un transport : il se lit immédiatement. Un secret encodé en base64 est en clair — on ne stocke jamais un mot de passe ainsi." },
+      { t:"César — Le vieux chiffre", p:"Message chiffré par décalage de César (décalage 7) :\n\nRYFWAVZ{sl jlzhy lujvyl}\n\nDéchiffre-le en reculant chaque lettre de 7 rangs.", rep:"KRYPTOS{le cesar encore}", contient:"lecesarencore", indice:"Recule chaque lettre de 7 : R→K, Y→R, F→Y... Le drapeau commence par KRYPTOS.", e:"César a 25 clés : on les essaie toutes en secondes. C'est un exercice, pas une protection. Tu as construit ce déchiffreur chez Dédale." },
+      { t:"Hexadécimal — Les octets bruts", p:"Une valeur affichée en hexadécimal :\n\n4b525950544f537b68657820666163696c657d\n\nChaque paire de chiffres est le code d'un caractère. Décode le drapeau.", rep:"KRYPTOS{hex facile}", contient:"hexfacile", indice:"4b = 75 en décimal = 'K'. Prends les paires deux par deux et convertis chaque octet en caractère.", e:"L'hexadécimal est un encodage, pas un chiffrement : il représente des octets, lisibles par tous. On le croise partout dans les outils de sécurité." },
+      { t:"Distinction — Le faux secret", p:"Un développeur affirme : « nos mots de passe sont protégés, ils sont encodés en base64 dans la base ». En un mot, quel est le problème ? (Réponds : que fait vraiment le base64 ?)", rep:"encoder", contient:"encod", indice:"Le base64 ne chiffre pas : il ne fait que... quoi ? Le mot commence par « encod ».", e:"Le base64 ENCODE, il ne chiffre pas : n'importe qui décode. Les mots de passe se stockent hachés (empreinte à sens unique), jamais encodés." },
+      { t:"Stockage — Le test du mot de passe oublié", p:"Un site t'envoie ton mot de passe oublié EN CLAIR par mail. Qu'est-ce que cela prouve sur la façon dont il le stocke ? (Réponds en un mot : il le stocke... comment ?)", rep:"clair", contient:"clair", indice:"S'il peut te le renvoyer, c'est qu'il le possède tel quel. Il le stocke donc en... ?", e:"S'il peut te le renvoyer, il le stocke en CLAIR — une faute grave. Un site correct n'en garde que l'empreinte et ne peut que te le faire réinitialiser." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Le base64 est :", c:["Un chiffrement fort","Un encodage sans secret, lisible par tous","Un mot de passe","Un pare-feu"], a:1, e:"Il transforme des données pour le transport, sans clé. Encoder n'est jamais chiffrer." },
+    { t:1, q:"Le chiffre de César a :", c:["Une infinité de clés","25 clés, donc se casse en secondes","Aucune clé","Une clé secrète imcassable"], a:1, e:"Une serrure en carton : on essaie les 25 décalages." },
+    { t:1, q:"La sécurité d'un chiffrement repose sur :", c:["Le secret de la méthode","La clé, la méthode pouvant être publique","La longueur du message","La vitesse"], a:1, e:"Principe de Kerckhoffs : les vrais algorithmes sont publics et attaqués par tous." },
+    { t:2, q:"Chiffrer sans authentifier laisse un attaquant :", c:["Lire le message","Modifier le message chiffré sans le lire","Rien faire","Ralentir l'échange"], a:1, e:"D'où les modes de chiffrement authentifié, qui font les deux à la fois." },
+    { t:2, q:"On n'invente jamais son propre chiffrement parce que :", c:["C'est interdit","On ne voit que les attaques auxquelles on a pensé","C'est trop lent","C'est illégal"], a:1, e:"La solidité vient d'avoir résisté à des milliers de chercheurs pendant des années." },
+    { t:2, q:"Les fuites de cryptographie viennent presque toujours :", c:["De l'algorithme","De l'usage : clé dans le code, nonce réutilisé, secret mal rangé","Du matériel","Du réseau"], a:1, e:"AES n'a jamais été cassé ; ses usages, régulièrement." },
+    { t:3, q:"Un service qui renvoie ton mot de passe en clair :", c:["Est bien organisé","Le stocke en clair, ce qui est une faute grave","Utilise un chiffrement fort","Est plus pratique"], a:1, e:"Un service correct n'en garde que l'empreinte (hachage) et ne peut que le faire réinitialiser." }
+  ]
+},
+{
+  id:'ol11', g:'Λ', titre:"Le Trône de Dionysos", theme:"Résilience et réponse au chaos", skill:'oly_resilience',
+  relique:{ nom:"La Coupe", em:'🍇' }, jeu:'scenario', duree:24, pro:true, premium:true,
+  accroche:"Tout finit par casser. Ce qui compte, c'est comment on se relève.",
+  scenes:[
+    { qui:'dionysos', t:"On me réduit à l'ivresse. On oublie que je suis aussi le dieu du chaos, de la perte, et de ce qui renaît après. Car tout festin finit, et toute forteresse tombe un jour." },
+    { qui:'dionysos', t:"La sécurité parfaite n'existe pas. Le vrai professionnel ne promet pas qu'il n'arrivera rien : il prépare le jour où ça arrive. Résilience, on dit. L'art de tenir debout dans la tempête." },
+    { qui:'kryptos', t:"Tu l'as vu au Siège du Bouclier : un incident n'est pas un problème technique, c'est une crise humaine. Des gens fatigués, un chef qui veut des réponses, et personne qui sait qui décide — si rien n'a été décidé à froid." },
+    { qui:'dionysos', t:"Cinq moments de crise. À chaque fois, le bon choix n'est pas le plus héroïque : c'est celui qu'on a préparé, calmement, avant que la tempête ne se lève." }
+  ],
+  cours:{
+    objectifs:["Comprendre la résilience","Connaître les phases de la réponse à incident","Préparer les décisions à froid","Apprendre de chaque incident"],
+    sections:[
+      { t:"Se préparer à l'inévitable", h:`
+<p>La <strong>résilience</strong> est la capacité à encaisser un incident et à s'en relever. Elle repose sur un renversement d'état d'esprit : on cesse de croire qu'on empêchera tout, pour se préparer au jour où ça arrive.</p>
+<p>Deux piliers, vus au Bouclier :</p>
+<ul>
+<li>Les <strong>sauvegardes</strong> — testées, dont une hors ligne. La seule vraie réponse au rançongiciel.</li>
+<li>Le <strong>plan de crise</strong> — écrit à froid : qui décide, qui prévient, quels gestes, dans quel ordre.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Pourquoi à froid</div><p style="margin:6px 0 0">Le moment de la crise est le pire moment pour décider : fatigue, pression, panique. On décide donc <strong>avant</strong>, calmement, et on applique sans rediscuter. C'est la discipline d'Hadès, à l'échelle d'une organisation.</p></div>` },
+      { t:"Les gestes qui sauvent, dans l'ordre", h:`
+<p>La réponse à incident suit un ordre qu'il ne faut pas inverser :</p>
+<ul>
+<li><strong>Endiguer</strong> — arrêter la propagation. Débrancher le réseau <em>sans éteindre</em> : la mémoire vive est une preuve.</li>
+<li><strong>Éradiquer</strong> — fermer l'accès de l'attaquant, corriger la faille, réinitialiser les identifiants.</li>
+<li><strong>Rétablir</strong> — remettre en service progressivement, depuis une sauvegarde <em>antérieure</em> à l'intrusion.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow">Les erreurs qui aggravent tout</div><p style="margin:6px 0 0">Éradiquer avant d'endiguer (l'attaquant continue ailleurs) ; rétablir avant d'éradiquer (il revient aussitôt) ; se connecter à la machine compromise avec un compte d'administration (on lui offre ces droits) ; payer une rançon sans avoir vérifié ses sauvegardes.</p></div>` },
+      { t:"Apprendre, sans chercher de coupable", h:`
+<p>La phase la plus sacrifiée est la plus précieuse : le <strong>retour d'expérience</strong>. Sans lui, la faille organisationnelle reste ouverte et l'incident se répète.</p>
+<ul>
+<li>On analyse <strong>sans chercher de coupable</strong> : dès que quelqu'un craint d'être désigné, l'information cesse de circuler et l'analyse devient fausse.</li>
+<li>On produit des <strong>actions datées</strong>, avec un responsable par action — pas un rapport que personne ne lira.</li>
+</ul>
+<p>La CNIL doit être notifiée sous <strong>72 heures</strong> en cas de fuite de données personnelles à risque, à compter de la connaissance de la violation. Et la communication interne — souvent oubliée — évite que des rumeurs plus rapides que la vérité ne s'installent.</p>` }
+    ],
+    vocab:[
+      ["Résilience","Capacité à encaisser un incident et à s'en relever."],
+      ["Plan de crise","Décisions écrites à froid pour le jour de l'incident."],
+      ["Endiguer","Arrêter la propagation d'un incident."],
+      ["Éradiquer","Supprimer la cause et l'accès de l'attaquant."],
+      ["Retour d'expérience","Analyse a posteriori, sans chercher de coupable."],
+      ["Notification","Déclaration à la CNIL sous 72 h en cas de fuite à risque."]
+    ],
+    retenir:["La sécurité parfaite n'existe pas : on prépare le jour où ça casse.","Sauvegardes testées et plan de crise écrit à froid.","Endiguer, puis éradiquer, puis rétablir — jamais dans le désordre.","Débrancher sans éteindre ; ne jamais s'y connecter en administrateur.","Retour d'expérience sans coupable, avec des actions datées."]
+  },
+  jeuData:{
+    intro:"Cinq moments d'une crise. À chaque fois, choisis le geste préparé à froid plutôt que la réaction héroïque du moment.",
+    sc:[
+      { s:"7h40. Le serveur de fichiers chiffre ses données en direct. Deux postes sont allumés. Tu es d'astreinte.",
+        c:[{ t:"Débrancher le câble réseau du serveur et des postes, sans les éteindre", p:2, r:"Endiguement immédiat, et la mémoire vive est préservée pour l'enquête. Le geste exact : on coupe la propagation sans détruire les preuves." },
+           { t:"Éteindre proprement le serveur", p:1, r:"La propagation s'arrête, mais on perd la mémoire vive, souvent riche en indices. Mieux que rien, mais on débranche plutôt qu'on éteint." },
+           { t:"Lancer une analyse antivirus complète pour comprendre", p:0, r:"Pendant l'analyse, le chiffrement continue et se propage. Comprendre vient après avoir arrêté l'hémorragie." }] },
+      { s:"8h05. La direction demande de rouvrir tout de suite : les usagers arrivent.",
+        c:[{ t:"Rouvrir : les postes semblent propres après un redémarrage", p:0, r:"Rétablir avant d'avoir éradiqué, c'est rendre à l'attaquant l'accès qu'il n'a jamais perdu. Il revient dans l'heure." },
+           { t:"Refuser, expliquer en une phrase simple, et donner une heure de point d'étape", p:2, r:"Tenir la ligne technique tout en donnant à la direction ce qu'elle attend : une explication claire et un rendez-vous." },
+           { t:"Rouvrir seulement l'accès internet", p:1, r:"On ne sait pas encore par où l'attaquant est entré ni s'il est présent. Trop tôt." }] },
+      { s:"9h20. Un collègue propose de se connecter au serveur avec le compte administrateur du domaine pour évaluer les dégâts.",
+        c:[{ t:"Accepter : il faut bien regarder", p:0, r:"Présenter un compte privilégié à une machine compromise, c'est offrir ces identifiants à l'attaquant. Un incident local devient une compromission totale." },
+           { t:"Refuser, et travailler depuis une machine saine avec un compte dédié à la crise", p:2, r:"On ne présente jamais de compte privilégié à un système compromis. Règle absolue." },
+           { t:"Accepter, mais changer le mot de passe juste après", p:0, r:"Trop tard : l'identifiant est capté au moment de la connexion." }] },
+      { s:"11h. Les données touchées contiennent des informations personnelles de nombreuses personnes, probablement copiées.",
+        c:[{ t:"Attendre d'avoir des certitudes avant de prévenir qui que ce soit", p:0, r:"Le délai de 72 h court depuis la connaissance de la violation, pas depuis la certitude. Attendre la preuve parfaite, c'est le dépasser." },
+           { t:"Notifier la CNIL sous 72 h avec ce qu'on sait, quitte à compléter ensuite", p:2, r:"La procédure prévoit une notification en plusieurs temps. Incomplète mais dans les délais est la bonne réponse." },
+           { t:"Prévenir seulement les personnes concernées, sans la CNIL", p:1, r:"L'information des personnes est nécessaire, mais ne remplace pas la notification à l'autorité. Les deux coexistent." }] },
+      { s:"Trois jours plus tard. Tout est rétabli, l'accès de l'attaquant fermé. L'équipe est épuisée et veut passer à autre chose.",
+        c:[{ t:"Clore l'incident : le service fonctionne", p:0, r:"Sans retour d'expérience, la faille organisationnelle reste ouverte. Les récidives à quelques mois sont très fréquentes." },
+           { t:"Organiser un retour d'expérience sans chercher de coupable, avec des actions datées et un responsable par action", p:2, r:"La seule phase qui transforme un incident en progrès. Sans recherche de coupable, sinon l'information cesse de circuler." },
+           { t:"Rédiger un rapport, sans réunion ni actions", p:1, r:"Un rapport que personne ne lit ne change rien. Ce qui produit l'amélioration, ce sont des actions datées avec un responsable." }] }
+    ]
+  },
+  quiz:[
+    { t:1, q:"La résilience, c'est :", c:["Empêcher tout incident","La capacité à encaisser un incident et à s'en relever","Un antivirus","Un pare-feu"], a:1, e:"On cesse de croire qu'on empêchera tout, pour se préparer au jour où ça arrive." },
+    { t:1, q:"Face à une machine compromise, il vaut mieux :", c:["L'éteindre proprement","Débrancher le réseau sans l'éteindre","La réinstaller aussitôt","La laisser en ligne"], a:1, e:"Éteindre efface la mémoire vive, souvent riche en preuves." },
+    { t:1, q:"L'ordre correct de la réponse est :", c:["Éradiquer, endiguer, rétablir","Endiguer, éradiquer, rétablir","Rétablir, endiguer, éradiquer","Peu importe"], a:1, e:"On arrête la propagation, on supprime la cause, puis seulement on remet en service." },
+    { t:2, q:"On décide les gestes de crise à froid parce que :", c:["C'est plus rapide","Le moment de la crise est le pire moment pour décider","La loi l'impose","Par tradition"], a:1, e:"Fatigue, pression, panique : on applique une procédure préparée, sans rediscuter." },
+    { t:2, q:"Le délai de notification à la CNIL est de :", c:["24 heures","72 heures","7 jours","1 mois"], a:1, e:"À compter de la connaissance de la violation, pas de sa résolution." },
+    { t:2, q:"Le retour d'expérience doit se faire :", c:["En désignant les responsables des erreurs","Sans chercher de coupable, avec des actions datées","Uniquement par écrit","Seulement si c'est grave"], a:1, e:"Dès que quelqu'un craint d'être désigné, l'information cesse de circuler." },
+    { t:3, q:"Rétablir un service avant l'éradication conduit à :", c:["Un gain de temps","Le retour de l'attaquant, mieux dissimulé","Une meilleure image","Rien"], a:1, e:"Son accès n'a jamais été fermé : il revient très vite, plus discret." }
+  ]
+},
+{
+  id:'ol12', g:'Μ', titre:"Le Trône de Zeus", theme:"La synthèse et l'épreuve du sommet", skill:'oly_synthese',
+  relique:{ nom:"La Foudre", em:'⚡' }, jeu:'terminal', duree:35, pro:true, premium:true, final:true,
+  accroche:"Onze trônes t'ont enseigné leur art. Le dernier te demande de les relier tous.",
+  scenes:[
+    { qui:'zeus', t:"Tu as fait le tour des trônes. L'identité, le réseau, les données, la défense, la détection, la chasse, l'attaque, l'humain, le code, les secrets, le chaos. Chacun t'a donné une pièce." },
+    { qui:'zeus', t:"Il ne reste qu'une chose à comprendre, et c'est la seule qui compte : ce ne sont pas onze arts, c'est un seul. Un défenseur qui pense en attaquant, code ses défenses, comprend l'humain et se prépare au chaos." },
+    { qui:'kryptos', t:"L'épreuve du sommet n'est pas plus difficile que les autres. Elle est plus complète : une cible que tu vas reconnaître, pénétrer, puis dont tu vas comprendre — en défenseur — comment elle aurait dû se protéger." },
+    { qui:'zeus', t:"Prends la foudre. Non pour détruire : pour éclairer d'un seul coup tout ce que tu sais désormais. Monte au dernier trône." }
+  ],
+  cours:{
+    objectifs:["Relier les onze domaines en une pensée unique","Enchaîner attaque et compréhension défensive","Voir une cible des deux côtés à la fois"],
+    sections:[
+      { t:"Un seul art, onze visages", h:`
+<p>Le message de l'Olympe tient en une phrase : <strong>la cybersécurité n'est pas une collection de techniques, c'est une façon de penser</strong>, qui regarde chaque système sous tous les angles à la fois.</p>
+<ul>
+<li>L'attaquant et le défenseur voient <strong>la même chose</strong>, de deux côtés : une version obsolète est une porte pour l'un, une faille à corriger pour l'autre.</li>
+<li>Le code, l'humain, le réseau, les données, les secrets ne sont pas des sujets séparés : ce sont les <strong>facettes d'un même risque</strong>.</li>
+<li>Comprendre, c'est <strong>relier</strong> : pourquoi cette faille existe, ce qu'elle permet, comment on la corrige, et pourquoi elle a été oubliée.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Ce que devient un professionnel entier</div><p style="margin:6px 0 0">Il ne demande plus « comment attaquer ? » ou « comment défendre ? », mais « comment ce système peut-il échouer, et comment l'en empêcher ? ». Attaque et défense deviennent une seule et même question, posée du bon côté.</p></div>` }
+    ],
+    vocab:[["Synthèse","Relier les domaines en une pensée unique."],["Posture attaquant/défenseur","Voir un système des deux côtés à la fois."],["Chaîne complète","De la reconnaissance à la remédiation."]],
+    retenir:["La cybersécurité est une façon de penser, pas une collection de techniques.","Attaquant et défenseur voient la même chose, de deux côtés.","Code, humain, réseau, données, secrets : les facettes d'un même risque.","Comprendre, c'est relier faille, impact, correction et cause.","La vraie question : comment ce système peut-il échouer, et comment l'en empêcher ?"]
+  },
+  jeuData:{
+    kind:'terminal',
+    intro:"ÉPREUVE DU SOMMET. Cible d'entraînement autorisée : 10.10.99.1. Reconnais, entre, prends le drapeau — puis, en défenseur, identifie la mesure qui aurait tout empêché pour obtenir le second drapeau. help pour les commandes.",
+    prompt:"zeus@olympe",
+    cible:"10.10.99.1",
+    objectifs:["Scanner et repérer la faille","Entrer et prendre le drapeau de l'assaut","Comprendre la défense manquante","Obtenir le drapeau du défenseur"],
+    flags:["KRYPTOS{4ss4ut_du_s0mm3t}", "KRYPTOS{d3f3ns3_qu1_s4uv3}"],
+    aide:[
+      "Phase attaque : 'nmap -sV 10.10.99.1', puis 'gobuster http://10.10.99.1'.",
+      "Le fichier /sauvegarde/config.bak contient un mot de passe : 'curl http://10.10.99.1/sauvegarde/config.bak'.",
+      "Entre avec : 'ssh admin@10.10.99.1' puis 'password Ete2019' ; 'cat flag.txt'.",
+      "Phase défense : tape 'defense' et choisis la mesure qui aurait bloqué toute la chaîne."
+    ],
+    rep:[
+      { c:/^nmap\b/i, o:"22/tcp  open  ssh   OpenSSH 8.9\n80/tcp  open  http  Apache 2.4.52\n→ SSH et web. Énumère le web.", set:'scan' },
+      { c:/^gobuster\b/i, o:"/index.html      (200)\n/sauvegarde/     (200  listing autorisé)\n→ Un dossier de sauvegarde exposé. Erreur classique.", set:'gob', need:['scan'] },
+      { c:/^curl\s+.*\/sauvegarde\/?\s*$/i, o:"Index of /sauvegarde/\n  config.bak\n→ Un fichier de configuration oublié. Ouvre-le.", set:'list', need:['gob'] },
+      { c:/^curl\s+.*config\.bak/i, o:"# config de secours (À RETIRER)\nadmin_user = admin\nadmin_pass = Ete2019\n→ Des identifiants en clair. Sers-t'en.", set:'creds', need:['list'] },
+      { c:/^curl\b/i, o:"Réponse reçue. Précise l'URL : /sauvegarde/ ou config.bak." },
+      { c:/^ssh\s+admin@10\.10\.99\.1/i, o:"admin@10.10.99.1's password:\n→ Tape 'password Ete2019'.", set:'sshp', need:['creds'] },
+      { c:/^ssh\b/i, o:"Il te faut un identifiant valide. As-tu ouvert config.bak ?" },
+      { c:/^password\s+Ete2019/i, o:"Bienvenue, admin.\nadmin@sommet:~$\n→ 'ls' puis 'cat flag.txt'.", set:'co', need:['sshp'] },
+      { c:/^password\b/i, o:"Mot de passe incorrect. Relis config.bak.", need:['sshp'] },
+      { c:/^ls\b/i, o:"flag.txt\n→ 'cat flag.txt'.", set:'ls', need:['co'] },
+      { c:/^cat\s+flag\.txt/i, o:"KRYPTOS{4ss4ut_du_s0mm3t}\n→ Drapeau de l'assaut ! 'submit'. Puis passe en défenseur : tape 'defense'.", flag:"KRYPTOS{4ss4ut_du_s0mm3t}", set:'af', need:['co'] },
+      { c:/^cat\b/i, o:"Précise : cat flag.txt (une fois connecté).", need:['co'] },
+      { c:/^defense\b/i, o:"MODE DÉFENSEUR. La chaîne : dossier /sauvegarde exposé → mot de passe en clair dans config.bak → connexion SSH.\nQuelle mesure aurait tout empêché à la racine ?\n  a) un antivirus plus cher\n  b) ne pas exposer le dossier de sauvegarde et ne jamais y laisser de secret en clair\n  c) changer la couleur du site\nRéponds : 'choix a', 'choix b' ou 'choix c'.", set:'defmode', need:['af'] },
+      { c:/^choix\s*b\b/i, o:"Exact. La cause racine est un dossier de sauvegarde exposé contenant un secret en clair. Le retirer (et ne jamais stocker de secret en clair) annule TOUTE la chaîne — l'attaquant n'a plus de point de départ.\nKRYPTOS{d3f3ns3_qu1_s4uv3}\n→ Drapeau du défenseur ! 'submit' pour terminer.", flag:"KRYPTOS{d3f3ns3_qu1_s4uv3}", need:['defmode'] },
+      { c:/^choix\s*[ac]\b/i, o:"Non. Un antivirus ou un changement cosmétique ne ferment pas la porte utilisée : le dossier de sauvegarde exposé et le secret en clair. Cherche la CAUSE RACINE.", need:['defmode'] },
+      { c:/^(ls|whoami|sudo)\b/i, o:"Tu n'es pas encore connecté. Reconnais et entre d'abord." }
+    ]
+  },
+  quiz:[
+    { t:2, q:"Le message central de l'Olympe est que la cybersécurité est :", c:["Une collection de techniques séparées","Une façon de penser qui regarde chaque système sous tous les angles","Réservée aux attaquants","Une affaire d'outils"], a:1, e:"Onze arts, un seul : relier attaque, défense, code, humain, chaos." },
+    { t:2, q:"Attaquant et défenseur, face à une version obsolète :", c:["Voient des choses opposées","Voient la même chose de deux côtés : une porte pour l'un, une faille à corriger pour l'autre","Ne s'y intéressent pas","Ont besoin d'outils différents"], a:1, e:"C'est pourquoi les meilleurs défenseurs savent penser en attaquants." },
+    { t:2, q:"Dans l'épreuve, la mesure qui aurait tout empêché était :", c:["Un antivirus plus cher","Ne pas exposer la sauvegarde et n'y laisser aucun secret en clair","Changer le design","Un mot de passe plus long uniquement"], a:1, e:"On corrige la cause racine : sans point de départ, toute la chaîne s'effondre." },
+    { t:3, q:"La question que se pose un professionnel entier est :", c:["Comment attaquer ?","Comment ce système peut-il échouer, et comment l'en empêcher ?","Quel outil acheter ?","Qui blâmer ?"], a:1, e:"Attaque et défense deviennent une seule question, posée du bon côté." },
+    { t:3, q:"Comprendre une faille, au sommet, c'est :", c:["Connaître son nom","Relier pourquoi elle existe, ce qu'elle permet, comment on la corrige et pourquoi elle a été oubliée","La mémoriser","L'exploiter"], a:1, e:"La synthèse relie les quatre faces d'un même risque." },
+    { t:2, q:"Dans l'épreuve du sommet, après le drapeau de l'assaut, on passe :", c:["À une autre cible","En défenseur, pour trouver la mesure qui aurait tout empêché","Au rapport commercial","À l'effacement des traces"], a:1, e:"Voir la même cible des deux côtés : c'est tout le sens de l'Olympe." }
+  ]
+}
+];
+
+/* ============================================================
+   39. INTÉGRATION DU MONT OLYMPE
+   ============================================================ */
+Object.assign(SKILLS, {
+  oly_identite:   { nom:"Identité et accès" },
+  oly_reseau:     { nom:"Réseaux et flux" },
+  oly_donnees:    { nom:"Données et vie privée" },
+  oly_defense:    { nom:"Défense en profondeur" },
+  oly_detection:  { nom:"Détection et journaux" },
+  oly_chasse:     { nom:"Chasse et renseignement" },
+  oly_offensif:   { nom:"Offensive éthique" },
+  oly_social:     { nom:"Ingénierie sociale" },
+  oly_code:       { nom:"Code défensif" },
+  oly_crypto:     { nom:"Cryptographie" },
+  oly_resilience: { nom:"Résilience et crise" },
+  oly_synthese:   { nom:"Synthèse" }
+});
+
+Object.assign(SIMPLE, {
+  oly_identite:{ img:"Avant de protéger, savoir qui est qui.",
+    txt:"Tout part de l'identité : on prouve qui l'on est (authentification), on décide ce qu'on peut faire (autorisation, à chaque objet), on garde la trace de qui a agi (traçabilité). Compromettre une identité, c'est hériter de tout ce qu'elle peut faire.",
+    pas:["Être connecté ne donne pas tous les droits : autoriser à chaque objet.","Un compte partagé détruit la traçabilité.","Les failles se logent aux transitions : création, changement de rôle, départ.","La revue des accès, une fois par an, rattrape l'oublié."] },
+  oly_reseau:{ img:"Tout circule ; qui comprend les courants tient la mer.",
+    txt:"Adresse (la machine), port (le service), protocole (la langue). Le DNS traduit les noms. Le chiffrement déplace ce que chaque acteur du trajet peut voir : il ne supprime jamais la confiance, il la place.",
+    pas:["Sur du trafic non chiffré, un mot de passe se lit en clair.","HTTPS protège le contenu, pas la destination.","Un VPN transfère la confiance vers le fournisseur du VPN.","Un trafic parfaitement régulier trahit un programme, pas un humain."] },
+  oly_donnees:{ img:"La donnée est la vraie moisson : de la graine au grenier.",
+    txt:"Une donnée existe au repos (chiffrement du disque), en transit (chiffrement de la connexion), en usage (le plus dur à protéger). On la classe par l'impact d'une fuite, et la meilleure protection reste de ne pas l'avoir collectée.",
+    pas:["On protège à chaque état, pas à un seul.","La sensibilité se mesure à l'impact d'une fuite.","La donnée jamais collectée ne peut pas fuiter.","Une sauvegarde éternelle est une fuite qui dort."] },
+  oly_defense:{ img:"Jamais une seule muraille : plusieurs remparts.",
+    txt:"La défense en profondeur superpose des barrières indépendantes. On suppose l'intrusion réussie et on fait qu'une brèche ne suffise pas. Prévention, détection et réponse se soutiennent : n'en négliger aucune.",
+    pas:["Les mesures les plus rentables sont les moins spectaculaires.","Une mesure trop pénible est contournée, donc vaut zéro.","Devant une solution : quel scénario précis bloque-t-elle ?","Sauvegardes, mises à jour, séparation des comptes d'abord."] },
+  oly_detection:{ img:"La lumière ne combat pas l'ombre : elle la rend visible.",
+    txt:"La vérité vit dans les journaux : centralisés, horodatés, sans secret. On distingue vrai positif, faux positif, faux négatif. Toute détection est un compromis entre bruit et angle mort.",
+    pas:["Jamais de secret dans un journal.","Une alerte inutile se supprime, elle ne s'ignore pas.","Voyage impossible et régularité parfaite : des signaux fiables.","Connaître le normal avant de chercher l'anormal."] },
+  oly_chasse:{ img:"On ne attend pas toujours la proie : on la traque.",
+    txt:"La traque cherche un intrus sans attendre d'alerte, en supposant qu'il est déjà là. Une intrusion est une chaîne qu'on remonte. Un indice ne vaut que par sa rareté ; le danger est d'accuser le mauvais.",
+    pas:["La détection automatique a toujours des angles morts.","On remonte le fil : la réponse est dans un journal déjà vu.","Un indice ne vaut que par sa rareté.","On cherche ce qui infirmerait son hypothèse."] },
+  oly_offensif:{ img:"Attaquer pour défendre : la lance au service du bouclier.",
+    txt:"On enchaîne reconnaître, énumérer, entrer, escalader, prouver. Chaque phase offensive répond à une défense précise. Un défenseur qui n'a jamais attaqué défend à l'aveugle.",
+    pas:["Bloqué ? La réponse est dans une sortie déjà obtenue.","On reste dans le périmètre, on prouve, on s'arrête.","On emprunte les droits d'un programme puissant pour escalader.","La maîtrise se mesure à ce qu'on refuse de faire."] },
+  oly_social:{ img:"La faille la plus fiable se joue sur la confiance.",
+    txt:"L'ingénierie sociale manipule la personne, pas la machine : urgence, peur, envie, confiance. On ne s'en défend pas en étant plus malin sur le moment, mais avec une règle décidée à froid.",
+    pas:["Personne de légitime ne demande ton mot de passe ni ton code à usage unique.","On vérifie une demande sensible par un autre canal.","La voix et le visage ne prouvent plus rien.","Le pire ennemi n'est pas l'erreur, c'est le silence par honte."] },
+  oly_code:{ img:"Comprendre une défense, c'est savoir l'écrire.",
+    txt:"Tout se ramène à quelques gestes de code : juger un secret, échapper une sortie, décider d'un accès. Une défense qu'on récite est une opinion ; écrite, testée et vue passer, elle devient un savoir.",
+    pas:["La longueur d'un mot de passe écrase la complexité.","Échapper toute donnée d'utilisateur, le & en premier.","Autoriser se vérifie à chaque objet.","Un test qui passe vaut mille affirmations."] },
+  oly_crypto:{ img:"Ce qu'Hermès scelle, nul ne le lit.",
+    txt:"Coder n'est pas chiffrer ; chiffrer n'est pas authentifier. Le base64 se lit sans clé. La force vient de la clé, jamais du secret de la méthode. On n'invente jamais son propre chiffrement.",
+    pas:["Encoder (base64) n'est jamais chiffrer.","César a 25 clés : une serrure en carton.","Les fuites viennent de l'usage : clé dans le code, nonce réutilisé.","Un service qui renvoie ton mot de passe en clair le stocke en clair : fuis."] },
+  oly_resilience:{ img:"Tout casse un jour ; ce qui compte, c'est se relever.",
+    txt:"La sécurité parfaite n'existe pas : on prépare le jour où ça arrive. Sauvegardes testées, plan de crise écrit à froid. On endigue, on éradique, on rétablit — dans cet ordre.",
+    pas:["Débrancher sans éteindre : la mémoire vive est une preuve.","Ne jamais se connecter en administrateur à une machine compromise.","CNIL sous 72 h à compter de la connaissance de la violation.","Retour d'expérience sans coupable, avec des actions datées."] },
+  oly_synthese:{ img:"Onze arts, un seul : une façon de penser.",
+    txt:"La cybersécurité n'est pas une collection de techniques : c'est regarder chaque système sous tous les angles. Attaquant et défenseur voient la même chose, de deux côtés. La vraie question : comment ce système peut-il échouer, et comment l'en empêcher ?",
+    pas:["Code, humain, réseau, données, secrets : facettes d'un même risque.","Comprendre, c'est relier faille, impact, correction et cause.","Les meilleurs défenseurs savent penser en attaquants.","On corrige la cause racine : la chaîne s'effondre alors d'elle-même."] }
+});
+
+BADGES.push(
+  { id:'oly_olympe', em:'🏔️', nom:"Ascension",        desc:"Terminer les douze trônes de l'Olympe" },
+  { id:'oly_foudre', em:'⚡', nom:"Porteur de foudre", desc:"Réussir l'épreuve du sommet sans indice" },
+  { id:'oly_pantheon',em:'🌌', nom:"Panthéon complet", desc:"Terminer absolument tous les parcours" }
+);
+
+Object.assign(ICON, {
+  olympe:'<path d="M3 20h18L12 5zM7 20l5-8 5 8M12 3v1.5M9 9l3-1 3 1"/>'
+});
+
+/* --- avatar générique de l'Olympe, coloré par dieu --- */
+function olympusAvatar(s, col) {
+  s = s || 52; col = col || 'var(--bronze)';
+  return '<svg class="kavatar" width="' + s + '" height="' + s + '" viewBox="0 0 64 64" aria-hidden="true">' +
+    '<circle cx="32" cy="32" r="30" fill="var(--surface-2)" stroke="' + col + '" stroke-width="1.5"/>' +
+    '<path d="M14 44h36M18 44V26M26 44V26M38 44V26M46 44V26M14 26h36l-18-10z" fill="none" stroke="' + col + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M30 20l-3 6h5l-3 6" fill="none" stroke="var(--bronze-2)" stroke-width="1.6" stroke-linecap="round"/>' +
+    '</svg>';
+}
+
+/* --- voix : tous les guides + les douze Olympiens --- */
+function voix(qui, t) {
+  if (qui === 'recit') {
+    return '<div class="card" style="background:var(--ground-2);border-style:dashed">' +
+      '<p class="oracle" style="font-style:normal;color:var(--text-2)">' + esc(t) + '</p></div>';
+  }
+  if (qui === 'minotaure') {
+    return '<div class="card" style="border-color:var(--porphyry);background:var(--porphyry-soft)">' +
+      '<div class="eyebrow" style="color:var(--porphyry)">Le Minotaure</div>' +
+      '<p class="mono" style="margin-top:8px;font-size:1.02rem;color:var(--porphyry);font-weight:700;letter-spacing:.03em">' + esc(t) + '</p></div>';
+  }
+  const av = { dedale:forgeAvatar, hades:casqueAvatar, athena:athenaAvatar, hephaistos:hephaAvatar, moires:moiresAvatar, ulysse:ulysseAvatar };
+  const G = {
+    dedale:    { nom:"Dédale, l'architecte",    c:'var(--bronze)' },
+    hades:     { nom:"Hadès, roi des ombres",   c:'var(--text-3)' },
+    athena:    { nom:"Athéna, la stratège",     c:'var(--verdigris)' },
+    hephaistos:{ nom:"Héphaïstos, le forgeron", c:'var(--bronze)' },
+    moires:    { nom:"Les Moires",              c:'var(--lapis)' },
+    ulysse:    { nom:"Ulysse, l'homme aux mille ruses", c:'var(--verdigris)' },
+    zeus:      { nom:"Zeus, roi des dieux",     c:'var(--bronze)' },
+    hera:      { nom:"Héra, gardienne du foyer",c:'var(--lapis)' },
+    poseidon:  { nom:"Poséidon, roi des flots", c:'var(--lapis)' },
+    demeter:   { nom:"Déméter, la moissonneuse",c:'var(--bronze)' },
+    apollon:   { nom:"Apollon, la lumière",     c:'var(--bronze-2)' },
+    artemis:   { nom:"Artémis, la chasseresse", c:'var(--verdigris)' },
+    ares:      { nom:"Arès, dieu de la guerre", c:'var(--porphyry)' },
+    aphrodite: { nom:"Aphrodite",               c:'var(--porphyry)' },
+    hermes:    { nom:"Hermès, le messager",     c:'var(--verdigris)' },
+    dionysos:  { nom:"Dionysos, dieu du chaos", c:'var(--porphyry)' }
+  };
+  const g = G[qui];
+  if (g) {
+    const avatar = av[qui] ? av[qui](52) : olympusAvatar(52, g.c);
+    return '<div class="kdock" style="border-left-color:' + g.c + '">' + avatar +
+      '<div class="grow"><div class="kname" style="color:' + g.c + '">' + esc(g.nom) + '</div>' +
+      '<div class="oracle ktext" data-t="' + esc(t) + '"></div></div></div>';
+  }
+  return kryptos(t);
+}
+
+/* --- le Mont Olympe rejoint les blocs premium --- */
+PREMIUM_PLUS.push({
+  id:'olympe', route:'olympe', nom:"Le Mont Olympe", sous:"La grande synthèse", pro:true, premium:true,
+  bloc:'Sommet premium', em:'🏔️',
+  intro:{ id:'olympe-intro', scenes:OLYMPE_INTRO, titre:"Le sommet du panthéon" }, mods:OLYMPE,
+  pitch:"Douze trônes, une divinité par domaine, qui relient TOUT ce que tu as appris : identité, réseau, données, défense, détection, chasse, offensive, ingénierie sociale, code, cryptographie, résilience — et une épreuve du sommet qui te fait voir une cible en attaquant ET en défenseur. Le parcours le plus complet de tout ton voyage."
+});
+
+/* --- libellés, guides et distinctions étendus à l'Olympe --- */
+function labelMod(p) {
+  if (!p) return '';
+  if (p.id === 'laby') return 'Chapitre ';
+  if (p.id === 'dedale' || p.id === 'talos') return 'Atelier ';
+  if (p.id === 'bouclier') return 'Cercle ';
+  if (p.id === 'chevaldebois') return 'Salle ';
+  if (p.id === 'arsenal') return 'Établi ';
+  if (p.id === 'olympe') return 'Trône ';
+  return 'Salle ';
+}
+function guideDe(p) {
+  const g = { dedale:'dedale', hades:'hades', bouclier:'athena', talos:'hephaistos', moires:'moires',
+              chevaldebois:'ulysse', arsenal:'hephaistos', olympe:'zeus' };
+  return (p && g[p.id]) || 'kryptos';
+}
+function badgesParcours(p) {
+  const m = { dedale:'batisseur', hades:'invisible', bouclier:'pro_bouclier', talos:'pro_talos', moires:'pro_moires',
+              chevaldebois:'hack_cheval', arsenal:'arse_arsenal', olympe:'oly_olympe' };
+  if (m[p.id]) decerner(m[p.id]);
+  if (PRO_PARCOURS.every(function (x) { return parcoursTermine(x); })) decerner('pro_ordre');
+  if (PARCOURS.every(function (x) { return parcoursTermine(x); }) && S.chapitres.boss && S.chapitres.boss.fini) decerner('oly_pantheon');
+}
+
+/* --- navigation --- */
+NAV.push({ k:'olympe', i:'olympe', l:"Mont Olympe", s:"La grande synthèse", pro:true });
+
 (function boot() {
   charger();
   if (S.theme === 'dark' || S.theme === 'light') document.documentElement.setAttribute('data-theme', S.theme);

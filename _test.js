@@ -20,7 +20,7 @@ new Function(
   'document', 'window', 'localStorage', 'matchMedia', 'requestAnimationFrame',
   'setTimeout', 'setInterval', 'clearInterval', 'innerWidth', 'innerHeight', 'module',
   src + `\nmodule.exports={PARCOURS,PRO_PARCOURS,PREMIUM_PLUS,MODULES_ALL,SKILLS,SIMPLE,BADGES,RANGS,JEUX,NAV,ICON,
-    CHEVAL,ARSENAL,CLES_PRO,choisirQuestions,executerCode,repr,modParSkill,modParId,syncPro,
+    CHEVAL,ARSENAL,OLYMPE,CLES_PRO,choisirQuestions,executerCode,repr,modParSkill,modParId,syncPro,
     creerCompte,connexion,cleValide,hacheMdp,normaliseCtf,skillsVisibles,EXAM_N,OUTILS,METIERS,
     getS:()=>S,setPro:(v)=>{S.pro=v;syncPro();},setCompte:(v)=>{S.compte=v;}};`
 )(doc, { scrollTo() {} }, localStorage,
@@ -166,11 +166,12 @@ if (E.modParId('hk1')) note('verrouillé : un module premium reste accessible');
 if (E.modParId('b1')) note('verrouillé : un module pro reste accessible');
 if (E.NAV.filter(nv => !nv.pro || false).length && E.NAV.some(nv => nv.pro && !nv.pro)) {} // no-op
 E.setPro(true);
-if (E.MODULES_ALL.length !== 57) note(`déverrouillé : ${E.MODULES_ALL.length} modules au lieu de 61`);
+if (E.MODULES_ALL.length !== 69) note(`déverrouillé : ${E.MODULES_ALL.length} modules au lieu de 61`);
 
 /* --- 8. blocs premium bien formés --- */
 if (E.CHEVAL.length !== 9) note(`le Cheval de Bois doit avoir 9 salles, il en a ${E.CHEVAL.length}`);
 if (E.ARSENAL.length !== 5) note(`l'Arsenal doit avoir 5 établis, il en a ${E.ARSENAL.length}`);
+if (E.OLYMPE.length !== 12) note(`le Mont Olympe doit avoir 12 trônes, il en a ${E.OLYMPE.length}`);
 E.PREMIUM_PLUS.forEach(p => {
   if (!p.intro || !p.intro.scenes.length) note(`${p.id} : intro manquante`);
   if (!p.mods.length) note(`${p.id} : aucun module`);

@@ -2,19 +2,20 @@ L'ODYSSEE DE KRYPTOS
 Site d'apprentissage de la cybersecurite, du college au niveau professionnel.
 
 CHIFFRES
-  8 parcours - 57 modules - 503 questions - 48 exercices de code
-  19 moteurs d'exercice - 44 distinctions - 12 rangs
+  9 parcours - 69 modules - 585 questions - 51 exercices de code
+  19 moteurs d'exercice - 47 distinctions - 12 rangs
 
 EDITION LIBRE (3 parcours, 25 modules)
   I   Le Grand Labyrinthe  (9 chapitres + boss)  les fondamentaux
   II  La Forge de Dedale   (8 ateliers)          apprendre par le code
   III Le Casque d'Hades    (8 salles)            devenir OPSEC
 
-EDITION PREMIUM (cle + compte, 3 blocs, 32 modules)
+EDITION PREMIUM (cle + compte, 4 blocs, 44 modules)
   Le Second Cercle   (18 modules) defense d'organisation, code pro, renseignement
                      + examen certifiant + trousse + espace metiers
   Le Cheval de Bois  (9 salles)   hacking ethique, avec une CONSOLE simulee
   L'Arsenal          (5 etablis)  les logiciels a installer
+  Le Mont Olympe     (12 trônes)  la grande synthese : TOUTE la cyber, le code, le hacking
 
 TRANSVERSAL
   L'Academie (cours magistraux imprimables), l'Arcade (epreuves libres),
