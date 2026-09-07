@@ -11410,6 +11410,188 @@ function badgesParcours(p) {
 /* --- navigation --- */
 NAV.push({ k:'olympe', i:'olympe', l:"Mont Olympe", s:"La grande synthèse", pro:true });
 
+
+/* ============================================================
+   40. TUTO LIBRE — INSTALLER LINUX
+   ============================================================
+   Page gratuite (hors premium) : quatre méthodes, pas à pas,
+   avec les rappels de sécurité (source officielle, empreinte,
+   sauvegarde) liés aux cours du site.
+   ============================================================ */
+
+Object.assign(ICON, {
+  linux:'<path d="M12 2.5c-2.8 0-4.5 2.2-4.5 5.5v7c0 3.2 1.7 6 4.5 6s4.5-2.8 4.5-6v-7c0-3.3-1.7-5.5-4.5-5.5z"/><path d="M12 9c-1.4 0-2.3 1.4-2.3 3.6S10.6 18 12 18s2.3-3.2 2.3-5.4S13.4 9 12 9z"/><path d="M11.2 8.4h1.6l-.8 1.2z"/><path d="M9.5 20.4l-2 1.3M14.5 20.4l2 1.3"/><circle cx="10.4" cy="7.6" r=".5"/><circle cx="13.6" cy="7.6" r=".5"/>'
+});
+
+/* on insère l'entrée avant le Panthéon, dans la partie libre */
+(function () {
+  if (NAV.some(function (n) { return n.k === 'linux'; })) return;
+  var i = NAV.findIndex(function (n) { return n.k === 'panth'; });
+  NAV.splice(i < 0 ? NAV.length : i, 0, { k:'linux', i:'linux', l:"Installer Linux", s:"Tuto pas à pas" });
+})();
+
+function etapesHTML(liste) {
+  return '<ol class="prose" style="max-width:none;margin:0;padding-left:22px">' +
+    liste.map(function (e) { return '<li style="margin-bottom:9px">' + e + '</li>'; }).join('') + '</ol>';
+}
+
+function vueLinux() {
+  return `
+  <div class="stack gap-28">
+    <header class="stack gap-12">
+      <div class="eyebrow" style="color:var(--verdigris)">Tuto libre · pratique</div>
+      <h1>Installer Linux</h1>
+      <p class="lede">Pour t'entraîner pour de vrai — et parce que la plupart des outils de sécurité vivent dessus — il te faut Linux. Ce guide couvre les quatre façons de l'obtenir, de la plus sûre à la plus avancée, pas à pas. Aucune n'exige d'être expert.</p>
+      <button class="btn btn-sm no-print" style="align-self:flex-start" onclick="window.print()">Imprimer le tuto</button>
+    </header>
+
+    ${voix('kryptos', "Ne te lance pas dans la méthode la plus impressionnante. Commence par la machine virtuelle : Linux tourne dans une fenêtre, tu peux tout casser puis tout restaurer, et ton Windows n'est jamais touché. C'est là que se forment les débutants.")}
+
+    <section class="stack gap-16">
+      <h2>1 · Choisir sa méthode</h2>
+      <div class="grid g2">
+        <div class="card stack gap-8">
+          <div class="row gap-10" style="justify-content:space-between"><span style="font-size:1.5rem">🪟</span><span class="pill pill-v">Débutant · sans risque</span></div>
+          <h3>La machine virtuelle</h3>
+          <p class="small muted">Linux tourne dans une fenêtre, à l'intérieur de Windows. On peut tout expérimenter, prendre une « photo » restaurable, et rien ne touche ton vrai ordinateur. <b>La méthode recommandée pour commencer.</b></p>
+          <div class="row gap-8 tiny dim"><span>VirtualBox (gratuit)</span><span>·</span><span>~30 min</span></div>
+        </div>
+        <div class="card stack gap-8">
+          <div class="row gap-10" style="justify-content:space-between"><span style="font-size:1.5rem">🔌</span><span class="pill pill-v">Débutant · pour essayer</span></div>
+          <h3>La clé USB « live »</h3>
+          <p class="small muted">On démarre l'ordinateur sur une clé USB et on utilise Linux <b>sans rien installer</b>. Parfait pour tester si tout fonctionne avant de s'engager. Rien n'est modifié sur ton disque.</p>
+          <div class="row gap-8 tiny dim"><span>Une clé de 8 Go</span><span>·</span><span>~20 min</span></div>
+        </div>
+        <div class="card stack gap-8">
+          <div class="row gap-10" style="justify-content:space-between"><span style="font-size:1.5rem">⌨️</span><span class="pill pill-l">Facile · ligne de commande</span></div>
+          <h3>WSL (Linux dans Windows)</h3>
+          <p class="small muted">Un vrai terminal Linux, directement dans Windows, en une commande. Idéal pour coder et pour les consoles du Cheval de Bois. Pas d'interface graphique, mais tout le terminal.</p>
+          <div class="row gap-8 tiny dim"><span>Windows 10 (2020+) ou 11</span><span>·</span><span>~10 min</span></div>
+        </div>
+        <div class="card stack gap-8" style="border-color:var(--porphyry)">
+          <div class="row gap-10" style="justify-content:space-between"><span style="font-size:1.5rem">⚙️</span><span class="pill pill-p">Avancé · avec précaution</span></div>
+          <h3>Le double amorçage</h3>
+          <p class="small muted">Garder Windows <b>et</b> Linux sur la même machine, et choisir au démarrage. Le plus performant, mais le plus risqué : une erreur de partition peut effacer des données. <b>Sauvegarde d'abord.</b></p>
+          <div class="row gap-8 tiny dim"><span>Réservé quand on est à l'aise</span><span>·</span><span>~1 h</span></div>
+        </div>
+      </div>
+      <div class="keybox"><div class="eyebrow">Quelle distribution choisir ?</div><p style="margin:6px 0 0">Pour débuter, deux distributions sont idéales et gratuites : <strong>Linux Mint</strong> (très proche de Windows, la plus douce pour commencer) ou <strong>Ubuntu</strong> (la plus répandue, beaucoup de tutoriels). Prends la version « Desktop » 64-bit. On garde <strong>Kali</strong> et <strong>Parrot</strong> — les distributions bourrées d'outils de hacking — pour plus tard, une fois à l'aise (elles sont couvertes dans le bloc <em>L'Arsenal</em>).</p></div>
+    </section>
+
+    <div class="meander"></div>
+
+    <section class="stack gap-16">
+      <h2>2 · La machine virtuelle, pas à pas</h2>
+      <p class="small muted">La méthode recommandée : sûre, réversible, et suffisante pour tout ce que tu apprends ici.</p>
+      ${etapesHTML([
+        "<strong>Télécharger VirtualBox</strong> depuis le site officiel <span class='mono'>virtualbox.org</span> (jamais une publicité ni un autre site — c'est la règle de La Règle du Forgeron). Installe-le en gardant les options par défaut.",
+        "<strong>Télécharger l'image ISO</strong> de Linux Mint (<span class='mono'>linuxmint.com</span>) ou d'Ubuntu (<span class='mono'>ubuntu.com</span>), version « Desktop » 64-bit. C'est un gros fichier (~2 à 3 Go).",
+        "<strong>Vérifier l'empreinte</strong> du fichier téléchargé. Le site publie une somme SHA256 ; compare-la à la tienne. Dans PowerShell : <span class='mono'>Get-FileHash chemin\\vers\\image.iso -Algorithm SHA256</span>. Si elles diffèrent, ne l'utilise pas. <em>(C'est le hachage du cours de Dédale, en usage réel.)</em>",
+        "<strong>Créer la machine</strong> : dans VirtualBox → « Nouvelle » → donne un nom, type <em>Linux</em>, version <em>Ubuntu (64-bit)</em>. Mémoire : <b>4096 Mo</b> si possible (2048 minimum). Crée un disque virtuel <b>VDI, dynamique, 25 Go</b>.",
+        "<strong>Insérer l'ISO</strong> : sélectionne la machine → « Configuration » → <em>Stockage</em> → clique sur le lecteur optique (« Vide ») → choisis ton fichier ISO. Dans <em>Système</em>, monte à 2 processeurs ; dans <em>Affichage</em>, mets la mémoire vidéo à 128 Mo.",
+        "<strong>Démarrer et installer</strong> : lance la machine. L'installateur de Linux apparaît → « Installer » → langue et clavier français → choisis <b>« Effacer le disque »</b> (rassure-toi : c'est le disque <em>virtuel</em> de 25 Go, pas ton vrai PC) → crée ton nom d'utilisateur et un mot de passe → laisse installer → redémarre.",
+        "<strong>Finaliser</strong> : une fois sur le bureau, mets à jour avec <span class='mono'>sudo apt update && sudo apt upgrade</span>. Installe les « Additions invité » (menu <em>Périphériques</em> de VirtualBox) pour le plein écran. Enfin, prends un <b>instantané</b> (menu <em>Machine → Prendre un instantané</em>) : tu pourras tout restaurer si tu casses quelque chose."
+      ])}
+      <div class="tipbox"><div class="eyebrow">Si la machine refuse de démarrer</div><p style="margin:6px 0 0">Un message sur « VT-x » ou « AMD-V » signifie que la <strong>virtualisation</strong> est désactivée. Redémarre le PC, entre dans le BIOS/UEFI (touche <span class="mono">Suppr</span>, <span class="mono">F2</span> ou <span class="mono">F10</span> au démarrage), active <em>Intel VT-x</em> ou <em>AMD-V / SVM</em>, enregistre et ressors.</p></div>
+    </section>
+
+    <section class="stack gap-16">
+      <h2>3 · La clé USB « live » (essayer sans installer)</h2>
+      ${etapesHTML([
+        "<strong>Télécharge l'ISO</strong> (Mint ou Ubuntu), comme ci-dessus, et vérifie son empreinte.",
+        "<strong>Télécharge Rufus</strong> (<span class='mono'>rufus.ie</span>) ou balenaEtcher : ce sont les outils qui « gravent » l'ISO sur la clé.",
+        "<strong>Branche une clé USB de 8 Go ou plus.</strong> Attention : elle sera <b>entièrement effacée</b> — sauvegarde son contenu avant.",
+        "<strong>Dans Rufus</strong> : sélectionne ta clé, puis ton fichier ISO, puis clique « Démarrer ». Attends la fin.",
+        "<strong>Redémarre l'ordinateur</strong> et appuie sur la touche du <b>menu de démarrage</b> (souvent <span class='mono'>F12</span>, parfois <span class='mono'>F9</span>, <span class='mono'>F10</span>, <span class='mono'>Échap</span> ou <span class='mono'>F2</span> — l'écran d'allumage l'indique une seconde). Choisis la clé USB dans la liste.",
+        "<strong>Choisis « Essayer Linux »</strong> (Try / Live). Tu utilises un vrai Linux, complet, sans rien avoir installé. En éteignant, tout disparaît : ton disque n'a pas été touché."
+      ])}
+    </section>
+
+    <section class="stack gap-16">
+      <h2>4 · WSL — un terminal Linux dans Windows</h2>
+      <p class="small muted">La voie la plus rapide si tu veux surtout la <b>ligne de commande</b> (pour coder, ou pour t'entraîner sur les consoles du site).</p>
+      ${etapesHTML([
+        "<strong>Ouvre PowerShell en administrateur</strong> : clic droit sur le menu Démarrer → « Terminal (administrateur) » ou « PowerShell (admin) ».",
+        "<strong>Tape</strong> <span class='mono'>wsl --install</span> puis Entrée. Windows télécharge Linux (Ubuntu par défaut). Redémarre quand il le demande.",
+        "<strong>Au premier lancement</strong>, Ubuntu s'ouvre et te demande de créer un nom d'utilisateur et un mot de passe pour Linux.",
+        "<strong>C'est prêt</strong> : tu as un terminal Linux complet. Mets-le à jour avec <span class='mono'>sudo apt update && sudo apt upgrade</span>. Tu peux le rouvrir à tout moment en tapant <span class='mono'>wsl</span> dans le menu Démarrer."
+      ])}
+      <div class="tipbox"><div class="eyebrow">Bon à savoir</div><p style="margin:6px 0 0">WSL demande Windows 10 (mise à jour de 2020 ou plus récente) ou Windows 11. Il n'a pas d'interface graphique par défaut : c'est le terminal, et c'est déjà énorme pour apprendre.</p></div>
+    </section>
+
+    <section class="stack gap-16">
+      <h2>5 · Le double amorçage (avancé)</h2>
+      <div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">À lire avant de commencer</div><p style="margin:6px 0 0"><strong>Sauvegarde TOUTES tes données importantes d'abord</strong>, sur un disque externe ou dans le cloud. Le partitionnement est l'étape où l'on peut, par erreur, tout effacer. Cette méthode est la plus performante, mais c'est la seule qui présente un vrai risque : ne t'y lance que si tu es à l'aise, ou accompagné.</p></div>
+      ${etapesHTML([
+        "<strong>Sauvegarde</strong> (vraiment). Puis prépare une <strong>clé USB live</strong> comme à l'étape 3.",
+        "<strong>Fais de la place</strong> : dans Windows, ouvre « Gestion des disques », clique droit sur ta partition principale → « Réduire le volume » → libère au moins <b>30 Go</b>.",
+        "<strong>Désactive le démarrage rapide de Windows</strong> (Panneau de configuration → Options d'alimentation) et, dans le BIOS/UEFI, le <em>Secure Boot</em> si l'installateur bloque (Ubuntu le gère, certaines distributions non).",
+        "<strong>Démarre sur la clé</strong> → « Installer » → choisis <b>« Installer Linux à côté de Windows »</b>. L'installateur gère le partage tout seul ; règle la taille réservée à Linux.",
+        "<strong>Termine et redémarre</strong> : un menu (appelé GRUB) s'affiche désormais à chaque démarrage et te laisse choisir <em>Windows</em> ou <em>Linux</em>."
+      ])}
+    </section>
+
+    <div class="meander"></div>
+
+    <section class="stack gap-16">
+      <h2>6 · Tes premiers pas dans le terminal</h2>
+      <p class="small muted">Quelques commandes pour ne pas être perdu. Tape-les, observe, recommence : c'est comme ça qu'on apprend.</p>
+      <div class="card-2"><pre class="codebloc">pwd                 # où suis-je ? (affiche le dossier courant)
+ls                  # liste les fichiers du dossier
+cd Documents        # entre dans un dossier
+cd ..               # remonte d'un dossier
+mkdir projets       # crée un dossier
+cat fichier.txt     # affiche le contenu d'un fichier
+sudo apt update     # met à jour la liste des logiciels
+sudo apt install git   # installe un logiciel (ici git)
+man ls              # le manuel d'une commande (q pour quitter)
+clear               # efface l'écran</pre></div>
+      <div class="tipbox"><div class="eyebrow">Le mot « sudo »</div><p style="margin:6px 0 0"><span class="mono">sudo</span> veut dire « fais ceci en administrateur ». Le système te demandera ton mot de passe, et tu ne verras rien s'afficher pendant que tu le tapes — c'est normal, c'est une protection. Tape-le à l'aveugle et valide.</p></div>
+    </section>
+
+    <section class="card stack gap-12" style="border-color:var(--verdigris)">
+      <div class="eyebrow" style="color:var(--verdigris)">Les trois règles de sécurité, à ne jamais oublier</div>
+      <ul class="prose" style="margin:0;max-width:none">
+        <li><strong>Source officielle uniquement.</strong> VirtualBox depuis virtualbox.org, l'ISO depuis le site de la distribution. Jamais une publicité, un forum ou un lien reçu.</li>
+        <li><strong>Vérifie l'empreinte.</strong> Une image système piégée compromet tout. Comparer la somme SHA256 prend dix secondes et protège de tout.</li>
+        <li><strong>La machine virtuelle est ta bulle.</strong> Tout ce qui est incertain se teste dedans, pas sur ton vrai système. Et avant un double amorçage : sauvegarde, toujours.</li>
+      </ul>
+    </section>
+
+    <section class="card no-print stack gap-12">
+      <div class="eyebrow">Aller plus loin</div>
+      <p class="small muted">Une fois Linux en place, le bloc <b>L'Arsenal</b> (édition premium) te montre comment en faire un vrai laboratoire de sécurité : machine attaquante, cibles légales, réseau isolé. Et le <b>Cheval de Bois</b> t'apprend à t'en servir pour le hacking éthique.</p>
+      <div class="row gap-10 wrap">
+        <button class="btn" data-go="arsenal">Voir l'Arsenal</button>
+        <button class="btn btn-ghost" data-go="chevaldebois">Le Cheval de Bois</button>
+        <button class="btn btn-ghost" data-go="agora">Retour à l'Agora</button>
+      </div>
+    </section>
+  </div>`;
+}
+
+/* --- routage : on ajoute la page libre "linux" --- */
+function rendre() {
+  const v = $('#view');
+  const b = ROUTE.split(':');
+  if (b[0] === 'agora')       v.innerHTML = vueAgora();
+  else if (b[0] === 'acad')   v.innerHTML = b[1] ? vueCours(b[1]) : vueAcademie();
+  else if (b[0] === 'arcade') v.innerHTML = vueArcade();
+  else if (b[0] === 'sanct')  v.innerHTML = b[1] ? vueCure(b[1]) : vueSanctuaire();
+  else if (b[0] === 'panth')  v.innerHTML = vuePantheon();
+  else if (b[0] === 'compte') v.innerHTML = vueCompte();
+  else if (b[0] === 'linux')  v.innerHTML = vueLinux();
+  else if (b[0] === 'chap')   { lancerChapitre(b[1]); return; }
+  else if (b[0] === 'jeu')    { lancerJeuLibre(b[1]); return; }
+  else if (b[0] === 'pro') {
+    if (b[1] === 'examen') { lancerExamen(); return; }
+    v.innerHTML = b[1] === 'metiers' ? vueMetiers() : b[1] === 'outils' ? vueOutils() : vuePro();
+  }
+  else if (parcoursDe(b[0]) && parcoursDe(b[0]).route === b[0]) v.innerHTML = vueParcours(b[0]);
+  else v.innerHTML = vueAgora();
+  brancher(v);
+}
+
 (function boot() {
   charger();
   if (S.theme === 'dark' || S.theme === 'light') document.documentElement.setAttribute('data-theme', S.theme);

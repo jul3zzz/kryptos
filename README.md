@@ -22,7 +22,7 @@ Un site complet et ludique pour apprendre la cybersécurité, **du collège au n
 | **La Forge de Dédale** | Dédale | 8 ateliers — apprendre la sécurité **par le code**, dans une vraie console JavaScript exécutée |
 | **Le Casque d'Hadès** | Hadès | 8 salles — l'OPSEC : modèle de menace, compartimentage, corrélation, discipline |
 
-Plus **l'Académie** (cours magistraux imprimables), **l'Arcade** (épreuves libres), **le Sanctuaire** (remise à niveau adaptative) et **le Panthéon** (distinctions).
+Plus **l'Académie** (cours magistraux imprimables), **l'Arcade** (épreuves libres), **le Sanctuaire** (remise à niveau adaptative), **le Panthéon** (distinctions) et un **tuto libre « Installer Linux »** (machine virtuelle, clé USB live, WSL, double amorçage).
 
 ### Édition premium (déverrouillée par une clé + compte)
 
@@ -58,7 +58,7 @@ node -e "const f=require('fs');const s=f.readFileSync('kryptos.html','utf8');f.w
 node _test.js
 ```
 
-Le harnais vérifie **157 assertions** : cohérence des 57 modules, des quiz, des moteurs de jeu, du système de comptes et du verrouillage — et surtout que **chacune des 48 solutions de référence passe réellement ses propres tests**.
+Le harnais vérifie **168 assertions** : cohérence des 69 modules, des quiz, des moteurs de jeu, du système de comptes et du verrouillage — et surtout que **chacune des 51 solutions de référence passe réellement ses propres tests**.
 
 ## ⚠️ À propos de l'édition premium
 
