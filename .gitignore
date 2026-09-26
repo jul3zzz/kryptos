@@ -4,6 +4,8 @@ _check.js
 _build*.js
 _patch*.js
 _fix*.js
+_reskin*.js
+_offensif.part
 
 # Secrets — ne jamais publier
 CLES.txt

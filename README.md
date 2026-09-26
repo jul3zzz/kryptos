@@ -6,10 +6,10 @@ Un site complet et ludique pour apprendre la cybersécurité, **du collège au n
 
 ## ✨ En chiffres
 
-- **9 parcours · 69 modules · 585 questions · 51 exercices de code**
+- **10 parcours · 75 modules · 622 questions · 51 exercices de code**
 - **19 moteurs d'exercice** différents (quiz adaptatif, tri, budget, tribunal, **console de hacking simulée**, chasse aux drapeaux, constructeur de labo…)
 - **47 distinctions, 12 rangs, un examen certifiant**
-- Thème clair et sombre, responsive, imprimable (cours et diplômes)
+- Direction artistique **« zinc & émeraude »** (façon portfolio de développeur, sombre et minimal), thème clair et sombre, responsive, imprimable (cours et diplômes)
 - Progression enregistrée localement (localStorage)
 
 ## 🗺️ Le contenu
@@ -22,7 +22,7 @@ Un site complet et ludique pour apprendre la cybersécurité, **du collège au n
 | **La Forge de Dédale** | Dédale | 8 ateliers — apprendre la sécurité **par le code**, dans une vraie console JavaScript exécutée |
 | **Le Casque d'Hadès** | Hadès | 8 salles — l'OPSEC : modèle de menace, compartimentage, corrélation, discipline |
 
-Plus **l'Académie** (cours magistraux imprimables), **l'Arcade** (épreuves libres), **le Sanctuaire** (remise à niveau adaptative), **le Panthéon** (distinctions) et un **tuto libre « Installer Linux »** (machine virtuelle, clé USB live, WSL, double amorçage).
+Plus **l'Académie** (cours magistraux imprimables), **l'Arcade** (épreuves libres), **le Sanctuaire** (remise à niveau adaptative), **le Panthéon** (distinctions) et un **tuto libre « Installer Linux »** (machine virtuelle, clé USB live, WSL, double amorçage) — enrichi d'un **atelier avancé** : laboratoire de VM isolé, modes réseau expliqués, terminal de terrain et durcissement système.
 
 ### Édition premium (déverrouillée par une clé + compte)
 
@@ -32,6 +32,7 @@ Plus **l'Académie** (cours magistraux imprimables), **l'Arcade** (épreuves lib
 | **Le Cheval de Bois** | Ulysse | 9 salles de **hacking éthique**, de débutant à pro, dans l'ordre d'un vrai test d'intrusion, avec une **console simulée** qui répond pour de vrai |
 | **L'Arsenal** | Héphaïstos | 5 établis sur **les logiciels à installer** : laboratoire, outils réseau et web, protections personnelles, hygiène d'installation |
 | **Le Mont Olympe** | Zeus & les Douze | 12 trônes — **la grande synthèse** : un dieu par domaine (identité, réseau, données, défense, détection, chasse, offensive, ingénierie sociale, code, cryptographie, résilience) qui relie **toute** la cybersécurité, le code et le hacking éthique. Épreuve du sommet où l'on voit une cible en attaquant ET en défenseur. |
+| **La Lance d'Arès** | Arès | 6 salles — **l'art offensif, légalement** : le miroir du Casque d'Hadès. Cadre légal, reconnaissance (OSINT), scan et énumération, exploitation en labo, discipline post-accès, rapport. Deux consoles simulées et une épreuve finale de bout en bout, **toujours en labo isolé et sous autorisation**. |
 
 ## 🎓 Pédagogie
 
@@ -58,7 +59,7 @@ node -e "const f=require('fs');const s=f.readFileSync('kryptos.html','utf8');f.w
 node _test.js
 ```
 
-Le harnais vérifie **168 assertions** : cohérence des 69 modules, des quiz, des moteurs de jeu, du système de comptes et du verrouillage — et surtout que **chacune des 51 solutions de référence passe réellement ses propres tests**.
+Le harnais vérifie **168 assertions** : cohérence des 75 modules, des quiz, des moteurs de jeu, du système de comptes et du verrouillage — et surtout que **chacune des 51 solutions de référence passe réellement ses propres tests**.
 
 ## ⚠️ À propos de l'édition premium
 

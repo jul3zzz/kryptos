@@ -1,7 +1,7 @@
 <title>L'Odyssée de Kryptos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;700&display=swap">
 
 <style>
 /* ============================================================
@@ -12,102 +12,103 @@
 
 /* --- THÈME CLAIR (papyrus / marbre) : défini sur :root nu --- */
 :root{
-  --ground:#EDE7D9;
-  --ground-2:#E3DBC9;
-  --surface:#F7F3E9;
-  --surface-2:#EAE3D2;
-  --surface-3:#DED5C0;
-  --line:#CCC1A8;
-  --line-soft:#DED5C0;
-  --text:#161B19;
-  --text-2:#4B554F;
-  --text-3:#79827A;
-  --verdigris:#22735B;
-  --verdigris-2:#2F8F71;
-  --verdigris-soft:#D6E8DF;
-  --bronze:#8E6318;
-  --bronze-2:#A9782A;
-  --bronze-soft:#EFE1C1;
-  --porphyry:#96263A;
-  --porphyry-soft:#F4D9DE;
-  --lapis:#2A5580;
-  --lapis-soft:#D9E3F0;
-  --shadow:0 1px 2px rgba(22,27,25,.08), 0 8px 24px -12px rgba(22,27,25,.22);
-  --shadow-lg:0 2px 4px rgba(22,27,25,.08), 0 24px 60px -20px rgba(22,27,25,.3);
+  /* THÈME CLAIR (zinc lumineux) */
+  --ground:#FAFAFA;
+  --ground-2:#F1F1F3;
+  --surface:#FFFFFF;
+  --surface-2:#F4F4F5;
+  --surface-3:#E7E7EA;
+  --line:#E4E4E7;
+  --line-soft:#EEEEF0;
+  --text:#18181B;
+  --text-2:#52525B;
+  --text-3:#8A8A93;
+  --verdigris:#0C9E54;
+  --verdigris-2:#0A8A49;
+  --verdigris-soft:#E4F7EC;
+  --bronze:#B4791E;
+  --bronze-2:#946316;
+  --bronze-soft:#F6EEDD;
+  --porphyry:#D23B54;
+  --porphyry-soft:#FBE7EB;
+  --lapis:#2A6FD0;
+  --lapis-soft:#E4EDFB;
+  --shadow:0 1px 2px rgba(24,24,27,.05), 0 10px 30px -18px rgba(24,24,27,.22);
+  --shadow-lg:0 2px 6px rgba(24,24,27,.06), 0 30px 60px -28px rgba(24,24,27,.26);
   --glow:none;
-  --thread:#A9782A;
-  --scrim:rgba(22,27,25,.55);
-  --grain:.035;
+  --thread:#0C9E54;
+  --scrim:rgba(24,24,27,.5);
+  --grain:.03;
 
-  --r-s:6px; --r-m:10px; --r-l:16px; --r-xl:24px;
-  --sp:clamp(16px,3vw,28px);
-  --maxw:1180px;
+  --r-s:6px; --r-m:8px; --r-l:12px; --r-xl:18px;
+  --sp:clamp(16px,3vw,30px);
+  --maxw:1120px;
   --read:66ch;
 
-  --f-display:"Cinzel",Georgia,"Times New Roman",serif;
-  --f-oracle:"Cormorant Garamond",Georgia,serif;
-  --f-ui:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --f-oracle:"Fraunces",Georgia,serif;
+  --f-ui:"Inter","Helvetica Neue",Arial,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
 }
 
-/* --- THÈME SOMBRE : chambre de l'oracle --- */
+/* THÈME SOMBRE (zinc quasi-noir, accent émeraude) — la signature du site */
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ground:#080B0A;
-    --ground-2:#0D1211;
-    --surface:#121917;
-    --surface-2:#19221F;
-    --surface-3:#212C29;
-    --line:#293633;
-    --line-soft:#1E2926;
-    --text:#E9E3D5;
-    --text-2:#A6B0A8;
-    --text-3:#6D7973;
-    --verdigris:#5FC9A3;
-    --verdigris-2:#7EDCBA;
-    --verdigris-soft:#0F2A23;
-    --bronze:#D9A548;
-    --bronze-2:#EFC275;
-    --bronze-soft:#2C2415;
-    --porphyry:#E0566E;
-    --porphyry-soft:#31141A;
-    --lapis:#79A8DE;
-    --lapis-soft:#141F2D;
-    --shadow:0 1px 2px rgba(0,0,0,.6), 0 10px 30px -14px rgba(0,0,0,.9);
-    --shadow-lg:0 2px 6px rgba(0,0,0,.6), 0 30px 70px -24px rgba(0,0,0,1);
-    --glow:0 0 0 1px rgba(95,201,163,.18), 0 0 28px -6px rgba(95,201,163,.28);
-    --thread:#D9A548;
-    --scrim:rgba(3,6,5,.78);
-    --grain:.06;
+    --ground:#18181B;
+    --ground-2:#141416;
+    --surface:#1E1E21;
+    --surface-2:#252528;
+    --surface-3:#2D2D31;
+    --line:#2A2A2E;
+    --line-soft:#232326;
+    --text:#FAFAFA;
+    --text-2:#A1A1AA;
+    --text-3:#71717A;
+    --verdigris:#33E092;
+    --verdigris-2:#5BF0AC;
+    --verdigris-soft:#12271E;
+    --bronze:#E3A93C;
+    --bronze-2:#F2C877;
+    --bronze-soft:#2A2213;
+    --porphyry:#F26D7D;
+    --porphyry-soft:#2C161A;
+    --lapis:#5FA8F5;
+    --lapis-soft:#14202E;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -16px rgba(0,0,0,.85);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.55), 0 34px 70px -30px rgba(0,0,0,1);
+    --glow:0 0 0 1px rgba(51,224,146,.22), 0 8px 30px -8px rgba(51,224,146,.32);
+    --thread:#33E092;
+    --scrim:rgba(9,9,11,.78);
+    --grain:.05;
   }
 }
 :root[data-theme="dark"]{
-  --ground:#080B0A;
-  --ground-2:#0D1211;
-  --surface:#121917;
-  --surface-2:#19221F;
-  --surface-3:#212C29;
-  --line:#293633;
-  --line-soft:#1E2926;
-  --text:#E9E3D5;
-  --text-2:#A6B0A8;
-  --text-3:#6D7973;
-  --verdigris:#5FC9A3;
-  --verdigris-2:#7EDCBA;
-  --verdigris-soft:#0F2A23;
-  --bronze:#D9A548;
-  --bronze-2:#EFC275;
-  --bronze-soft:#2C2415;
-  --porphyry:#E0566E;
-  --porphyry-soft:#31141A;
-  --lapis:#79A8DE;
-  --lapis-soft:#141F2D;
-  --shadow:0 1px 2px rgba(0,0,0,.6), 0 10px 30px -14px rgba(0,0,0,.9);
-  --shadow-lg:0 2px 6px rgba(0,0,0,.6), 0 30px 70px -24px rgba(0,0,0,1);
-  --glow:0 0 0 1px rgba(95,201,163,.18), 0 0 28px -6px rgba(95,201,163,.28);
-  --thread:#D9A548;
-  --scrim:rgba(3,6,5,.78);
-  --grain:.06;
+  --ground:#18181B;
+  --ground-2:#141416;
+  --surface:#1E1E21;
+  --surface-2:#252528;
+  --surface-3:#2D2D31;
+  --line:#2A2A2E;
+  --line-soft:#232326;
+  --text:#FAFAFA;
+  --text-2:#A1A1AA;
+  --text-3:#71717A;
+  --verdigris:#33E092;
+  --verdigris-2:#5BF0AC;
+  --verdigris-soft:#12271E;
+  --bronze:#E3A93C;
+  --bronze-2:#F2C877;
+  --bronze-soft:#2A2213;
+  --porphyry:#F26D7D;
+  --porphyry-soft:#2C161A;
+  --lapis:#5FA8F5;
+  --lapis-soft:#14202E;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -16px rgba(0,0,0,.85);
+  --shadow-lg:0 2px 6px rgba(0,0,0,.55), 0 34px 70px -30px rgba(0,0,0,1);
+  --glow:0 0 0 1px rgba(51,224,146,.22), 0 8px 30px -8px rgba(51,224,146,.32);
+  --thread:#33E092;
+  --scrim:rgba(9,9,11,.78);
+  --grain:.05;
 }
 
 *{box-sizing:border-box}
@@ -125,26 +126,28 @@ body{
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   opacity:var(--grain);
-  background-image:radial-gradient(circle at 50% 0%, rgba(95,201,163,.5), transparent 60%),
-                   radial-gradient(circle at 90% 90%, rgba(217,165,72,.35), transparent 55%);
+  background-image:radial-gradient(circle at 50% -8%, rgba(51,224,146,.55), transparent 52%),
+                   radial-gradient(circle at 94% 98%, rgba(51,224,146,.14), transparent 55%);
 }
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E")}
 img{max-width:100%;display:block}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:none}
-a{color:var(--verdigris);text-underline-offset:3px}
+a{color:var(--verdigris);text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--verdigris) 45%,transparent)}
 :focus-visible{outline:2px solid var(--verdigris-2);outline-offset:3px;border-radius:4px}
 ::selection{background:var(--bronze);color:var(--ground)}
 
 /* ---------- typographie ---------- */
 h1,h2,h3,h4{margin:0;text-wrap:balance;line-height:1.15}
-h1{font-family:var(--f-display);font-weight:900;font-size:clamp(1.9rem,4.2vw,3rem);letter-spacing:.01em}
-h2{font-family:var(--f-display);font-weight:700;font-size:clamp(1.35rem,2.6vw,1.9rem)}
-h3{font-family:var(--f-ui);font-weight:800;font-size:1.06rem;letter-spacing:-.01em}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(2rem,4.4vw,3.1rem);letter-spacing:-.022em}
+h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.4rem,2.7vw,2rem);letter-spacing:-.015em}
+h3{font-family:var(--f-ui);font-weight:700;font-size:1.06rem;letter-spacing:-.015em}
 p{margin:0}
 .eyebrow{
-  font-family:var(--f-ui);font-size:.68rem;font-weight:700;letter-spacing:.22em;
+  font-family:var(--f-ui);font-size:.68rem;font-weight:700;letter-spacing:.2em;
   text-transform:uppercase;color:var(--text-3);
 }
+.eyebrow.v{color:var(--verdigris)}
 .oracle{font-family:var(--f-oracle);font-size:1.22rem;line-height:1.55;font-style:italic;color:var(--text)}
 .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 .num{font-variant-numeric:tabular-nums}
@@ -173,13 +176,13 @@ p{margin:0}
 #app{position:relative;z-index:1;display:flex;min-height:100vh}
 .rail{
   width:236px;flex:0 0 236px;position:sticky;top:0;height:100vh;
-  background:var(--surface);border-right:1px solid var(--line);
+  background:color-mix(in srgb,var(--ground) 82%,transparent);backdrop-filter:blur(10px);border-right:1px solid var(--line);
   display:flex;flex-direction:column;gap:4px;padding:20px 14px;overflow-y:auto;
 }
 .brand{display:flex;align-items:center;gap:11px;padding:4px 6px 14px}
 .brand-mark{width:38px;height:38px;flex:0 0 38px}
 .brand-txt{display:flex;flex-direction:column;line-height:1.05}
-.brand-txt b{font-family:var(--f-display);font-weight:900;font-size:1.02rem;letter-spacing:.06em}
+.brand-txt b{font-family:var(--f-display);font-weight:600;font-size:1.14rem;letter-spacing:0}
 .brand-txt span{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);font-weight:700}
 .navbtn{
   display:flex;align-items:center;gap:11px;width:100%;text-align:left;
@@ -201,7 +204,7 @@ main{flex:1;min-width:0;padding:clamp(20px,3.5vw,44px) var(--sp) 120px}
 .sheet{max-width:var(--maxw);margin:0 auto}
 
 /* ---------- cartes ---------- */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:20px;box-shadow:var(--shadow)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:22px;box-shadow:var(--shadow)}
 .card-2{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:var(--r-m);padding:15px}
 .grid{display:grid;gap:16px}
 .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -218,7 +221,7 @@ main{flex:1;min-width:0;padding:clamp(20px,3.5vw,44px) var(--sp) 120px}
 .btn:hover{background:var(--surface-3);transform:translateY(-1px)}
 .btn:active{transform:translateY(0)}
 .btn[disabled]{opacity:.42;pointer-events:none}
-.btn-primary{background:var(--verdigris);border-color:var(--verdigris);color:var(--ground);box-shadow:var(--glow)}
+.btn-primary{background:var(--verdigris);border-color:var(--verdigris);color:#0A0A0B;font-weight:700;box-shadow:var(--glow)}
 .btn-primary:hover{background:var(--verdigris-2);border-color:var(--verdigris-2)}
 .btn-gold{background:var(--bronze);border-color:var(--bronze);color:var(--ground)}
 .btn-gold:hover{background:var(--bronze-2);border-color:var(--bronze-2)}
@@ -241,7 +244,7 @@ main{flex:1;min-width:0;padding:clamp(20px,3.5vw,44px) var(--sp) 120px}
 .node-dot{
   flex:0 0 68px;height:68px;border-radius:50%;display:grid;place-items:center;
   background:var(--surface);border:2px solid var(--line);
-  font-family:var(--f-display);font-weight:900;font-size:1.5rem;color:var(--text-3);
+  font-family:var(--f-display);font-weight:600;font-size:1.5rem;color:var(--text-3);
   transition:.25s;
 }
 .node.done .node-dot{border-color:var(--bronze);color:var(--bronze);background:var(--bronze-soft);box-shadow:0 0 0 5px color-mix(in srgb,var(--bronze) 12%,transparent)}
@@ -300,7 +303,7 @@ main{flex:1;min-width:0;padding:clamp(20px,3.5vw,44px) var(--sp) 120px}
 
 /* ---------- cours ---------- */
 .prose{max-width:var(--read);font-size:1rem;color:var(--text)}
-.prose h3{margin:26px 0 8px;color:var(--verdigris);font-family:var(--f-display);font-weight:700;font-size:1.15rem;letter-spacing:.02em}
+.prose h3{margin:26px 0 8px;color:var(--verdigris);font-family:var(--f-display);font-weight:600;font-size:1.28rem;letter-spacing:-.01em}
 .prose p{margin:0 0 12px;color:var(--text-2)}
 .prose strong{color:var(--text);font-weight:700}
 .prose ul{margin:0 0 14px;padding-left:20px;color:var(--text-2)}
@@ -600,7 +603,7 @@ function pluie() {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const cv = document.createElement('canvas'); cv.className = 'confetti';
   cv.width = innerWidth; cv.height = innerHeight; document.body.appendChild(cv);
-  const x = cv.getContext('2d'), cols = ['#D9A548','#5FC9A3','#E0566E','#EFC275','#79A8DE'];
+  const x = cv.getContext('2d'), cols = ['#E3A93C','#33E092','#E0566E','#EFC275','#79A8DE'];
   const P = Array.from({length:110}, () => ({
     x:Math.random()*cv.width, y:-20-Math.random()*cv.height*0.5, w:5+Math.random()*7, h:7+Math.random()*9,
     vy:2+Math.random()*3.6, vx:-1.4+Math.random()*2.8, a:Math.random()*6.28, va:-0.12+Math.random()*0.24, c:pick(cols)
@@ -9607,12 +9610,12 @@ const ARSENAL = [
   .terminal{
     background:#05080a;border:1px solid var(--line);border-radius:var(--r-m);
     padding:14px 16px;font-family:var(--f-mono);font-size:.84rem;line-height:1.6;
-    height:340px;overflow-y:auto;color:#c8f2dd;white-space:pre-wrap;word-break:break-word;
+    height:340px;overflow-y:auto;color:#8af3c4;white-space:pre-wrap;word-break:break-word;
   }
   :root[data-theme="light"] .terminal, :root:not([data-theme="dark"]) .terminal{ background:#0a1210; }
-  .terminal .cmd{color:#7edcba}
+  .terminal .cmd{color:#5bf0ac}
   .terminal .cmd::before{content:"$ ";color:var(--bronze)}
-  .terminal .out{color:#c8f2dd;opacity:.92;margin:2px 0 10px}
+  .terminal .out{color:#8af3c4;opacity:.92;margin:2px 0 10px}
   .terminal .sys{color:var(--bronze);opacity:.9}
   .terminal .err{color:#ff9db0}
   .termbar{display:flex;align-items:center;gap:8px;margin-top:10px}
@@ -11409,6 +11412,453 @@ function badgesParcours(p) {
 /* --- navigation --- */
 NAV.push({ k:'olympe', i:'olympe', l:"Mont Olympe", s:"La grande synthèse", pro:true });
 
+/* OFFENSIF-PART v1 — marqueur d'insertion (ne pas retirer) */
+/* ============================================================
+   41. BLOC PREMIUM — LA LANCE D'ARÈS (l'art offensif, légal)
+   ============================================================
+   Guidé par Arès. Le pendant offensif du Casque d'Hadès : la
+   démarche d'un red team, mais toujours dans un labo isolé et
+   sous autorisation. Kryptos veille au cadre légal à chaque salle.
+   ============================================================ */
+
+ICON.offensif = '<path d="M14.5 3.5 21 10l-2 2-6.5-6.5zM3 21l4.5-1.5L19 8l-3-3L4.5 16.5zM14 6l4 4M6.5 13.5l4 4M3 3l4 1.5M3 3l1.5 4"/>';
+
+Object.assign(SKILLS, {
+  ethiqueoff: { nom:"Cadre légal offensif" },
+  reconoff:   { nom:"Reconnaissance" },
+  scanoff:    { nom:"Scan et énumération" },
+  exploitoff: { nom:"Exploitation en labo" },
+  postexploit:{ nom:"Discipline post-accès" },
+  rapportoff: { nom:"Rapport offensif" }
+});
+
+Object.assign(SIMPLE, {
+  ethiqueoff:{ img:"Une épée n'est légale que dans une arène.",
+    txt:"Le même geste — scanner, entrer — est un exercice dans ton labo et un délit sur la machine d'un inconnu. Ce qui change tout, ce n'est pas la technique, c'est l'autorisation. En France, l'article 323-1 punit l'accès non autorisé, même sans dégât.",
+    pas:["Ta cible est-elle à toi, à un exercice (CTF), ou couverte par un accord écrit ?","Si c'est « non » ou « je ne sais pas » : on ne touche pas.","Un « oui » à l'oral ne suffit pas : il faut un périmètre écrit.","Dans le doute, on demande — jamais on ne tente."] },
+  reconoff:{ img:"On observe la cité avant d'en approcher.",
+    txt:"La reconnaissance, c'est rassembler ce qui est déjà public : noms de domaine, sous-domaines oubliés, adresses de serveurs, courriels. Le passif ne touche pas la cible ; il lit des sources ouvertes. C'est lent, discret, et c'est 80 % du travail.",
+    pas:["Passif d'abord : whois, DNS, journaux de certificats, moteurs de recherche.","Note tout : chaque sous-domaine est une porte possible.","Ne « frappe » jamais la cible pendant la phase passive.","Ce que tu trouves sur toi, réduis-le : c'est aussi de la défense."] },
+  scanoff:{ img:"Frapper aux portes pour entendre lesquelles sonnent creux.",
+    txt:"Scanner, c'est demander à une machine quels ports sont ouverts et quels services écoutent. Énumérer, c'est creuser chaque service pour connaître sa version et ses réglages. Bruyant par nature : réservé au labo ou au périmètre autorisé.",
+    pas:["Vérifie d'abord que la cible répond (ping).","Liste les ports ouverts (nmap), puis les versions (nmap -sV).","Pour chaque service, cherche sa version et ses défauts connus.","Consigne : un port ouvert n'est pas une faille, c'est une piste."] },
+  exploitoff:{ img:"On n'enfonce pas le mur : on trouve la porte oubliée.",
+    txt:"L'exploitation profite d'un défaut : un mot de passe par défaut, un contrôle d'accès manquant, une donnée en clair. En labo, on la déclenche sur une machine faite pour ça. Le but n'est pas de casser : c'est de prouver la faille pour la faire corriger.",
+    pas:["Pars d'une faille identifiée à l'énumération, pas au hasard.","Le plus rentable est souvent le plus bête : identifiants par défaut.","Une preuve suffit : on ne s'acharne pas, on ne détruit rien.","Tout ce qui est trouvé sera écrit dans le rapport."] },
+  postexploit:{ img:"Un professionnel s'arrête à la ligne blanche.",
+    txt:"Une fois entré, la tentation est d'aller plus loin : rebondir, fouiller, garder un accès. C'est là que se joue la différence entre un métier et un délit. On reste dans le périmètre, on documente, on ne détruit jamais une preuve, on ne garde rien après la mission.",
+    pas:["Reste strictement dans le périmètre écrit.","Un chemin hors périmètre ? On s'arrête et on signale.","On documente (captures horodatées), on ne détruit aucun journal.","Après la mission : on ne conserve aucune donnée de la cible."] },
+  rapportoff:{ img:"L'attaque n'a de valeur que par le rapport qui la répare.",
+    txt:"Le livrable d'un test d'intrusion n'est pas « j'ai réussi » : c'est un rapport clair qui classe chaque faille par gravité, explique comment elle a été trouvée, et surtout comment la corriger. C'est ce qui transforme une attaque en défense.",
+    pas:["Classe chaque trouvaille : critique, moyen, faible, info.","Pour chacune : où, comment reproduire, quel impact.","Donne une correction concrète et priorisée.","Le bon rapport se lit par un non-spécialiste."] }
+});
+
+const OFFENSIF_INTRO = [
+  { qui:'recit', t:"Une arène de sable, pas un champ de bataille. Au sol, des cibles de bois alignées, et au mur, une seule phrase gravée : « Ici, et seulement ici. »" },
+  { qui:'ares', t:"On me présente toujours comme la brute. Le dieu qui frappe. C'est faux. Frapper sans réfléchir, c'est perdre — mon fils préféré, c'est la stratégie, pas la fureur." },
+  { qui:'ares', t:"L'offensive, la vraie, c'est de la patience : observer, comprendre, trouver le point faible, et ne frapper qu'une fois, au bon endroit. Tout le reste est du gaspillage." },
+  { qui:'kryptos', t:"Et il y a une règle avant toutes les autres, non négociable : tout ce que tu vas apprendre ici ne se pratique que sur des machines que tu as le droit d'attaquer. Ton labo isolé, un exercice, un contrat signé. Jamais rien d'autre. La première salle ne parle que de ça." },
+  { qui:'ares', t:"Six salles. Reconnaître, scanner, entrer, tenir sa ligne, rendre compte. C'est l'ordre exact d'une vraie mission offensive. Celui qui saute une étape se blesse lui-même." },
+  { qui:'kryptos', t:"Ce parcours est le miroir du Casque d'Hadès : on y apprend à attaquer pour mieux savoir défendre. Un attaquant qui comprend la défense, et un défenseur qui comprend l'attaque, c'est la même personne — la meilleure." }
+];
+
+const OFFENSIF = [
+{
+  id:'of1', g:'I', titre:"Le Serment du Guerrier", theme:"Le cadre légal de l'offensif", skill:'ethiqueoff',
+  relique:{ nom:"Le Serment", em:'📜' }, jeu:'tri3', duree:15,
+  accroche:"Le même geste est un exercice ici, un délit ailleurs. Tout tient dans un mot : autorisation.",
+  scenes:[
+    { qui:'ares', t:"Avant de te donner la moindre arme, une question. Sur quoi as-tu le droit de t'entraîner ?" },
+    { qui:'kryptos', t:"C'est la question qui protège toute ta vie. Réponds mal, et la meilleure intention du monde devient une infraction pénale." },
+    { qui:'ares', t:"Un guerrier sans arène n'est pas un guerrier : c'est un danger. On va tracer ton arène avant de te tendre la lance." }
+  ],
+  cours:{
+    objectifs:["Distinguer une cible autorisée d'une cible interdite","Citer ce que dit la loi française sur l'accès non autorisé","Comprendre qu'un accord oral ne suffit pas","Savoir dire non et demander un périmètre écrit"],
+    sections:[
+      { t:"Ce que dit la loi", h:`
+<p>En France, le <strong>Code pénal</strong> est clair, et il n'attend pas qu'il y ait des dégâts :</p>
+<ul>
+<li><strong>Article 323-1</strong> : accéder ou se maintenir dans un système informatique <em>sans autorisation</em> est un délit — même si tu ne casses rien, même « juste pour voir ».</li>
+<li><strong>Article 323-2</strong> : entraver ou fausser le fonctionnement d'un système (un déni de service, par exemple) est puni plus lourdement.</li>
+<li><strong>Article 323-3</strong> : modifier ou supprimer des données sans droit.</li>
+</ul>
+<p>La technique n'entre même pas en compte : ce qui fait l'infraction, c'est <strong>l'absence d'autorisation</strong>. Un scan de ports sur une machine qui n'est pas la tienne est déjà un « accès » au sens de la loi.</p>
+<div class="keybox"><div class="eyebrow">La seule question qui compte</div><p style="margin:6px 0 0">« Ai-je le droit écrit d'attaquer <em>cette</em> machine, <em>maintenant</em>, dans <em>ce</em> périmètre ? » Si la réponse n'est pas un <strong>oui écrit</strong>, la réponse est <strong>non</strong>.</p></div>` },
+      { t:"Où s'entraîner, vraiment", h:`
+<p>Il existe des terrains faits pour ça, où l'autorisation est <strong>donnée d'avance</strong> :</p>
+<ul>
+<li><strong>Ton propre labo</strong> — des machines virtuelles que tu possèdes, sur un réseau isolé (voir le tuto <em>Installer Linux</em>). Tu es propriétaire : tu as tous les droits.</li>
+<li><strong>Les plateformes d'entraînement</strong> — TryHackMe, Hack The Box, Root-Me : des cibles légales, préparées, avec des règles claires.</li>
+<li><strong>Les CTF</strong> — des compétitions où « capturer le drapeau » est le but officiel.</li>
+<li><strong>Le bug bounty</strong> — des entreprises publient un périmètre et t'autorisent à chercher des failles… <em>dans ce périmètre uniquement</em>.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">Les pièges classiques</div><p style="margin:6px 0 0">« Mon ami m'a dit oui à l'oral » : insuffisant, il faut un écrit. « Le site avait l'air mal protégé » : ce n'est pas une autorisation. « Je voulais juste les prévenir » : on prévient <em>sans</em> entrer. Dans le doute, on ne touche pas — et on demande.</p></div>` }
+    ],
+    retenir:["Ce qui rend l'offensif légal, c'est l'autorisation écrite, pas la technique.","Article 323-1 : entrer sans droit est un délit, même sans dégât.","Un « oui » oral ne vaut rien : exige un périmètre écrit.","Ton labo, les CTF, TryHackMe/HTB, le bug bounty : des terrains autorisés.","Dans le doute : on s'arrête et on demande."]
+  },
+  jeuData:{
+    kind:'tri',
+    titre:"L'Arène du Droit",
+    intro:"Range chaque situation : as-tu le droit d'agir ? Trois d'entre elles sont des pièges où presque tout le monde se trompe.",
+    cats:[
+      { n:"Autorisé", d:"tu as le droit d'agir" },
+      { n:"Interdit", d:"c'est un délit, jamais" },
+      { n:"Écrit d'abord", d:"zone grise : pas sans accord écrit" }
+    ],
+    items:[
+      { t:"Attaquer ta propre machine virtuelle, dans ton labo isolé.", c:0, e:"Tu es propriétaire des deux machines et rien ne sort de la bulle : parfaitement légal." },
+      { t:"Scanner le site d'une entreprise « juste pour voir », sans accord.", c:1, e:"Un scan est déjà un accès au sens de la loi. Sans autorisation, c'est l'article 323-1." },
+      { t:"Résoudre une épreuve sur TryHackMe ou Hack The Box.", c:0, e:"Ces plateformes fournissent des cibles légales, l'autorisation est donnée d'avance." },
+      { t:"Tester la box internet de tes parents parce qu'ils t'ont dit oui à l'oral.", c:2, e:"L'intention est bonne, mais un accord oral ne protège pas : mets-le par écrit, avec un périmètre." },
+      { t:"Chercher des failles dans le périmètre publié d'un bug bounty.", c:0, e:"L'entreprise autorise explicitement, dans les limites qu'elle fixe. Reste dans le périmètre." },
+      { t:"Un ami te demande de tester son site perso ; rien n'est écrit.", c:2, e:"Demande-lui un accord écrit précisant ce que tu peux toucher. Ensuite seulement." },
+      { t:"Utiliser un identifiant récupéré ailleurs pour entrer sur un service.", c:1, e:"Se maintenir dans un système avec des identifiants qui ne sont pas les tiens est un délit." },
+      { t:"Garder une copie de données trouvées pendant un test, après la mission.", c:1, e:"Aucune autorisation ne couvre la conservation de données après la fin du périmètre." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Ce qui rend une action offensive légale, c'est :", c:["Qu'elle ne fasse aucun dégât","L'autorisation, écrite et délimitée","Qu'on prévienne après coup","Que la cible soit mal protégée"], a:1, e:"Seule l'autorisation compte. Sans dégât mais sans droit, c'est déjà un délit." },
+    { t:1, q:"Un simple scan de ports sur une machine qui n'est pas la tienne :", c:["N'est rien du tout","Est déjà un accès au sens de la loi","Est légal si tu ne te connectes pas","Est autorisé la nuit"], a:1, e:"La loi considère le scan comme un accès. Sans autorisation, il tombe sous l'article 323-1." },
+    { t:1, q:"Un accord donné à l'oral par un ami :", c:["Suffit largement","Ne protège pas : il faut un écrit","Vaut mieux qu'un écrit","N'est utile que pour les entreprises"], a:1, e:"Sans trace écrite et sans périmètre, tu n'as aucune protection en cas de problème." },
+    { t:2, q:"Lequel est un terrain d'entraînement légal ?", c:["Le site du collège","Une caméra trouvée en ligne","Une cible sur Hack The Box","La box d'un voisin"], a:2, e:"Les plateformes comme HTB fournissent des cibles autorisées, prévues pour l'exercice." },
+    { t:2, q:"Dans un bug bounty, tu peux :", c:["Attaquer tout le système d'information","Agir uniquement dans le périmètre publié","Garder les données trouvées","Sortir du périmètre si c'est intéressant"], a:1, e:"Le programme définit un périmètre précis : hors de lui, l'autorisation ne s'applique plus." },
+    { t:2, q:"L'article 323-1 du Code pénal punit :", c:["Uniquement le vol de données","L'accès ou le maintien sans autorisation","Seulement les attaques avec dégâts","La détention d'outils"], a:1, e:"Il vise l'accès et le maintien non autorisés, indépendamment de tout dégât." },
+    { t:3, q:"Tu tombes par hasard sur une faille évidente d'un vrai site. Le bon réflexe :", c:["L'exploiter pour la prouver","Ne pas entrer, et la signaler par un canal responsable","La publier sur les réseaux","Tester juste un peu"], a:1, e:"On peut alerter sans entrer. Exploiter « pour prouver » reste un accès non autorisé." }
+  ]
+},
+{
+  id:'of2', g:'II', titre:"L'Œil d'Arès", theme:"La reconnaissance passive (OSINT)", skill:'reconoff',
+  relique:{ nom:"La Lunette", em:'🔭' }, jeu:'terminal', duree:18,
+  accroche:"Avant la première frappe, on observe. La reconnaissance, c'est 80 % du travail.",
+  scenes:[
+    { qui:'ares', t:"Les débutants veulent frapper tout de suite. Les vrais commencent par regarder — longtemps, sans être vus." },
+    { qui:'kryptos', t:"Ici tout est passif : on interroge des sources publiques, on ne touche pas encore la cible. Et la cible, c'est sparte.lab — un domaine d'entraînement, à toi." },
+    { qui:'ares', t:"Chaque nom oublié, chaque vieux serveur, est une porte que le défenseur ne surveille plus. Trouve-les." }
+  ],
+  cours:{
+    objectifs:["Distinguer reconnaissance passive et active","Utiliser le DNS et le whois pour cartographier une cible","Comprendre l'intérêt des journaux de certificats","Voir la reconnaissance comme un problème de défense"],
+    sections:[
+      { t:"Passif contre actif", h:`
+<p>La <strong>reconnaissance passive</strong> ne touche jamais la cible : elle lit des sources déjà publiques. On y apprend énormément sans laisser la moindre trace chez l'adversaire :</p>
+<ul>
+<li><strong>whois</strong> — qui possède le domaine, depuis quand, quel hébergeur.</li>
+<li><strong>DNS</strong> — les adresses des serveurs (<span class="mono">A</span>), la messagerie (<span class="mono">MX</span>), des notes techniques (<span class="mono">TXT</span>).</li>
+<li><strong>Journaux de certificats</strong> (crt.sh) — chaque certificat HTTPS émis révèle des <strong>sous-domaines</strong>, souvent oubliés.</li>
+<li><strong>Moteurs et fuites</strong> — pages indexées, courriels, documents publics.</li>
+</ul>
+<p>La <strong>reconnaissance active</strong>, elle, interroge directement la cible (scan de ports…) : bruyante, elle laisse des traces, et n'est légale que dans un périmètre autorisé. On ne l'entame qu'après le passif.</p>` },
+      { t:"L'autre bout de la lunette : se défendre", h:`
+<p>Tout ce que tu apprends à trouver sur une cible, un attaquant peut le trouver sur <strong>toi</strong> ou ton organisation. La reconnaissance est donc aussi une leçon de défense :</p>
+<ul>
+<li>Fais l'inventaire de ta propre <em>surface</em> : quels sous-domaines, quels serveurs, quelles adresses traînent en public ?</li>
+<li>Ferme les vieux services oubliés — ce sont les plus vulnérables.</li>
+<li>Ne publie pas de secrets dans des enregistrements DNS ou des dépôts de code.</li>
+</ul>
+<div class="tipbox"><div class="eyebrow">Le pont avec Hadès</div><p style="margin:6px 0 0">La reconnaissance offensive et l'OPSEC (Casque d'Hadès) sont deux vues d'un même problème : réduire ce qu'on montre. Attaquer apprend à défendre.</p></div>` }
+    ],
+    retenir:["Le passif ne touche pas la cible ; l'actif oui, et laisse des traces.","whois + DNS (A, MX, TXT) cartographient une cible sans la toucher.","Les journaux de certificats révèlent les sous-domaines oubliés.","Ce qu'on trouve sur une cible, un autre peut le trouver sur toi.","On termine le passif avant de commencer l'actif."]
+  },
+  jeuData:{
+    kind:'terminal',
+    intro:"Console de reconnaissance passive. Cible autorisée d'entraînement : sparte.lab. Reste passif : interroge des sources publiques, ne scanne rien. Tape help pour les commandes, hint si tu bloques, submit <drapeau> quand tu l'as trouvé.",
+    titre:"L'Œil d'Arès",
+    prompt:"recon@ares",
+    cible:"sparte.lab",
+    objectifs:["Identifier l'hébergeur du domaine","Trouver le fournisseur de messagerie","Lister un sous-domaine oublié","Récupérer le drapeau caché dans un enregistrement TXT"],
+    flags:["KRYPTOS{r3c0n_0s1nt_p4ss1v3}"],
+    aide:[
+      "Commence par 'whois sparte.lab' pour voir qui possède le domaine.",
+      "Essaie 'dig sparte.lab', puis 'dig sparte.lab mx' et 'dig sparte.lab txt'.",
+      "Les sous-domaines oubliés se trouvent avec 'crtsh sparte.lab'.",
+      "Le drapeau est dans un enregistrement TXT : relis la sortie de 'dig sparte.lab txt', puis 'submit'."
+    ],
+    commandes:"whois <domaine> · dig <domaine> [mx|txt] · crtsh <domaine> · host <domaine>",
+    rep:[
+      { c:/^whois\s+sparte\.lab/i, o:"Domaine : SPARTE.LAB\nRegistrar : LabRegistry\nCreé le : 2013-05-02\nHébergeur : OVHcloud (labo)\nContact : admin@sparte.lab", set:'whois' },
+      { c:/^dig\s+sparte\.lab\s+mx/i, o:"sparte.lab.   IN  MX  10 mail.protonmail.ch.\n\n→ Messagerie hébergée chez Proton. Noté.", set:'mx' },
+      { c:/^dig\s+sparte\.lab\s+txt/i, o:"sparte.lab.  IN  TXT  \"v=spf1 include:_spf.protonmail.ch ~all\"\nsparte.lab.  IN  TXT  \"kryptos-ctf=KRYPTOS{r3c0n_0s1nt_p4ss1v3}\"\n\n→ Un TXT contient un drapeau. Utilise 'submit <drapeau>'.", set:'txt', flag:"KRYPTOS{r3c0n_0s1nt_p4ss1v3}" },
+      { c:/^dig\s+sparte\.lab\s*$/i, o:"sparte.lab.   IN  A  185.12.44.7\n\n→ L'adresse du serveur web principal.", set:'a' },
+      { c:/^crtsh\s+sparte\.lab/i, o:"Journaux de certificats pour *.sparte.lab :\n  www.sparte.lab\n  mail.sparte.lab\n  vieux-test.sparte.lab   (certificat de 2019, jamais renouvelé)\n\n→ 'vieux-test' est un sous-domaine oublié : une piste de choix.", set:'crt' },
+      { c:/^host\s+sparte\.lab/i, o:"sparte.lab has address 185.12.44.7\nsparte.lab mail is handled by 10 mail.protonmail.ch.", set:'a' }
+    ]
+  },
+  quiz:[
+    { t:1, q:"La reconnaissance passive :", c:["Attaque directement la cible","Lit des sources publiques sans toucher la cible","Est illégale par nature","Nécessite un scan de ports"], a:1, e:"Le passif n'interroge que des sources ouvertes : aucune trace chez la cible." },
+    { t:1, q:"Quel enregistrement DNS révèle le fournisseur de messagerie ?", c:["A","MX","TXT","CNAME"], a:1, e:"L'enregistrement MX (Mail eXchange) indique quels serveurs reçoivent les courriels." },
+    { t:1, q:"Les journaux de certificats (crt.sh) servent surtout à :", c:["Casser le HTTPS","Découvrir des sous-domaines oubliés","Envoyer des courriels","Scanner des ports"], a:1, e:"Chaque certificat émis est public et cite des sous-domaines, souvent tombés dans l'oubli." },
+    { t:2, q:"Un vieux sous-domaine oublié est intéressant parce qu'il est souvent :", c:["Plus rapide","Moins surveillé et non mis à jour","Mieux protégé","Chiffré"], a:1, e:"Ce qu'on oublie, on ne le met plus à jour ni ne le surveille : la cible facile." },
+    { t:2, q:"On lance la reconnaissance active :", c:["Avant le passif","Seulement après le passif, et dans un périmètre autorisé","Jamais","À la place du passif"], a:1, e:"L'actif est bruyant et touche la cible : on l'entame après le passif, et seulement si autorisé." },
+    { t:3, q:"En quoi la reconnaissance est-elle aussi une leçon de défense ?", c:["Elle ne l'est pas","Ce qu'on trouve sur une cible, un autre le trouve sur nous : on réduit sa surface","Elle chiffre les données","Elle remplace le pare-feu"], a:1, e:"Comprendre ce qui fuit permet de fermer les vieux services et de moins s'exposer." }
+  ]
+},
+{
+  id:'of3', g:'III', titre:"Les Portes de la Cité", theme:"Scan et énumération", skill:'scanoff',
+  relique:{ nom:"Le Bélier", em:'🐏' }, jeu:'terminal', duree:20,
+  accroche:"On frappe à chaque porte pour entendre lesquelles sonnent creux. Bruyant : réservé au labo.",
+  scenes:[
+    { qui:'ares', t:"La reconnaissance t'a donné une adresse. Maintenant on approche. On demande à la machine : quelles portes sont ouvertes ?" },
+    { qui:'kryptos', t:"C'est actif : ça touche la cible et ça laisse des traces. Donc uniquement sur ta cible de labo, 10.10.10.5, qui t'appartient." },
+    { qui:'ares', t:"Un port ouvert n'est pas une victoire. C'est une piste. Trouve le service, sa version, et son point faible." }
+  ],
+  cours:{
+    objectifs:["Comprendre ce qu'est un port et un service","Lire le résultat d'un scan de ports","Passer du port à la version, puis à la faille possible","Mesurer le bruit d'un scan et ses limites légales"],
+    sections:[
+      { t:"Ports, services, versions", h:`
+<p>Une machine expose des <strong>ports</strong> numérotés : chacun est une porte derrière laquelle un <strong>service</strong> écoute (un serveur web sur 80/443, SSH sur 22, une base de données sur 3306…).</p>
+<ul>
+<li><strong>Scanner les ports</strong> (nmap) répond à : « quelles portes sont ouvertes ? »</li>
+<li><strong>Détecter les versions</strong> (<span class="mono">nmap -sV</span>) répond à : « quel programme, et surtout quelle version ? »</li>
+<li><strong>Énumérer</strong>, c'est creuser chaque service : pages cachées d'un site, partages d'un serveur de fichiers, comptes par défaut.</li>
+</ul>
+<p>La <strong>version</strong> est l'information en or : elle relie le service à une liste publique de failles connues (les <em>CVE</em>). Un service vieux de trois ans est presque toujours vulnérable.</p>
+<div class="keybox"><div class="eyebrow">Un port ouvert n'est pas une faille</div><p style="margin:6px 0 0">C'est une <strong>piste</strong>. La faille, c'est un service mal configuré, non mis à jour, ou protégé par un mot de passe par défaut. Le scan ne fait que t'indiquer où chercher.</p></div>` },
+      { t:"Le bruit, la trace, la loi", h:`
+<p>Un scan est <strong>bruyant</strong> : la cible le voit dans ses journaux, et un système de détection peut te bloquer. C'est pourquoi cette phase est <strong>active</strong> au sens légal — elle touche la machine.</p>
+<ul>
+<li>Sur ta cible de labo : aucune limite, entraîne-toi autant que tu veux.</li>
+<li>Sur un périmètre autorisé : reste dans les bornes fixées, et note l'heure de tes scans.</li>
+<li>Ailleurs : jamais. Un scan non autorisé est déjà un accès illégal.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">Côté défense</div><p style="margin:6px 0 0">Ce que le scan révèle, ferme-le : moins de ports ouverts, services à jour, pas de version affichée inutilement. Chaque porte fermée est une piste en moins pour l'attaquant.</p></div>` }
+    ],
+    retenir:["Un port est une porte ; derrière écoute un service.","nmap liste les ports ouverts ; nmap -sV donne les versions.","La version relie le service à des failles connues (CVE).","Un scan est bruyant et actif : labo ou périmètre autorisé seulement.","Défendre, c'est fermer les ports et mettre à jour les services."]
+  },
+  jeuData:{
+    kind:'terminal',
+    intro:"Console de scan. Cible de labo (à toi) : 10.10.10.5. Ici tu as le droit de faire du bruit. Trouve les services, leurs versions, et le drapeau exposé par l'un d'eux. Tape help, hint, ou submit <drapeau>.",
+    titre:"Les Portes de la Cité",
+    prompt:"scan@ares",
+    cible:"10.10.10.5",
+    objectifs:["Vérifier que la cible répond","Lister les ports ouverts","Identifier la version du service web","Récupérer le drapeau exposé par le service web"],
+    flags:["KRYPTOS{sc4n_v3rs10n_c3st_l_0r}"],
+    aide:[
+      "Commence par 'ping 10.10.10.5' pour voir si elle répond.",
+      "Lance 'nmap 10.10.10.5' pour lister les ports ouverts.",
+      "Puis 'nmap -sV 10.10.10.5' pour connaître les versions.",
+      "Le service web (port 8080) expose un drapeau : 'curl 10.10.10.5:8080', puis 'submit'."
+    ],
+    commandes:"ping <hôte> · nmap <hôte> · nmap -sV <hôte> · curl <hôte>:<port>",
+    rep:[
+      { c:/^ping\s+10\.10\.10\.5/i, o:"PING 10.10.10.5 : 3 réponses, 0 perte, temps ~0.4 ms\n\n→ La cible est en ligne.", set:'ping' },
+      { c:/^nmap\s+-sv\s+10\.10\.10\.5/i, o:"PORT     ÉTAT   SERVICE   VERSION\n22/tcp   open   ssh       OpenSSH 7.2 (2016)\n80/tcp   open   http      Apache 2.4.7\n8080/tcp open   http      lab-webapp 1.0\n3306/tcp open   mysql     MySQL 5.5 (obsolète)\n\n→ Versions anciennes : SSH 7.2 et MySQL 5.5 ont des failles connues. Regarde aussi le port 8080.", set:'ver' },
+      { c:/^nmap\s+10\.10\.10\.5/i, o:"PORT     ÉTAT   SERVICE\n22/tcp   open   ssh\n80/tcp   open   http\n8080/tcp open   http-alt\n3306/tcp open   mysql\n\n→ 4 portes ouvertes. Demande les versions avec 'nmap -sV'.", set:'ports' },
+      { c:/^curl\s+10\.10\.10\.5:8080/i, o:"HTTP/1.1 200 OK\nServer: lab-webapp 1.0\nX-Lab-Flag: KRYPTOS{sc4n_v3rs10n_c3st_l_0r}\n\n<html><body>Application de laboratoire</body></html>\n\n→ Un en-tête HTTP expose un drapeau. 'submit <drapeau>'.", set:'web', flag:"KRYPTOS{sc4n_v3rs10n_c3st_l_0r}" },
+      { c:/^curl\s+10\.10\.10\.5/i, o:"HTTP/1.1 200 OK\nServer: Apache 2.4.7\n\n<html><body>Bienvenue</body></html>\n\n→ Rien d'intéressant ici. Essaie le service du port 8080.", set:'web80' }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Un port ouvert signifie :", c:["Une faille certaine","Un service écoute derrière","La machine est piratée","Rien du tout"], a:1, e:"Un port ouvert indique qu'un service écoute : c'est une piste, pas une faille." },
+    { t:1, q:"Quelle commande donne la VERSION des services ?", c:["ping","nmap -sV","whois","cat"], a:1, e:"L'option -sV de nmap tente d'identifier le service et sa version exacte." },
+    { t:1, q:"La version d'un service est précieuse parce qu'elle :", c:["Ralentit l'attaque","Relie le service à des failles connues (CVE)","Chiffre le trafic","Ferme le port"], a:1, e:"Connaître la version permet de chercher les vulnérabilités publiées pour cette version." },
+    { t:2, q:"Un scan de ports est, au sens légal :", c:["Passif et anodin","Actif : il touche la cible et laisse des traces","Toujours interdit","Sans conséquence"], a:1, e:"Le scan interroge directement la cible : c'est une action active, à réserver au périmètre autorisé." },
+    { t:2, q:"Énumérer un service web, c'est par exemple :", c:["Éteindre le serveur","Chercher ses pages et répertoires cachés","Changer son adresse IP","Le mettre à jour"], a:1, e:"L'énumération creuse le service : pages cachées, comptes par défaut, points d'entrée." },
+    { t:3, q:"Côté défense, réduire l'utilité d'un scan revient à :", c:["Ouvrir plus de ports","Fermer les ports inutiles et mettre à jour les services","Cacher son IP","Débrancher le pare-feu"], a:1, e:"Moins de ports ouverts et des services à jour, c'est autant de pistes en moins pour l'attaquant." }
+  ]
+},
+{
+  id:'of4', g:'IV', titre:"La Faille dans le Rempart", theme:"L'exploitation en laboratoire", skill:'exploitoff',
+  relique:{ nom:"Le Coin", em:'🪓' }, jeu:'ctf', duree:22,
+  accroche:"On n'enfonce pas le mur : on trouve la porte que personne ne surveille.",
+  scenes:[
+    { qui:'ares', t:"Le scan t'a montré les portes. Certaines sont simplement… ouvertes. Un mot de passe jamais changé, un contrôle oublié." },
+    { qui:'kryptos', t:"Trois défis, sur des applications de laboratoire. Le but n'est jamais de détruire : c'est de prouver la faille pour qu'on la corrige." },
+    { qui:'ares', t:"La faille la plus dévastatrice est presque toujours la plus bête. Ne cherche pas compliqué : cherche l'oubli." }
+  ],
+  cours:{
+    objectifs:["Reconnaître les grandes classes de failles","Comprendre pourquoi l'encodage n'est pas du chiffrement","Saisir ce qu'est un défaut de contrôle d'accès","Adopter le réflexe « je prouve, je ne détruis pas »"],
+    sections:[
+      { t:"Les failles les plus fréquentes", h:`
+<p>La majorité des intrusions réelles ne reposent pas sur une prouesse, mais sur un <strong>oubli</strong> :</p>
+<ul>
+<li><strong>Identifiants par défaut</strong> — un équipement livré avec <span class="mono">admin/admin</span> jamais changé. La faille numéro un dans le monde réel.</li>
+<li><strong>Contrôle d'accès cassé (IDOR)</strong> — l'application affiche la facture n°1027 ; tu changes pour 1026 et tu vois celle du voisin. Elle vérifie <em>que tu es connecté</em>, pas <em>que c'est à toi</em>.</li>
+<li><strong>Données en clair</strong> — un secret « protégé » par un simple encodage (base64), qui se lit en une seconde.</li>
+<li><strong>Injection</strong> — des données de l'utilisateur exécutées comme du code (SQL, commandes).</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Encoder n'est pas chiffrer</div><p style="margin:6px 0 0">Le <strong>base64</strong> transporte, il ne protège pas : il se décode sans clé. Un mot de passe en base64 est un mot de passe en clair. Le <strong>chiffrement</strong>, lui, exige une clé (voir la Forge de Dédale).</p></div>` },
+      { t:"Prouver, pas détruire", h:`
+<p>En exploitation, la retenue distingue le professionnel du délinquant :</p>
+<ul>
+<li>Une <strong>preuve suffit</strong> : une capture d'écran, un identifiant récupéré. On ne s'acharne pas.</li>
+<li>On <strong>ne détruit rien</strong>, on ne modifie pas les données réelles, on n'expose personne.</li>
+<li>Tout ce qu'on trouve part dans le <strong>rapport</strong>, avec la correction.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">Rappel</div><p style="margin:6px 0 0">Ces défis se jouent sur des applications de labo faites pour ça. Les mêmes gestes, sur un vrai service sans autorisation, sont des délits — quelle que soit la « bonne intention ».</p></div>` }
+    ],
+    retenir:["La faille la plus courante : un identifiant par défaut jamais changé.","IDOR : l'appli vérifie que tu es connecté, pas que la donnée est à toi.","Le base64 encode, il ne chiffre pas : il se lit sans clé.","Une preuve suffit : on ne détruit rien, on ne garde rien.","Tout ce qui est trouvé va dans le rapport, avec sa correction."]
+  },
+  jeuData:{
+    kind:'ctf',
+    intro:"Trois défis sur des applications de laboratoire. Trouve chaque drapeau au format KRYPTOS{...}. Tu peux demander un indice — mais cherche d'abord seul.",
+    defis:[
+      { t:"Encodage — Le jeton « protégé »", p:"Un jeton de session a été capté sur une appli de labo. Il est « protégé » en base64 :\n\nS1JZUFRPU3tiNHMzX25fM3N0X3A0c191bl9zM2NyM3R9\n\nDécode-le pour révéler le drapeau.", rep:"KRYPTOS{b4s3_n_3st_p4s_un_s3cr3t}", indice:"Le base64 se décode sans aucune clé. Dans une console de navigateur : atob(\"...\"). Chaque caractère du drapeau y est.", e:"Le base64 n'est qu'un transport : un secret encodé ainsi est un secret en clair. C'est pourquoi on ne « protège » jamais un mot de passe avec un simple encodage." },
+      { t:"Contrôle d'accès — La facture du voisin", p:"Connecté à une appli de labo, tu consultes ta facture :\n\n  https://labo.local/facture?id=1027\n\nCurieux, tu remplaces 1027 par 1026. La facture d'un autre client s'affiche, et en bas figure :\n\n  Drapeau : KRYPTOS{1d0r_c0ntr0l3_d_4cc3s}\n\nQuel est le drapeau ? Et surtout, comment nommer cette faille ?", rep:"KRYPTOS{1d0r_c0ntr0l3_d_4cc3s}", indice:"On appelle ça une IDOR : l'application vérifie que tu es connecté, mais pas que l'objet demandé t'appartient. Le drapeau est écrit tel quel sur la page.", e:"Une IDOR (référence directe non contrôlée) : la correction est de vérifier, côté serveur, que la ressource appartient bien à l'utilisateur connecté — jamais de se fier au numéro fourni." },
+      { t:"Identifiants par défaut — Le panneau oublié", p:"Le scan a révélé un panneau d'administration de caméra de labo sur le port 8081. Sa notice publique indique que le couple d'usine est admin / admin, et qu'il doit être changé à l'installation. Ici, il ne l'a jamais été. Une fois « connecté », la bannière affiche :\n\n  KRYPTOS{m0t_d3_p4ss3_p4r_d3f4ut}\n\nQuel est le drapeau ?", rep:"KRYPTOS{m0t_d3_p4ss3_p4r_d3f4ut}", indice:"Pas besoin d'attaque : le mot de passe d'usine n'a pas été changé. Le drapeau est celui affiché après connexion.", e:"Les identifiants par défaut sont la première cause d'intrusion réelle. La correction est triviale et gratuite : changer chaque mot de passe d'usine, dès l'installation." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"La faille la plus fréquente dans le monde réel :", c:["Une cryptographie cassée","Un identifiant par défaut jamais changé","Un zero-day","Un bug du processeur"], a:1, e:"Les identifiants d'usine non changés restent la porte d'entrée numéro un." },
+    { t:1, q:"Le base64 :", c:["Chiffre solidement","Encode, et se décode sans clé","Est incassable","Est un mot de passe"], a:1, e:"C'est un encodage de transport : il se lit immédiatement, il ne protège rien." },
+    { t:1, q:"Une IDOR, c'est quand l'application :", c:["Plante","Vérifie que tu es connecté mais pas que la donnée est à toi","Chiffre trop","Refuse tout accès"], a:1, e:"Le contrôle d'accès est incomplet : on accède à l'objet d'un autre en changeant un identifiant." },
+    { t:2, q:"En exploitation éthique, quand tu as prouvé la faille :", c:["Tu continues jusqu'à tout casser","Tu t'arrêtes : une preuve suffit","Tu gardes une copie des données","Tu la publies aussitôt"], a:1, e:"Une preuve suffit. On ne détruit rien, on ne conserve rien : tout va dans le rapport." },
+    { t:2, q:"La bonne correction d'une IDOR :", c:["Cacher le bouton","Vérifier côté serveur que la ressource appartient à l'utilisateur","Changer les numéros","Chiffrer l'URL"], a:1, e:"Seule une vérification d'appartenance côté serveur règle le problème de fond." },
+    { t:3, q:"Ces défis sont légaux parce que :", c:["Personne ne regarde","Ils se jouent sur des applications de labo prévues pour ça","On a de bonnes intentions","Ils sont faciles"], a:1, e:"C'est l'autorisation — ici, des cibles d'entraînement — qui rend l'exercice légal, pas l'intention." }
+  ]
+},
+{
+  id:'of5', g:'V', titre:"La Ligne Blanche", theme:"La discipline après l'accès", skill:'postexploit',
+  relique:{ nom:"La Bride", em:'🛑' }, jeu:'tri3', duree:17,
+  accroche:"Tu es entré. C'est ici, pas avant, que se joue la différence entre un métier et un délit.",
+  scenes:[
+    { qui:'ares', t:"L'accès obtenu, une ivresse monte : aller plus loin, rebondir, tout voir. C'est exactement là que les imprudents se perdent." },
+    { qui:'kryptos', t:"Un professionnel a une bride. Il reste dans le périmètre, il documente, il ne détruit jamais une preuve, et il ne garde rien après." },
+    { qui:'ares', t:"Le vrai guerrier n'est pas celui qui frappe le plus fort. C'est celui qui sait s'arrêter à la ligne blanche." }
+  ],
+  cours:{
+    objectifs:["Rester strictement dans le périmètre autorisé","Reconnaître un dépassement de périmètre et s'arrêter","Documenter sans détruire de preuves","Ne rien conserver après la mission"],
+    sections:[
+      { t:"Le périmètre est sacré", h:`
+<p>La <strong>post-exploitation</strong>, c'est ce qu'on fait une fois entré. C'est aussi le moment de tous les dérapages. Trois règles tiennent tout :</p>
+<ul>
+<li><strong>Le périmètre écrit fixe la frontière.</strong> Une machine, un domaine, une application listée : on y reste. Tout ce qui n'y est pas est <em>hors périmètre</em>, donc interdit.</li>
+<li><strong>Un chemin vers l'extérieur du périmètre ?</strong> On ne le suit pas. On l'écrit dans le rapport comme un risque, et on <strong>s'arrête</strong>.</li>
+<li><strong>On ne détruit jamais.</strong> Pas de données modifiées, pas de journaux effacés. Effacer les traces, c'est le geste du délinquant, jamais celui du professionnel.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">Le dépassement de périmètre</div><p style="margin:6px 0 0">C'est la faute la plus grave d'un test d'intrusion : « puisque j'y étais, j'ai continué un peu ». Ce « un peu » sort du contrat, donc de la loi. La curiosité ne couvre rien.</p></div>` },
+      { t:"Documenter, puis oublier", h:`
+<p>Ce que tu obtiens n'a de valeur que <strong>prouvé</strong> et <strong>rendu</strong> :</p>
+<ul>
+<li><strong>Documente</strong> : captures d'écran horodatées, chemin suivi, commandes exactes, pour que la faille soit reproductible et corrigible.</li>
+<li><strong>Manipule le minimum</strong> : la preuve de l'accès suffit, on ne fouille pas les données personnelles.</li>
+<li><strong>Après la mission, on n'oublie rien par accident</strong> : mots de passe, données, accès — tout est détruit de ton côté. Rien de la cible ne te survit.</li>
+</ul>
+<div class="tipbox"><div class="eyebrow">Le miroir d'Hadès</div><p style="margin:6px 0 0">C'est la même discipline que l'OPSEC, vue de l'autre côté : décider ce qu'on touche, ce qu'on garde, ce qu'on montre. La retenue est une compétence, pas une faiblesse.</p></div>` }
+    ],
+    retenir:["Le périmètre écrit est la frontière : hors de lui, tout est interdit.","Un chemin hors périmètre : on le note, et on s'arrête.","On ne détruit jamais une preuve ni n'efface de journaux.","On documente précisément pour rendre la faille corrigible.","Après la mission, rien de la cible ne doit rester chez toi."]
+  },
+  jeuData:{
+    kind:'tri',
+    titre:"La Ligne Blanche",
+    intro:"Tu es dans une mission autorisée, avec un périmètre écrit. Range chaque situation : dans le périmètre, hors périmètre (on stoppe), ou à documenter pour le rapport.",
+    cats:[
+      { n:"Dans le périmètre", d:"prévu au contrat, autorisé" },
+      { n:"Hors périmètre — STOP", d:"on s'arrête et on signale" },
+      { n:"À documenter", d:"preuve pour le rapport" }
+    ],
+    items:[
+      { t:"Tu obtiens un accès administrateur sur la machine cible listée au contrat.", c:0, e:"Elle est dans le périmètre : l'accès est prévu et autorisé." },
+      { t:"Depuis la cible, tu repères un chemin vers le réseau interne, non listé.", c:1, e:"Hors périmètre : on ne suit pas, on le signale comme risque et on s'arrête là." },
+      { t:"Tu prends une capture d'écran horodatée de l'accès obtenu.", c:2, e:"C'est la preuve qui rendra la faille corrigible : elle va dans le rapport." },
+      { t:"Tu effaces les journaux de la cible pour « faire propre ».", c:1, e:"Jamais. Détruire des preuves est le geste du délinquant, hors de toute mission éthique." },
+      { t:"L'application web testée figure explicitement dans le périmètre signé.", c:0, e:"Listée au contrat : tu es autorisé à l'attaquer." },
+      { t:"Tu notes la faille, le chemin exact et les commandes pour la reproduire.", c:2, e:"Une faille non reproductible ne se corrige pas : la documentation est essentielle." },
+      { t:"Tu découvres des données personnelles de vrais utilisateurs.", c:1, e:"On ne fouille pas : on note l'existence du risque, on n'y touche pas, et on s'arrête." },
+      { t:"Tu gardes une copie des mots de passe trouvés, après la fin de la mission.", c:1, e:"Rien de la cible ne doit survivre à la mission : aucune autorisation ne couvre ça." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"La post-exploitation, c'est ce qu'on fait :", c:["Avant d'entrer","Une fois l'accès obtenu","À la place du scan","En reconnaissance"], a:1, e:"C'est l'étape qui suit l'accès — et celle de tous les dérapages possibles." },
+    { t:1, q:"La frontière d'une mission offensive, c'est :", c:["Ce que l'attaquant décide","Le périmètre écrit","La difficulté technique","L'heure"], a:1, e:"Le périmètre écrit définit précisément ce qui est autorisé. Hors de lui : interdit." },
+    { t:1, q:"Effacer les journaux de la cible, c'est :", c:["Une bonne pratique","Jamais : détruire une preuve est le geste du délinquant","Obligatoire","Discret et propre"], a:1, e:"Un professionnel ne détruit rien. Effacer ses traces est le comportement d'un criminel." },
+    { t:2, q:"Tu repères un chemin hors du périmètre. Tu dois :", c:["Le suivre, puisque tu y es","T'arrêter et le signaler comme risque","L'exploiter discrètement","Le garder pour plus tard"], a:1, e:"Hors périmètre = hors autorisation. On documente le risque et on s'arrête." },
+    { t:2, q:"Documenter précisément une faille sert à :", c:["Frimer","La rendre reproductible et donc corrigible","Gagner du temps","Rien"], a:1, e:"Une faille reproductible peut être corrigée : c'est tout l'intérêt du test." },
+    { t:3, q:"En quoi la post-exploitation ressemble-t-elle à l'OPSEC d'Hadès ?", c:["En rien","Les deux sont l'art de décider ce qu'on touche, garde et montre","Elles utilisent les mêmes outils","Elles sont illégales"], a:1, e:"Attaque et défense partagent la même discipline de retenue et de choix conscients." }
+  ]
+},
+{
+  id:'of6', g:'VI', titre:"Le Rapport d'Arès", theme:"Rendre compte, transformer l'attaque en défense", skill:'rapportoff',
+  relique:{ nom:"Le Trophée", em:'🏛️' }, jeu:'terminal', duree:24,
+  accroche:"Épreuve du sommet : une mission complète, du premier scan au drapeau final — puis le rapport.",
+  scenes:[
+    { qui:'ares', t:"Dernière salle. Tu vas mener une mission entière sur troie.lab, ta cible autorisée : reconnaître, scanner, entrer, atteindre le cœur." },
+    { qui:'kryptos', t:"Et quand tu tiendras le drapeau final, le vrai travail commencera : le rapport. Une attaque sans rapport ne sert à personne." },
+    { qui:'ares', t:"Le trophée n'est pas l'accès. Le trophée, c'est la cité rendue plus solide grâce à toi. Vas-y." }
+  ],
+  cours:{
+    objectifs:["Enchaîner les étapes d'une mission offensive","Atteindre un objectif dans un labo isolé","Classer les trouvailles par gravité","Rédiger un rapport utile et actionnable"],
+    sections:[
+      { t:"L'enchaînement complet", h:`
+<p>Une mission offensive suit toujours le même fil, celui que tu as appris salle après salle :</p>
+<ul>
+<li><strong>Reconnaissance</strong> → une cible, des adresses.</li>
+<li><strong>Scan et énumération</strong> → des services, des versions, des points faibles.</li>
+<li><strong>Exploitation</strong> → une porte s'ouvre (un défaut, un mot de passe faible).</li>
+<li><strong>Post-exploitation disciplinée</strong> → on prouve, on reste dans le périmètre.</li>
+<li><strong>Rapport</strong> → on rend tout, classé et corrigible.</li>
+</ul>
+<p>Chaque étape nourrit la suivante. Sauter l'énumération, c'est frapper à l'aveugle ; sauter le rapport, c'est n'avoir servi à rien.</p>` },
+      { t:"Le rapport : le vrai livrable", h:`
+<p>Le produit d'un test d'intrusion n'est pas l'exploit : c'est le <strong>rapport</strong>. Un bon rapport :</p>
+<ul>
+<li><strong>Classe chaque faille par gravité</strong> : critique, élevée, moyenne, faible, informative — selon l'impact et la facilité d'exploitation.</li>
+<li>Pour chacune : <strong>où</strong> elle est, <strong>comment</strong> la reproduire, quel <strong>impact</strong>, et surtout <strong>comment la corriger</strong>.</li>
+<li>Est <strong>lisible par un non-spécialiste</strong> : un résumé pour les décideurs, le détail pour les techniciens.</li>
+<li>Priorise : on corrige d'abord ce qui est critique et facile à exploiter.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Le cercle se referme</div><p style="margin:6px 0 0">C'est ici que l'offensive devient défense : chaque faille trouvée et corrigée est une porte de moins pour le prochain attaquant. Un red team utile est celui qui rend le bleu (la défense) plus fort.</p></div>` }
+    ],
+    retenir:["La mission suit un fil : reconnaissance → scan → exploitation → discipline → rapport.","Chaque étape nourrit la suivante ; on n'en saute aucune.","Le vrai livrable est le rapport, pas l'exploit.","On classe par gravité et on donne une correction concrète.","L'offensive n'a de valeur que si elle rend la défense plus forte."]
+  },
+  jeuData:{
+    kind:'terminal',
+    intro:"Épreuve finale. Cible autorisée de labo : troie.lab (10.10.10.9). Mène la mission complète : reconnais, scanne, trouve la porte, atteins le drapeau final. Tape help, hint, ou submit <drapeau>.",
+    titre:"L'Assaut de Troie",
+    prompt:"ares@troie",
+    cible:"troie.lab",
+    objectifs:["Cartographier la cible (DNS)","Lister les services et versions","Trouver la faille d'accès","Atteindre le drapeau final au cœur du système"],
+    flags:["KRYPTOS{tr01e_3st_t0mb33_p4r_l4_rus3}"],
+    aide:[
+      "Commence par 'dig troie.lab' puis 'nmap -sV 10.10.10.9'.",
+      "Un service SSH accepte un couple par défaut trouvé à l'énumération : 'enum 10.10.10.9'.",
+      "Connecte-toi : 'ssh gardien@10.10.10.9' (le mot de passe par défaut est révélé par enum).",
+      "Une fois « dedans », lis le cœur : 'cat /root/flag.txt', puis 'submit'."
+    ],
+    commandes:"dig <domaine> · nmap -sV <hôte> · enum <hôte> · ssh <user>@<hôte> · cat <fichier>",
+    rep:[
+      { c:/^dig\s+troie\.lab/i, o:"troie.lab.  IN  A  10.10.10.9\n\n→ Adresse de la cité : 10.10.10.9.", set:'dns' },
+      { c:/^nmap\s+-sv\s+10\.10\.10\.9/i, o:"PORT     ÉTAT  SERVICE  VERSION\n22/tcp   open  ssh      OpenSSH 7.2\n80/tcp   open  http     Apache 2.4.7\n8080/tcp open  http     lab-admin 2.1\n\n→ SSH ouvert. Énumère la cible pour trouver un compte.", set:'ver' },
+      { c:/^nmap\s+10\.10\.10\.9/i, o:"22/tcp open ssh\n80/tcp open http\n8080/tcp open http\n\n→ Demande les versions : 'nmap -sV 10.10.10.9'.", set:'ports' },
+      { c:/^enum\s+10\.10\.10\.9/i, o:"Énumération de lab-admin 2.1 (port 8080)...\nNotice d'usine trouvée : compte de service « gardien », mot de passe par défaut « bois-de-troie », jamais changé.\n\n→ Essaie : ssh gardien@10.10.10.9", set:'enum' },
+      { c:/^ssh\s+gardien@10\.10\.10\.9/i, o:"gardien@10.10.10.9's password: ********\nBienvenue sur troie.lab.\ngardien@troie:~$  (tu es dans la place)\n\n→ Le cœur du système est dans /root/flag.txt.", set:'ssh' },
+      { c:/^cat\s+\/root\/flag\.txt/i, o:"KRYPTOS{tr01e_3st_t0mb33_p4r_l4_rus3}\n\n→ Drapeau final. 'submit <drapeau>'. Puis : rédige le rapport.", set:'flag', flag:"KRYPTOS{tr01e_3st_t0mb33_p4r_l4_rus3}" },
+      { c:/^ssh\b/i, o:"Connexion refusée : mauvais compte ou mot de passe. Énumère d'abord la cible ('enum 10.10.10.9').", set:'sshko' }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Le vrai livrable d'un test d'intrusion, c'est :", c:["L'accès obtenu","Le rapport","Le drapeau","La capture d'écran"], a:1, e:"L'exploit ne vaut rien sans un rapport qui permet de corriger : c'est le produit." },
+    { t:1, q:"Dans quel ordre se déroule une mission ?", c:["Exploitation → scan → reconnaissance","Reconnaissance → scan → exploitation → rapport","Rapport → exploitation","Scan → rapport → reconnaissance"], a:1, e:"Chaque étape nourrit la suivante : on reconnaît, on scanne, on exploite, on rend compte." },
+    { t:1, q:"Comment troie.lab tombe-t-elle, dans l'épreuve ?", c:["Par un zero-day génial","Par un mot de passe par défaut jamais changé","Par la force brute du processeur","Par un virus"], a:1, e:"Comme souvent dans le réel : un compte de service au mot de passe d'usine oublié." },
+    { t:2, q:"Classer une faille « critique » dépend surtout de :", c:["Sa couleur dans l'outil","Son impact et sa facilité d'exploitation","La longueur du rapport","Son ancienneté"], a:1, e:"La gravité combine l'impact potentiel et la facilité avec laquelle on peut l'exploiter." },
+    { t:2, q:"Un bon rapport est :", c:["Réservé aux experts","Lisible aussi par un non-spécialiste, avec des corrections priorisées","Sans recommandation","Le plus long possible"], a:1, e:"Résumé pour décideurs, détail pour techniciens, et surtout des corrections concrètes." },
+    { t:3, q:"En quoi l'offensive « rend la défense plus forte » ?", c:["Elle ne le fait pas","Chaque faille trouvée et corrigée est une porte de moins pour le prochain attaquant","Elle remplace la défense","Elle chiffre les données"], a:1, e:"Le red team n'a de valeur que s'il aide le bleu à se corriger : c'est le cercle vertueux." }
+  ]
+}
+];
+
+/* le petit dock de guide affiche Arès sur ce parcours */
+(function () {
+  if (typeof guideDe === 'function') {
+    var _g0 = guideDe;
+    guideDe = function (p) { return (p && p.id === 'offensif') ? 'ares' : _g0(p); };
+  }
+})();
+
+/* La Lance d'Arès rejoint les blocs premium */
+PREMIUM_PLUS.push({
+  id:'offensif', route:'offensif', nom:"La Lance d'Arès", sous:"L'art offensif, légalement",
+  pro:true, premium:true, bloc:'Bloc premium', em:'⚔️',
+  intro:{ id:'offensif-intro', scenes:OFFENSIF_INTRO, titre:"L'arène d'Arès" }, mods:OFFENSIF,
+  pitch:"Six salles, le miroir offensif du Casque d'Hadès : le cadre légal, la reconnaissance, le scan, l'exploitation en labo, la discipline après l'accès, et le rapport. On y apprend à attaquer — dans un labo isolé, sous autorisation — pour mieux savoir défendre. Deux consoles simulées et une épreuve finale de bout en bout."
+});
+
+/* entrée de navigation (premium, filtrée quand verrouillé) */
+(function () {
+  if (!NAV.some(function (n) { return n.k === 'offensif'; })) {
+    NAV.push({ k:'offensif', i:'offensif', l:"La Lance d'Arès", s:"L'art offensif", pro:true });
+  }
+})();
+
+
 
 /* ============================================================
    40. TUTO LIBRE — INSTALLER LINUX
@@ -11548,6 +11998,106 @@ clear               # efface l'écran</pre></div>
       <div class="tipbox"><div class="eyebrow">Le mot « sudo »</div><p style="margin:6px 0 0"><span class="mono">sudo</span> veut dire « fais ceci en administrateur ». Le système te demandera ton mot de passe, et tu ne verras rien s'afficher pendant que tu le tapes — c'est normal, c'est une protection. Tape-le à l'aveugle et valide.</p></div>
     </section>
 
+    <div class="meander"></div>
+
+    ${voix('kryptos', "Tu sais installer Linux. Passons à ce qui fait la différence : transformer une simple machine virtuelle en un vrai laboratoire — isolé, restaurable, et sûr. C'est là-dedans, et nulle part ailleurs, que tu as le droit de tout tester.")}
+
+    <section class="stack gap-16">
+      <h2>7 · Le laboratoire de machines virtuelles (avancé)</h2>
+      <p class="lede">Une seule VM, c'est bien pour apprendre Linux. Un <strong>laboratoire</strong>, c'est deux machines ou plus qui se parlent sur un réseau <strong>coupé du monde</strong> : une attaquante, une cible volontairement vulnérable. C'est l'environnement où l'on pratique l'offensif <em>légalement</em>, parce que rien ne peut fuir vers le vrai réseau.</p>
+
+      <h3>Les instantanés (snapshots) : ton filet de sécurité</h3>
+      <p class="small muted">Un <strong>instantané</strong> fige l'état complet d'une machine à un instant T. Tu casses tout, tu injectes un malware d'exercice, tu détruis le système — puis tu restaures, et la machine revient exactement à l'instant figé, en quelques secondes.</p>
+      ${etapesHTML([
+        "<strong>Prends un instantané « propre »</strong> juste après l'installation et les mises à jour : menu <em>Machine → Prendre un instantané</em>, nomme-le « base saine ».",
+        "<strong>Avant chaque manipulation risquée</strong> (test d'un outil, d'un exploit d'exercice), prends-en un autre : « avant test X ».",
+        "<strong>Pour revenir en arrière</strong> : éteins la VM, ouvre <em>Instantanés</em>, sélectionne l'état voulu, clique <em>Restaurer</em>. Tout ce qui a été fait après est effacé.",
+        "<strong>Règle d'or du labo</strong> : on ne travaille jamais sur une machine dont on n'a pas d'instantané propre à restaurer."
+      ])}
+
+      <h3>Les modes réseau : la clé de l'isolement</h3>
+      <p class="small muted">C'est le réglage le plus important d'un labo, et le plus mal compris. Il décide de <strong>qui peut parler à qui</strong>. Pour un labo offensif, l'objectif est simple : <strong>les attaques ne doivent jamais atteindre Internet ni ton vrai réseau</strong>.</p>
+      <div class="card-2" style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+          <thead><tr style="text-align:left;color:var(--text-3)">
+            <th style="padding:8px 10px;border-bottom:1px solid var(--line)">Mode</th>
+            <th style="padding:8px 10px;border-bottom:1px solid var(--line)">VM → Internet</th>
+            <th style="padding:8px 10px;border-bottom:1px solid var(--line)">VM ↔ VM</th>
+            <th style="padding:8px 10px;border-bottom:1px solid var(--line)">Usage</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)"><b>NAT</b></td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Oui</td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Non</td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Télécharger, mettre à jour une seule VM</td></tr>
+            <tr><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)"><b>Réseau NAT</b></td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Oui</td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Oui</td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Plusieurs VM qui ont besoin d'Internet</td></tr>
+            <tr><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)"><b>Réseau privé hôte</b><br><span class="tiny dim">(host-only)</span></td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Non</td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Oui (+ l'hôte)</td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)">Labo où ton PC participe, sans Internet</td></tr>
+            <tr style="color:var(--verdigris)"><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)"><b>Réseau interne</b><br><span class="tiny">(internal)</span></td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)"><b>Non</b></td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)"><b>Oui</b></td><td style="padding:8px 10px;border-bottom:1px solid var(--line-soft)"><b>Le labo offensif : isolement total ✓</b></td></tr>
+            <tr style="color:var(--porphyry)"><td style="padding:8px 10px"><b>Accès par pont</b><br><span class="tiny">(bridged)</span></td><td style="padding:8px 10px">Oui</td><td style="padding:8px 10px">Oui (vrai réseau !)</td><td style="padding:8px 10px">À éviter en labo : la VM est exposée sur ton réseau réel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">La règle absolue de l'isolement</div><p style="margin:6px 0 0">Un labo offensif se met en <strong>« Réseau interne »</strong> (ou « host-only » si tu as besoin de l'hôte). Ainsi, un scan, un exploit, un outil bruyant restent <strong>enfermés entre tes VM</strong> : impossible de toucher Internet, un voisin, ou une vraie entreprise par accident. Le mode « pont » branche au contraire ta VM sur le vrai réseau — parfait pour se retrouver, sans le vouloir, à scanner la box de la maison. On ne l'utilise jamais pour un labo d'attaque.</p></div>
+
+      <h3>Additions invité, dossiers partagés, clones</h3>
+      ${etapesHTML([
+        "<strong>Additions invité</strong> (menu <em>Périphériques → Insérer l'image CD des Additions invité</em>, puis exécute le script) : plein écran automatique, presse-papier partagé, glisser-déposer entre Windows et Linux.",
+        "<strong>Dossier partagé</strong> : <em>Configuration → Dossiers partagés</em>, choisis un dossier Windows, coche « montage automatique ». Il apparaît dans Linux sous <span class='mono'>/media/sf_&lt;nom&gt;</span> — pratique pour transférer une ISO ou un fichier.",
+        "<strong>Cloner une machine</strong> : clic droit → <em>Cloner</em> → « Clone lié » (léger, partage le disque de base) pour multiplier les cibles sans remplir ton disque. Idéal pour créer un mini-réseau de plusieurs postes.",
+        "<strong>Carte mentale du labo</strong> : garde une VM « attaquante » (Kali ou Parrot) et une ou plusieurs VM « cibles » volontairement vulnérables, toutes sur le même <em>Réseau interne</em>."
+      ])}
+
+      <div class="keybox"><div class="eyebrow">Monter un labo attaquant / cible, légalement</div><p style="margin:6px 0 0">1) VM <strong>attaquante</strong> : Kali Linux ou Parrot OS (elles embarquent les outils). 2) VM <strong>cible</strong> : une machine <em>faite pour être attaquée</em> — <strong>Metasploitable 2</strong>, <strong>OWASP Juice Shop</strong>, ou les images de <em>VulnHub</em>. 3) Mets les deux en <strong>Réseau interne</strong>, prends un instantané propre de chacune. Tu as maintenant un terrain d'entraînement <strong>100 % légal</strong> : tu es propriétaire des deux machines, et rien ne sort de la bulle. Pour t'entraîner en ligne dans le même esprit, <strong>TryHackMe</strong> et <strong>Hack The Box</strong> fournissent des cibles autorisées, prêtes à l'emploi.</p></div>
+    </section>
+
+    <section class="stack gap-16">
+      <h2>8 · Le terminal, pour de vrai</h2>
+      <p class="small muted">Au-delà des premiers pas : les commandes qu'un praticien utilise tous les jours pour comprendre une machine (utilisateurs, processus, réseau, services, journaux).</p>
+      <div class="card-2"><pre class="codebloc">who ; id                     # qui suis-je, quels droits ai-je
+sudo -l                       # ce que j'ai le droit de faire en admin
+chmod 600 secret.txt          # droits : lecture/écriture pour moi seul
+chown moi:moi fichier         # changer le propriétaire d'un fichier
+
+ps aux | grep firefox         # retrouver un processus
+top        # ou : htop        # activité en direct (q pour quitter)
+kill -9 1234                  # arrêter le processus numéro 1234
+
+ip a                          # mes adresses réseau (remplace ifconfig)
+ss -tulpn                     # quels ports sont ouverts, par quel programme
+ping -c3 10.0.2.15            # tester si une machine répond
+curl -I http://cible.lab      # en-têtes d'un serveur web
+dig cible.lab                 # interroger le DNS
+
+apt search nmap               # chercher un logiciel
+sudo apt install nmap         # l'installer
+systemctl status ssh          # état d'un service
+sudo systemctl enable --now ssh   # démarrer + activer au boot
+journalctl -xe                # les derniers journaux du système
+find / -name "*.conf" 2>/dev/null | head   # chercher des fichiers
+grep -ri "password" .         # chercher un mot dans des fichiers</pre></div>
+      <div class="tipbox"><div class="eyebrow">Trois conseils de confort</div><p style="margin:6px 0 0"><strong>htop</strong> (<span class="mono">sudo apt install htop</span>) remplace <span class="mono">top</span> en bien plus lisible. <strong>tmux</strong> garde tes terminaux ouverts même si la fenêtre se ferme. Et les <strong>alias</strong> (dans <span class="mono">~/.bashrc</span>, ex. <span class="mono">alias ll='ls -lah'</span>) t'évitent de retaper les mêmes commandes. La touche <span class="mono">Tab</span> complète tout, la flèche du haut rappelle la dernière commande.</p></div>
+
+      <h3>Se connecter à distance en SSH (avec des clés)</h3>
+      ${etapesHTML([
+        "<strong>Génère une paire de clés</strong> : <span class='mono'>ssh-keygen -t ed25519</span>. Elle crée une clé <em>privée</em> (à garder secrète, jamais partagée) et une clé <em>publique</em> (à distribuer).",
+        "<strong>Installe ta clé publique</strong> sur la machine cible : <span class='mono'>ssh-copy-id utilisateur@10.0.2.20</span>. Tu pourras te connecter sans mot de passe, avec une sécurité bien supérieure.",
+        "<strong>Connecte-toi</strong> : <span class='mono'>ssh utilisateur@10.0.2.20</span>. C'est ainsi qu'on administre un serveur, et ainsi qu'on relie l'attaquante à la cible dans un labo."
+      ])}
+    </section>
+
+    <section class="stack gap-16">
+      <h2>9 · Durcir ton Linux (conseils de sécurité)</h2>
+      <p class="small muted">Savoir attaquer, c'est savoir défendre. Voici comment refermer les portes sur ta propre machine — les mêmes gestes qu'on recommande à une organisation.</p>
+      ${etapesHTML([
+        "<strong>Mets à jour, tout le temps.</strong> <span class='mono'>sudo apt update && sudo apt full-upgrade</span>. La très grande majorité des intrusions exploitent un logiciel non mis à jour.",
+        "<strong>Active le pare-feu.</strong> <span class='mono'>sudo apt install ufw</span> puis <span class='mono'>sudo ufw default deny incoming</span>, <span class='mono'>sudo ufw allow ssh</span>, <span class='mono'>sudo ufw enable</span>. Par défaut : on refuse tout ce qui entre, on n'ouvre que le nécessaire.",
+        "<strong>Verrouille SSH.</strong> Dans <span class='mono'>/etc/ssh/sshd_config</span> : <span class='mono'>PermitRootLogin no</span> et <span class='mono'>PasswordAuthentication no</span> (connexion par clé uniquement). Puis <span class='mono'>sudo systemctl restart ssh</span>.",
+        "<strong>Le moindre privilège.</strong> On travaille en utilisateur normal, on ne passe en <span class='mono'>sudo</span> que ponctuellement. Jamais de session en root permanent.",
+        "<strong>fail2ban</strong> (<span class='mono'>sudo apt install fail2ban</span>) bannit automatiquement une adresse qui multiplie les tentatives de connexion ratées. Une protection gratuite contre la force brute.",
+        "<strong>Sauvegarde.</strong> Une machine durcie mais sans sauvegarde reste fragile : garde une copie de tes données importantes ailleurs."
+      ])}
+      <div class="tipbox"><div class="eyebrow">Le pont vers le reste du site</div><p style="margin:6px 0 0">Ces réflexes défensifs sont approfondis dans <b>Le Casque d'Hadès</b> (OPSEC) et, côté organisation, dans <b>Le Second Cercle</b>. L'art d'attaquer un labo, lui, se pratique dans <b>La Lance d'Arès</b> — le parcours offensif, en édition premium.</p></div>
+    </section>
+
+    <div class="meander"></div>
+
     <section class="card stack gap-12" style="border-color:var(--verdigris)">
       <div class="eyebrow" style="color:var(--verdigris)">Les trois règles de sécurité, à ne jamais oublier</div>
       <ul class="prose" style="margin:0;max-width:none">
@@ -11559,10 +12109,11 @@ clear               # efface l'écran</pre></div>
 
     <section class="card no-print stack gap-12">
       <div class="eyebrow">Aller plus loin</div>
-      <p class="small muted">Une fois Linux en place, le bloc <b>L'Arsenal</b> (édition premium) te montre comment en faire un vrai laboratoire de sécurité : machine attaquante, cibles légales, réseau isolé. Et le <b>Cheval de Bois</b> t'apprend à t'en servir pour le hacking éthique.</p>
+      <p class="small muted">Une fois Linux en place, le bloc <b>L'Arsenal</b> (édition premium) te montre comment en faire un vrai laboratoire de sécurité : machine attaquante, cibles légales, réseau isolé. Le <b>Cheval de Bois</b> t'apprend à t'en servir pour le hacking éthique, et <b>La Lance d'Arès</b> pour l'art offensif — toujours dans ton labo isolé, toujours légalement.</p>
       <div class="row gap-10 wrap">
         <button class="btn" data-go="arsenal">Voir l'Arsenal</button>
         <button class="btn btn-ghost" data-go="chevaldebois">Le Cheval de Bois</button>
+        <button class="btn btn-ghost" data-go="offensif">La Lance d'Arès</button>
         <button class="btn btn-ghost" data-go="agora">Retour à l'Agora</button>
       </div>
     </section>

@@ -166,7 +166,7 @@ if (E.modParId('hk1')) note('verrouillé : un module premium reste accessible');
 if (E.modParId('b1')) note('verrouillé : un module pro reste accessible');
 if (E.NAV.filter(nv => !nv.pro || false).length && E.NAV.some(nv => nv.pro && !nv.pro)) {} // no-op
 E.setPro(true);
-if (E.MODULES_ALL.length !== 69) note(`déverrouillé : ${E.MODULES_ALL.length} modules au lieu de 61`);
+if (E.MODULES_ALL.length !== 75) note(`déverrouillé : ${E.MODULES_ALL.length} modules au lieu de 75`);
 
 /* --- 8. blocs premium bien formés --- */
 if (E.CHEVAL.length !== 9) note(`le Cheval de Bois doit avoir 9 salles, il en a ${E.CHEVAL.length}`);
