@@ -160,13 +160,13 @@ if (lg3.ok) note('connexion à un compte inexistant acceptée');
 
 /* --- 7. verrouillage : sans premium, aucun bloc pro/premium visible --- */
 E.setCompte(null); E.setPro(false);
-if (E.PARCOURS.length !== 3) note(`verrouillé : ${E.PARCOURS.length} parcours au lieu de 3`);
-if (E.MODULES_ALL.length !== 25) note(`verrouillé : ${E.MODULES_ALL.length} modules au lieu de 25`);
+if (E.PARCOURS.length !== 4) note(`verrouillé : ${E.PARCOURS.length} parcours au lieu de 4`);
+if (E.MODULES_ALL.length !== 31) note(`verrouillé : ${E.MODULES_ALL.length} modules au lieu de 31`);
 if (E.modParId('hk1')) note('verrouillé : un module premium reste accessible');
 if (E.modParId('b1')) note('verrouillé : un module pro reste accessible');
 if (E.NAV.filter(nv => !nv.pro || false).length && E.NAV.some(nv => nv.pro && !nv.pro)) {} // no-op
 E.setPro(true);
-if (E.MODULES_ALL.length !== 75) note(`déverrouillé : ${E.MODULES_ALL.length} modules au lieu de 75`);
+if (E.MODULES_ALL.length !== 81) note(`déverrouillé : ${E.MODULES_ALL.length} modules au lieu de 81`);
 
 /* --- 8. blocs premium bien formés --- */
 if (E.CHEVAL.length !== 9) note(`le Cheval de Bois doit avoir 9 salles, il en a ${E.CHEVAL.length}`);

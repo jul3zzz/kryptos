@@ -6,10 +6,10 @@ Un site complet et ludique pour apprendre la cybersécurité, **du collège au n
 
 ## ✨ En chiffres
 
-- **10 parcours · 75 modules · 622 questions · 51 exercices de code**
+- **11 parcours · 81 modules · 658 questions · 51 exercices de code**
 - **19 moteurs d'exercice** différents (quiz adaptatif, tri, budget, tribunal, **console de hacking simulée**, chasse aux drapeaux, constructeur de labo…)
 - **47 distinctions, 12 rangs, un examen certifiant**
-- Direction artistique **« zinc & émeraude »** (façon portfolio de développeur, sombre et minimal), thème clair et sombre, responsive, imprimable (cours et diplômes)
+- Direction artistique **« zinc & émeraude »** (façon portfolio de développeur, sombre et minimal), emblème du faucheur, **animations douces** (respectent `prefers-reduced-motion`), thème clair et sombre, responsive, imprimable (cours et diplômes)
 - Progression enregistrée localement (localStorage)
 
 ## 🗺️ Le contenu
@@ -21,6 +21,7 @@ Un site complet et ludique pour apprendre la cybersécurité, **du collège au n
 | **Le Grand Labyrinthe** | Kryptos | 9 chapitres + boss — les fondamentaux : mots de passe, hameçonnage, harcèlement, vie privée, chiffrement… |
 | **La Forge de Dédale** | Dédale | 8 ateliers — apprendre la sécurité **par le code**, dans une vraie console JavaScript exécutée |
 | **Le Casque d'Hadès** | Hadès | 8 salles — l'OPSEC : modèle de menace, compartimentage, corrélation, discipline |
+| **Le Feu d'Héphaïstos** | Héphaïstos | 6 salles **à choix multiples** — Linux de A à Z : fondations, terminal, permissions, système, puis deux salles jumelles — durcissement (défense) et vue offensive (labo isolé). Avec consoles simulées. |
 
 Plus **l'Académie** (cours magistraux imprimables), **l'Arcade** (épreuves libres), **le Sanctuaire** (remise à niveau adaptative), **le Panthéon** (distinctions) et un **tuto libre « Installer Linux »** (machine virtuelle, clé USB live, WSL, double amorçage) — enrichi d'un **atelier avancé** : laboratoire de VM isolé, modes réseau expliqués, terminal de terrain et durcissement système.
 
@@ -59,7 +60,7 @@ node -e "const f=require('fs');const s=f.readFileSync('kryptos.html','utf8');f.w
 node _test.js
 ```
 
-Le harnais vérifie **168 assertions** : cohérence des 75 modules, des quiz, des moteurs de jeu, du système de comptes et du verrouillage — et surtout que **chacune des 51 solutions de référence passe réellement ses propres tests**.
+Le harnais vérifie **168 assertions** : cohérence des 81 modules, des quiz, des moteurs de jeu, du système de comptes et du verrouillage — et surtout que **chacune des 51 solutions de référence passe réellement ses propres tests**.
 
 ## ⚠️ À propos de l'édition premium
 

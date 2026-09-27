@@ -426,6 +426,73 @@ main{flex:1;min-width:0;padding:clamp(20px,3.5vw,44px) var(--sp) 120px}
   .thread-line,.thread-fill{left:25px}
   .wheel{grid-template-columns:repeat(7,1fr)}
 }
+/* ============================================================
+   ANIMATIONS — entrées douces, micro-interactions, vie
+   (toutes neutralisées par prefers-reduced-motion, ci-dessous)
+   ============================================================ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes shine{0%{transform:translateX(-160%) skewX(-18deg)}60%,100%{transform:translateX(340%) skewX(-18deg)}}
+@keyframes ringDraw{from{stroke-dashoffset:182}to{stroke-dashoffset:0}}
+@keyframes emGlow{0%,100%{filter:none}50%{filter:drop-shadow(0 0 5px color-mix(in srgb,var(--verdigris) 60%,transparent))}}
+
+/* entrée de vue : le contenu principal apparaît en fondu, section par section */
+#view{animation:fadeIn .28s ease both}
+#view > .stack > *{animation:fadeUp .5s cubic-bezier(.2,.8,.2,1) both}
+#view > .stack > *:nth-child(1){animation-delay:.02s}
+#view > .stack > *:nth-child(2){animation-delay:.07s}
+#view > .stack > *:nth-child(3){animation-delay:.12s}
+#view > .stack > *:nth-child(4){animation-delay:.17s}
+#view > .stack > *:nth-child(5){animation-delay:.22s}
+#view > .stack > *:nth-child(6){animation-delay:.27s}
+#view > .stack > *:nth-child(n+7){animation-delay:.3s}
+
+/* grilles de cartes : révélation échelonnée */
+.grid > *{animation:fadeUp .45s cubic-bezier(.2,.8,.2,1) both}
+.grid > *:nth-child(2){animation-delay:.05s}
+.grid > *:nth-child(3){animation-delay:.1s}
+.grid > *:nth-child(4){animation-delay:.15s}
+.grid > *:nth-child(5){animation-delay:.2s}
+.grid > *:nth-child(6){animation-delay:.25s}
+.grid > *:nth-child(n+7){animation-delay:.3s}
+
+/* nœuds du fil d'Ariane : apparition en cascade */
+.node{animation:fadeUp .5s cubic-bezier(.2,.8,.2,1) both}
+.node:nth-child(2){animation-delay:.06s}
+.node:nth-child(3){animation-delay:.12s}
+.node:nth-child(4){animation-delay:.18s}
+.node:nth-child(5){animation-delay:.24s}
+.node:nth-child(n+6){animation-delay:.3s}
+
+/* boutons : ressort au survol, brillance qui balaie le primaire */
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary{position:relative;overflow:hidden}
+.btn-primary::after{content:"";position:absolute;top:0;left:0;width:35%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:translateX(-160%) skewX(-18deg);animation:shine 5s ease-in-out 1.4s infinite;pointer-events:none}
+
+/* cartes vivantes au survol */
+.card,.card-2,.qopt,.optcard,.badge-tile,.chapcard{transition:transform .18s cubic-bezier(.2,.8,.2,1),border-color .18s,box-shadow .18s,background .18s}
+button.card:hover{transform:translateY(-3px)}
+.badge-tile:not(.locked):hover{transform:translateY(-3px) scale(1.02)}
+.qopt:hover:not(:disabled){transform:translateX(3px)}
+
+/* réponses de quiz : petit tressaut juste/faux */
+@keyframes goodPop{0%{transform:scale(1)}40%{transform:scale(1.03)}100%{transform:scale(1)}}
+@keyframes badShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.qopt.good{animation:goodPop .4s ease}
+.qopt.bad{animation:badShake .4s ease}
+
+/* l'emblème : l'anneau se trace, halo qui respire au survol de la marque */
+.emblem .em-ring{stroke-dasharray:182;animation:ringDraw 1.1s cubic-bezier(.2,.8,.2,1) .1s both}
+.brand .emblem{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.brand:hover .emblem{transform:rotate(-4deg) scale(1.06);animation:emGlow 1.8s ease-in-out infinite}
+
+/* pastilles à l'apparition */
+.pill{animation:popIn .35s ease both}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
@@ -482,6 +549,30 @@ function owl(size) {
   '<path d="M32 34l-3 5h6z" fill="var(--bronze)"/>' +
   '<path d="M26 44h12M28 48h8" stroke="var(--bronze)" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>' +
   '</svg>';
+}
+
+/* ---- l'emblème du site : le faucheur d'Hadès, épi d'émeraude et méandre grec ---- */
+function emblem(size) {
+  const s = size || 40;
+  return '<svg class="emblem" width="' + s + '" height="' + s + '" viewBox="0 0 64 64" fill="none" aria-hidden="true">' +
+    '<circle class="em-ring" cx="32" cy="32" r="29" stroke="var(--verdigris)" stroke-width="2"/>' +
+    '<path d="M7 26v12h8.5v-8.5h-4.5v4.5h1.6v-1.9h1.2v3.2h-4.7v-6.7h6.4v9.9" stroke="var(--verdigris)" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/>' +
+    '<path d="M57 26v12h-8.5v-8.5h4.5v4.5h-1.6v-1.9h-1.2v3.2h4.7v-6.7h-6.4v9.9" stroke="var(--verdigris)" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/>' +
+    '<path d="M25 55 35.5 13" stroke="var(--text)" stroke-width="2.6" stroke-linecap="round"/>' +
+    '<path d="M35.5 12.5c6.5-1.2 13.2 1.8 16.5 8.2-3.8-3.4-8.7-4.8-13.4-4-2 .3-3.9 1-5.6 2.1z" fill="var(--text)"/>' +
+    '<path d="M34 15c-6.3 0-10.3 5.2-10.3 12 0 3.2 .8 5.4-.4 8.3-1.2 2.9-3.3 4.7-3.3 8.7h28c0-4-2.1-5.8-3.3-8.7-1.2-2.9-.4-5.1-.4-8.3 0-6.8-4-12-10.3-12z" fill="var(--text)"/>' +
+    '<path d="M35.6 19.5c-4.4 0-6.8 3.6-6.8 8.4 0 3.6 2.6 6.3 6.4 6.3 3.4 0 5.8-2.4 6.2-5.6.5-4.7-1.8-9.1-5.8-9.1z" fill="var(--ground)"/>' +
+    '<path d="M27.5 41.6c1.9-.5 3.8.1 5 1.6-1.6 1.1-3.8 1-5.4-.2z" fill="var(--text)"/>' +
+    '<path class="em-sprig" d="M31 45 40.5 24" stroke="var(--verdigris)" stroke-width="1.7" stroke-linecap="round"/>' +
+    '<g class="em-leaves" fill="var(--verdigris-2)">' +
+      '<path d="M40.6 24.5c2.1-1.6 4.8-1.4 6.4 0-1.6 1.5-4.3 1.7-6.4 0z"/>' +
+      '<path d="M37.7 30.5c2.1-1.6 4.8-1.4 6.4 0-1.6 1.5-4.3 1.7-6.4 0z"/>' +
+      '<path d="M34.8 36.5c2.1-1.6 4.8-1.4 6.4 0-1.6 1.5-4.3 1.7-6.4 0z"/>' +
+      '<path d="M40.6 24.5c-2.1-1.6-4.8-1.4-6.4 0 1.6 1.5 4.3 1.7 6.4 0z" opacity=".5"/>' +
+      '<path d="M37.7 30.5c-2.1-1.6-4.8-1.4-6.4 0 1.6 1.5 4.3 1.7 6.4 0z" opacity=".5"/>' +
+      '<circle cx="41.2" cy="22.6" r="1.5"/>' +
+    '</g>' +
+    '</svg>';
 }
 
 /* ============================================================
@@ -1433,7 +1524,7 @@ function peindreRail() {
   const prog = rg.n ? Math.round((S.xp - rg.r.xp) / (rg.n.xp - rg.r.xp) * 100) : 100;
   const nbFrag = fragiles().length;
   $('#rail').innerHTML =
-    '<div class="brand">' + owl(38) +
+    '<div class="brand">' + emblem(40) +
       '<div class="brand-txt"><b>KRYPTOS</b><span>Odyssée cyber</span></div></div>' +
     NAV.map(n => '<button class="navbtn" data-go="' + n.k + '" aria-current="' + (base === n.k) + '">' +
       ico(n.i) + '<span>' + n.l + '</span>' +
@@ -5312,7 +5403,7 @@ function finirChapitre() {
     if (map[c.id]) decerner(map[c.id]);
     gagnerXP(120 + et * 40, labelMod(p) + c.g + ' franchi');
     if (parcoursTermine(p)) { badgesParcours(p); }
-    if (PARCOURS.filter(function (x) { return !x.pro; }).every(function (x) { return parcoursTermine(x); }) && S.chapitres.boss && S.chapitres.boss.fini) decerner('triarque');
+    if (PARCOURS.filter(function (x) { return !x.pro && !x.hors; }).every(function (x) { return parcoursTermine(x); }) && S.chapitres.boss && S.chapitres.boss.fini) decerner('triarque');
   } else if (reussi) {
     gagnerXP(30, 'Épreuve rejouée');
   }
@@ -5419,7 +5510,9 @@ function vueParcours(pid) {
     ? "Le fil d'Ariane a été brisé en neuf fragments. Chaque salle t'en rend un — à condition de réussir l'épreuve. Le fil doré, à gauche, montre ce que tu as déjà reconquis."
     : p.id === 'dedale'
     ? "Huit ateliers, vingt-sept exercices écrits dans une vraie console. Ton code est réellement exécuté et réellement testé : rien n'est simulé. Chaque atelier montre aussi la version Python."
-    : "Huit salles pour apprendre la sécurité opérationnelle : décider ce que tu protèges, contre qui, et tenir la discipline. Aucune ne t'apprendra à disparaître ; toutes t'apprendront à choisir ce que tu montres.";
+    : p.id === 'hades'
+    ? "Huit salles pour apprendre la sécurité opérationnelle : décider ce que tu protèges, contre qui, et tenir la discipline. Aucune ne t'apprendra à disparaître ; toutes t'apprendront à choisir ce que tu montres."
+    : p.pitch;
   return `
   <div class="stack gap-24">
     <header class="stack gap-12">
@@ -5471,11 +5564,11 @@ function vueAgora() {
     </header>
 
     ${kryptos(!S.prologue
-      ? "Enfin quelqu'un. Je suis Kryptos, la chouette d'Athéna. Trois parcours t'attendent là-dessous, mais on commence par le commencement : le prologue."
+      ? "Enfin quelqu'un. Je suis Kryptos, la chouette d'Athéna. Plusieurs parcours t'attendent là-dessous, mais on commence par le commencement : le prologue."
       : frag.length
         ? "Je remarque une faiblesse dans ta cuirasse : " + SKILLS[frag[0]].nom.toLowerCase() + ". Passe au Sanctuaire quand tu veux, c'est court et ça se répare vite."
         : totalFinis === 0 ? "Le premier fragment du fil t'attend derrière la porte de bronze. Descends, je te suis."
-        : "Trois parcours, trois façons d'apprendre. Le Labyrinthe pour les réflexes, la Forge pour comprendre la machine, le Casque pour la méthode. Prends-les dans l'ordre que tu veux — mais prends-les.")}
+        : "Plusieurs parcours, plusieurs façons d'apprendre. Le Labyrinthe pour les réflexes, la Forge pour comprendre la machine, le Casque pour la méthode, la forge d'Héphaïstos pour Linux. Prends-les dans l'ordre que tu veux — mais prends-les.")}
 
     <div class="grid g4">
       ${tuile(S.xp, 'Points de gloire', 'var(--bronze)')}
@@ -5794,7 +5887,7 @@ function lancerJeuLibre(id) {
 function vuePantheon() {
   const mm = moyenneMaitrise(), rg = rang(S.xp);
   const fini = S.chapitres.boss && S.chapitres.boss.fini;
-  const tous = PARCOURS.filter(function (p) { return !p.pro; }).every(function (p) { return parcoursTermine(p); }) && fini;
+  const tous = PARCOURS.filter(function (p) { return !p.pro && !p.hors; }).every(function (p) { return parcoursTermine(p); }) && fini;
   return `
   <div class="stack gap-24">
     <header class="stack gap-12">
@@ -7990,7 +8083,7 @@ function vueProVerrouille() {
     <header class="stack gap-12">
       <div class="eyebrow" style="color:var(--bronze)">Édition professionnelle</div>
       <h1>Le Second Cercle</h1>
-      <p class="lede">Les trois parcours libres t'apprennent à te protéger. Le Second Cercle t'apprend le métier : défendre une organisation, écrire du code qui résiste, et conduire une analyse de renseignement. Dix-huit modules, vingt-et-un exercices de code avancé, et un examen de certification.</p>
+      <p class="lede">Les parcours libres t'apprennent à te protéger. Le Second Cercle t'apprend le métier : défendre une organisation, écrire du code qui résiste, et conduire une analyse de renseignement. Dix-huit modules, vingt-et-un exercices de code avancé, et un examen de certification.</p>
     </header>
     ${voix('athena', "Ce qui est derrière cette porte n'est pas plus difficile. C'est plus vaste, et cela suppose que tu aies déjà tout le reste. Franchis-la quand tu seras prêt.")}
     <section class="stack gap-16">
@@ -10076,7 +10169,8 @@ function badgesParcours(p) {
   if (PRO_PARCOURS.every(function (x) { return parcoursTermine(x); })) decerner('pro_ordre');
 }
 function eyebrowParcours(p) {
-  if (!p.pro) return 'Parcours ' + ['I', 'II', 'III'][PARCOURS.filter(function (x) { return !x.pro; }).indexOf(p)];
+  if (p.hors) return 'Parcours libre';
+  if (!p.pro) return 'Parcours ' + (['I', 'II', 'III'][PARCOURS.filter(function (x) { return !x.pro && !x.hors; }).indexOf(p)] || '');
   if (p.bloc) return p.bloc;
   return 'Second Cercle';
 }
@@ -10243,7 +10337,7 @@ function peindreRail() {
   const nbFrag = fragiles().length;
   const items = NAV.filter(function (n) { return !n.pro || S.pro; });
   $('#rail').innerHTML =
-    '<div class="brand">' + owl(38) +
+    '<div class="brand">' + emblem(40) +
       '<div class="brand-txt"><b>KRYPTOS</b><span>Odyssée cyber</span></div></div>' +
     items.map(function (n) {
       return '<button class="navbtn" data-go="' + n.k + '" aria-current="' + (base === n.k) + '">' +
@@ -11874,11 +11968,461 @@ Object.assign(ICON, {
   linux:'<path d="M12 2.5c-2.8 0-4.5 2.2-4.5 5.5v7c0 3.2 1.7 6 4.5 6s4.5-2.8 4.5-6v-7c0-3.3-1.7-5.5-4.5-5.5z"/><path d="M12 9c-1.4 0-2.3 1.4-2.3 3.6S10.6 18 12 18s2.3-3.2 2.3-5.4S13.4 9 12 9z"/><path d="M11.2 8.4h1.6l-.8 1.2z"/><path d="M9.5 20.4l-2 1.3M14.5 20.4l2 1.3"/><circle cx="10.4" cy="7.6" r=".5"/><circle cx="13.6" cy="7.6" r=".5"/>'
 });
 
-/* on insère l'entrée avant le Panthéon, dans la partie libre */
+/* ============================================================
+   40 bis. PARCOURS LIBRE — LE FEU D'HÉPHAÏSTOS (Linux)
+   ============================================================
+   Un parcours complet à choix multiples : maîtriser Linux, de
+   débutant à pro, côté défense ET côté attaque. Libre, mais
+   marqué hors-trilogie (hors:true) pour ne pas fausser le
+   diplôme des trois parcours d'origine.
+   ============================================================ */
+
+Object.assign(SKILLS, {
+  linuxbase:{ nom:'Fondations Linux' },
+  linuxcli: { nom:'Terminal Linux' },
+  linuxperm:{ nom:'Permissions Linux' },
+  linuxsys: { nom:'Système & services' },
+  linuxdef: { nom:'Durcissement Linux' },
+  linuxatt: { nom:'Linux offensif' }
+});
+
+Object.assign(SIMPLE, {
+  linuxbase:{ img:"Trois couches empilées : le matériel, le noyau, tes logiciels.",
+    txt:"Linux, au sens strict, c'est le noyau : le chef d'orchestre qui parle au matériel. Autour, une distribution (Ubuntu, Kali…) ajoute les logiciels et l'installateur. Tes programmes tournent par-dessus. Comprendre ces trois couches, c'est ne plus jamais être perdu.",
+    pas:["Le noyau parle au matériel (mémoire, disques, réseau).","La distribution habille le noyau : outils, installateur, mises à jour.","Les logiciels (Firefox, nmap) tournent au-dessus.","Une distribution n'est pas « un autre Linux » : c'est le même noyau, habillé autrement."] },
+  linuxcli:{ img:"Le terminal : parler à la machine avec des mots exacts.",
+    txt:"Le terminal fait peur parce qu'il attend des mots précis. Mais chaque commande est un petit outil qui fait une seule chose bien. On enchaîne ces outils avec des tuyaux (|). C'est plus rapide et plus puissant que la souris, une fois qu'on connaît quelques mots.",
+    pas:["pwd = où suis-je, ls = ce qu'il y a ici, cd = se déplacer.","cat lit un fichier, grep cherche dedans.","Le tuyau | envoie la sortie d'une commande dans une autre.","Tab complète, flèche du haut rappelle : on tape peu."] },
+  linuxperm:{ img:"Chaque fichier a un propriétaire et trois droits : lire, écrire, exécuter.",
+    txt:"Sur Linux, tout est fichier, et chaque fichier dit qui peut le lire (r), le modifier (w) et l'exécuter (x). chmod change ces droits, chown le propriétaire. Le compte root peut tout : c'est pour ça qu'on n'y reste jamais, et qu'on passe par sudo au coup par coup.",
+    pas:["r = lire, w = écrire, x = exécuter (ou entrer, pour un dossier).","chmod 600 : moi seul lis et écris. chmod 777 : tout le monde tout.","root peut tout : on n'y vit pas, on y passe avec sudo.","Un droit trop large est une faille : le moindre privilège gagne."] },
+  linuxsys:{ img:"Une machine vivante : des processus, des services, des journaux.",
+    txt:"À chaque instant, des dizaines de programmes (processus) tournent. Certains sont lancés au démarrage et surveillés : ce sont les services, gérés par systemd. Tout ce qui se passe est écrit dans les journaux. Savoir lire cette vie, c'est savoir diagnostiquer et défendre.",
+    pas:["ps / top : voir les processus en cours.","systemctl : démarrer, arrêter, activer un service.","journalctl : lire les journaux du système.","apt : installer, mettre à jour, retirer des logiciels."] },
+  linuxdef:{ img:"Refermer les portes qu'on n'utilise pas.",
+    txt:"Durcir un Linux, c'est réduire sa surface d'attaque : mettre à jour, n'ouvrir que les ports utiles (pare-feu), verrouiller l'accès distant (SSH par clé), bannir les intrus (fail2ban), et ne jamais vivre en root. Les mêmes gestes protègent un serveur et ton portable.",
+    pas:["Mettre à jour : la plupart des intrusions visent du vieux logiciel.","Pare-feu (UFW) : on refuse tout, on n'ouvre que le nécessaire.","SSH : pas de root, connexion par clé uniquement.","Moindre privilège : root au coup par coup, jamais en permanence."] },
+  linuxatt:{ img:"L'attaquant cherche l'oubli : un droit trop large, un sudo mal réglé.",
+    txt:"Une fois un premier accès obtenu, l'attaquant « énumère » : il cherche ce qui traîne. Un programme SUID mal choisi, une règle sudo trop permissive, une tâche planifiée modifiable — et il devient root. Apprendre à le voir, c'est apprendre à le corriger avant lui. En labo, uniquement.",
+    pas:["Énumérer d'abord : id, sudo -l, chercher les fichiers SUID.","Un sudo « ALL » sans mot de passe, c'est souvent root immédiat.","Un droit d'écriture au mauvais endroit = élévation de privilège.","Ce qu'on trouve à l'attaque, on le referme à la défense."] }
+});
+
+const LINUXP_INTRO = [
+  { qui:'recit', t:"Une forge. Pas de marbre ici, mais du métal, des braises, et une odeur de fer chaud. Sur l'établi, un manchot de bronze veille." },
+  { qui:'hephaistos', t:"Les autres dieux vivent sur l'Olympe. Moi, je travaille. On me trouve boiteux, laid, à l'écart — et pourtant, sans mes outils, aucun héros ne fait rien. Linux, c'est ma forge : ouverte, réparable, à toi." },
+  { qui:'hephaistos', t:"Tout le monde peut ouvrir le capot, voir comment c'est fait, réparer, améliorer. C'est pour ça que les gens de la sécurité l'ont choisi : on ne fait bien la guerre que sur un terrain qu'on comprend entièrement." },
+  { qui:'kryptos', t:"Six salles. On part des fondations, on apprend la langue du terminal, les permissions, les rouages du système. Puis deux salles jumelles : durcir la machine — la défense — et voir comme un attaquant la voit — l'offensive, en labo." },
+  { qui:'hephaistos', t:"À la fin, tu ne subiras plus Linux : tu le forgeras. Prends le premier outil." }
+];
+
+const LINUXP = [
+{
+  id:'lx1', g:'I', titre:"L'Étincelle", theme:"Ce qu'est Linux vraiment", skill:'linuxbase',
+  relique:{ nom:"L'Étincelle", em:'🔥' }, jeu:'tri3', duree:12,
+  accroche:"Noyau, distribution, logiciel : trois couches. Les confondre, c'est être perdu pour toujours.",
+  scenes:[
+    { qui:'hephaistos', t:"Avant de forger, on apprend de quoi est fait le métal. « Linux », ce mot, désigne trois choses qu'il ne faut jamais confondre." },
+    { qui:'kryptos', t:"Le noyau, la distribution, le logiciel. Range-les bien : tout le reste en découlera." }
+  ],
+  cours:{
+    objectifs:["Distinguer le noyau, la distribution et un logiciel","Comprendre pourquoi Linux est libre et ouvert","Savoir choisir une distribution selon son usage","Comprendre pourquoi la sécurité vit sur Linux"],
+    sections:[
+      { t:"Les trois couches", h:`
+<p>Le mot « Linux » cache trois réalités empilées :</p>
+<ul>
+<li><strong>Le noyau (Linux)</strong> — le vrai « Linux ». C'est le chef d'orchestre qui parle au matériel : mémoire, disques, réseau, périphériques. Tu ne le vois jamais directement.</li>
+<li><strong>La distribution</strong> — Ubuntu, Debian, Mint, Kali, Fedora… Elle prend le noyau et l'habille : un installateur, des logiciels, un magasin d'applications, des mises à jour. Toutes partagent le <em>même</em> noyau.</li>
+<li><strong>Les logiciels</strong> — Firefox, nmap, un serveur web… Ils tournent par-dessus la distribution.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">L'erreur classique</div><p style="margin:6px 0 0">« Kali, c'est un autre Linux qu'Ubuntu. » Non : c'est le <strong>même noyau</strong>, avec d'autres logiciels pré-installés (des outils de sécurité) et d'autres réglages. Comprendre ça, c'est ne plus jamais être impressionné par un nom de distribution.</p></div>` },
+      { t:"Libre, ouvert, et c'est pour ça qu'on l'a choisi", h:`
+<p>Linux est un <strong>logiciel libre</strong> : n'importe qui peut lire son code, le modifier, le partager. Ce n'est pas « gratuit » au sens de « au rabais » — c'est « ouvert » au sens de « transparent ».</p>
+<ul>
+<li>On peut <strong>vérifier</strong> ce que fait le système : rien de caché.</li>
+<li>On peut le <strong>réparer</strong> et l'<strong>adapter</strong> soi-même.</li>
+<li>Une immense communauté le corrige en permanence.</li>
+</ul>
+<p>C'est exactement pour ces raisons que <strong>la cybersécurité vit sur Linux</strong> : serveurs, outils d'attaque et de défense, laboratoires. On ne défend bien que ce qu'on comprend entièrement.</p>
+<div class="tipbox"><div class="eyebrow">Quelle distribution ?</div><p style="margin:6px 0 0">Pour débuter : <strong>Mint</strong> ou <strong>Ubuntu</strong>. Pour la sécurité : <strong>Kali</strong> ou <strong>Parrot</strong> (bourrées d'outils). Pour un serveur : <strong>Debian</strong>. Toutes, le même noyau.</p></div>` }
+    ],
+    retenir:["« Linux » = le noyau, qui parle au matériel.","Une distribution habille le noyau : Ubuntu, Kali, Debian…","Kali n'est pas « un autre Linux » : même noyau, autres outils.","Libre = ouvert et vérifiable, pas seulement gratuit.","La sécurité vit sur Linux parce qu'on peut tout inspecter."]
+  },
+  jeuData:{
+    kind:'tri',
+    titre:"Les trois couches",
+    intro:"Range chaque élément à sa couche : le noyau, la distribution, ou un simple logiciel.",
+    cats:[
+      { n:"Le noyau", d:"parle au matériel" },
+      { n:"La distribution", d:"habille le noyau" },
+      { n:"Un logiciel", d:"tourne par-dessus" }
+    ],
+    items:[
+      { t:"Ubuntu", c:1, e:"Ubuntu est une distribution : un noyau Linux habillé d'outils et d'un installateur." },
+      { t:"Gérer la mémoire et les processus", c:0, e:"C'est le rôle du noyau : il arbitre l'accès au matériel." },
+      { t:"Firefox", c:2, e:"Firefox est un logiciel : il tourne au-dessus de la distribution." },
+      { t:"Kali", c:1, e:"Kali est une distribution orientée sécurité : même noyau, outils différents." },
+      { t:"Piloter la carte réseau et les disques", c:0, e:"Parler au matériel, c'est précisément le travail du noyau." },
+      { t:"nmap", c:2, e:"nmap est un logiciel (un scanner réseau) qu'on installe et lance." },
+      { t:"Linux Mint", c:1, e:"Mint est une distribution, réputée douce pour les débutants." },
+      { t:"Le magasin d'applications et l'installateur", c:1, e:"C'est la distribution qui fournit l'installateur et le gestionnaire de paquets." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Au sens strict, « Linux » désigne :", c:["Une marque d'ordinateur","Le noyau qui parle au matériel","Un logiciel de bureau","Un antivirus"], a:1, e:"Linux est le noyau : le cœur qui gère mémoire, disques, réseau et périphériques." },
+    { t:1, q:"Ubuntu, Kali et Debian sont :", c:["Trois noyaux différents","Des distributions : le même noyau, habillé autrement","Des logiciels antivirus","Des marques de PC"], a:1, e:"Ce sont des distributions. Elles partagent le noyau Linux, avec des outils et réglages différents." },
+    { t:1, q:"« Logiciel libre » veut surtout dire :", c:["Gratuit et au rabais","Ouvert : on peut lire, modifier et partager le code","Sans virus garanti","Réservé aux experts"], a:1, e:"Le libre, c'est la transparence : le code est ouvert, vérifiable et modifiable." },
+    { t:2, q:"Pourquoi la cybersécurité utilise-t-elle massivement Linux ?", c:["Parce qu'il est joli","Parce qu'on peut tout inspecter et adapter","Parce qu'il n'a aucune faille","Parce qu'il est payant"], a:1, e:"On défend bien ce qu'on comprend : l'ouverture de Linux permet de tout vérifier et outiller." },
+    { t:2, q:"Kali Linux se distingue d'Ubuntu surtout par :", c:["Un noyau totalement différent","Ses outils de sécurité pré-installés et ses réglages","Son prix","Son incompatibilité avec Linux"], a:1, e:"Même noyau : ce qui change, ce sont les logiciels fournis et la configuration." },
+    { t:3, q:"Un débutant veut juste remplacer Windows en douceur. On lui conseille :", c:["Kali","Mint ou Ubuntu","Debian sans interface","Parrot"], a:1, e:"Mint et Ubuntu sont pensées pour la transition : Kali et Parrot sont des ateliers de sécurité, pour plus tard." }
+  ]
+},
+{
+  id:'lx2', g:'II', titre:"La Langue de la Forge", theme:"Le terminal", skill:'linuxcli',
+  relique:{ nom:"La Clé du Terminal", em:'⌨️' }, jeu:'terminal', duree:16,
+  accroche:"Quelques mots exacts valent mille clics. Le terminal, c'est parler à la machine.",
+  scenes:[
+    { qui:'hephaistos', t:"La souris montre. Le terminal ordonne. Chaque commande est un outil qui fait une seule chose, bien. On les enchaîne, et on devient rapide." },
+    { qui:'kryptos', t:"N'aie pas peur de l'écran noir. Tu vas t'y promener, lire un dossier, et trouver un fichier caché. Tape help si tu bloques." }
+  ],
+  cours:{
+    objectifs:["Se déplacer dans l'arborescence (pwd, ls, cd)","Lire et chercher dans des fichiers (cat, grep)","Comprendre les tuyaux et la redirection","Prendre les réflexes qui font gagner du temps"],
+    sections:[
+      { t:"Se repérer et se déplacer", h:`
+<p>Le système de fichiers est un arbre. Quatre commandes suffisent pour s'y promener :</p>
+<ul>
+<li><span class="mono">pwd</span> — <em>print working directory</em> : où suis-je ?</li>
+<li><span class="mono">ls</span> — liste ce qu'il y a ici. <span class="mono">ls -la</span> montre aussi les fichiers cachés (ceux qui commencent par un point).</li>
+<li><span class="mono">cd dossier</span> — entre dans un dossier. <span class="mono">cd ..</span> remonte.</li>
+<li><span class="mono">cat fichier</span> — affiche le contenu d'un fichier.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Les fichiers cachés</div><p style="margin:6px 0 0">Un fichier ou dossier dont le nom commence par un point (<span class="mono">.secret</span>, <span class="mono">.bashrc</span>) est <strong>caché</strong> : <span class="mono">ls</span> ne le montre pas, <span class="mono">ls -a</span> oui. Beaucoup de secrets et de réglages s'y trouvent.</p></div>` },
+      { t:"Chercher, enchaîner, aller vite", h:`
+<p>La vraie puissance vient de l'<strong>enchaînement</strong> :</p>
+<ul>
+<li><span class="mono">grep mot fichier</span> — cherche un mot dans un fichier.</li>
+<li><strong>Le tuyau</strong> <span class="mono">|</span> envoie la sortie d'une commande dans une autre : <span class="mono">ls -la | grep secret</span> liste, puis ne garde que les lignes contenant « secret ».</li>
+<li><span class="mono">man commande</span> — le manuel d'une commande (<span class="mono">q</span> pour quitter).</li>
+</ul>
+<div class="tipbox"><div class="eyebrow">Trois réflexes qui changent tout</div><p style="margin:6px 0 0">La touche <span class="mono">Tab</span> complète les noms. La flèche du <strong>haut</strong> rappelle les dernières commandes. Et on lit toujours ce qu'affiche l'écran : la réponse est presque toujours dedans.</p></div>` }
+    ],
+    retenir:["pwd = où je suis, ls = ce qu'il y a, cd = se déplacer.","ls -a révèle les fichiers cachés (qui commencent par un point).","cat lit, grep cherche, le tuyau | enchaîne les outils.","man donne le manuel d'une commande.","Tab complète, flèche du haut rappelle : on tape peu."]
+  },
+  jeuData:{
+    kind:'terminal',
+    titre:"La Clé du Terminal",
+    intro:"Un terminal Linux, à toi. Explore le dossier, trouve le fichier caché et lis le drapeau. Tape help pour les commandes, hint si tu bloques, submit <drapeau> quand tu l'as.",
+    prompt:"tux@forge",
+    cible:"~ (ton dossier personnel)",
+    objectifs:["Voir où tu te trouves","Lister les fichiers, y compris cachés","Ouvrir le fichier caché","Récupérer le drapeau qu'il contient"],
+    flags:["KRYPTOS{l3_t3rm1n4l_c_3st_l4_cl3}"],
+    aide:[
+      "Commence par 'pwd' pour voir où tu es, puis 'ls'.",
+      "Un fichier manque à l'appel : essaie 'ls -a' pour voir les fichiers cachés.",
+      "Tu vois un fichier '.secret' ? Lis-le avec 'cat .secret'.",
+      "Le drapeau est dans '.secret'. Copie-le, puis 'submit <drapeau>'."
+    ],
+    commandes:"pwd · ls [-a] · cd <dossier> · cat <fichier> · grep <mot> <fichier>",
+    rep:[
+      { c:/^pwd\b/i, o:"/home/tux", set:'pwd' },
+      { c:/^ls\s+-l?a\b|^ls\s+-al\b/i, o:"total 20\ndrwxr-xr-x  tux  .\ndrwxr-xr-x root .\n-rw-r--r--  tux  notes.txt\n-rw-------  tux  .secret\n-rw-r--r--  tux  bienvenue.txt\n\n→ Un fichier caché apparaît : .secret", set:'lsa' },
+      { c:/^ls\b/i, o:"notes.txt   bienvenue.txt\n\n→ Rien de bien secret ici. Et s'il y avait des fichiers cachés ? (ls -a)", set:'ls' },
+      { c:/^cat\s+\.secret\b/i, o:"# ne pas partager\nKRYPTOS{l3_t3rm1n4l_c_3st_l4_cl3}\n\n→ Voilà le drapeau. 'submit <drapeau>'.", set:'cat', flag:"KRYPTOS{l3_t3rm1n4l_c_3st_l4_cl3}" },
+      { c:/^cat\s+notes\.txt\b/i, o:"Rappel : le vrai secret est ailleurs, et il est caché.", set:'notes' },
+      { c:/^cat\s+bienvenue\.txt\b/i, o:"Bienvenue dans la forge. Tape 'ls -a' pour tout voir.", set:'bienv' },
+      { c:/^grep\b/i, o:"grep cherche un mot dans un fichier : essaie 'grep KRYPTOS .secret'.", set:'grep' }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Quelle commande affiche le dossier où tu te trouves ?", c:["ls","pwd","cd","cat"], a:1, e:"pwd (print working directory) répond à « où suis-je ? »." },
+    { t:1, q:"Pour voir les fichiers cachés :", c:["ls","ls -a","cd -a","hidden"], a:1, e:"L'option -a de ls révèle les fichiers cachés (ceux commençant par un point)." },
+    { t:1, q:"Un nom de fichier qui commence par un point est :", c:["Cassé","Caché","En lecture seule","Un dossier"], a:1, e:"Le point initial marque un fichier caché : ls ne le montre pas sans -a." },
+    { t:2, q:"Le tuyau | sert à :", c:["Effacer un fichier","Envoyer la sortie d'une commande dans une autre","Ouvrir un dossier","Changer les droits"], a:1, e:"Le pipe enchaîne les outils : la sortie de gauche devient l'entrée de droite." },
+    { t:2, q:"Pour chercher le mot « clé » dans notes.txt :", c:["find clé","grep clé notes.txt","cat clé","ls clé"], a:1, e:"grep <mot> <fichier> cherche un motif à l'intérieur d'un fichier." },
+    { t:3, q:"Tu tapes une commande longue déjà utilisée. Le plus rapide :", c:["La retaper en entier","Flèche du haut pour la rappeler, Tab pour compléter","Redémarrer","Copier depuis un cours"], a:1, e:"La flèche du haut rappelle l'historique, Tab complète les noms : on tape le minimum." }
+  ]
+},
+{
+  id:'lx3', g:'III', titre:"Les Sceaux", theme:"Fichiers, droits et root", skill:'linuxperm',
+  relique:{ nom:"Les Sceaux", em:'🔏' }, jeu:'tri3', duree:15,
+  accroche:"Chaque fichier dit qui peut le lire, le changer, l'exécuter. Un droit de trop, c'est une faille.",
+  scenes:[
+    { qui:'hephaistos', t:"Dans ma forge, chaque outil a son propriétaire et sa place. Sur Linux, chaque fichier aussi : qui peut le lire, le modifier, le faire tourner." },
+    { qui:'kryptos', t:"Et il y a root, le maître de tout. Puissant, donc dangereux : on n'y vit pas, on y passe par sudo, au coup par coup." }
+  ],
+  cours:{
+    objectifs:["Lire les droits r, w, x d'un fichier","Utiliser chmod et chown","Comprendre root, sudo et le moindre privilège","Repérer un droit dangereux (SUID, 777)"],
+    sections:[
+      { t:"Lire, écrire, exécuter", h:`
+<p>Chaque fichier porte trois droits, pour trois publics (le propriétaire, le groupe, les autres) :</p>
+<ul>
+<li><strong>r</strong> (read) — lire le contenu.</li>
+<li><strong>w</strong> (write) — modifier ou supprimer.</li>
+<li><strong>x</strong> (execute) — lancer le programme (ou, pour un dossier, y entrer).</li>
+</ul>
+<p>On les change avec <span class="mono">chmod</span>, et on change le propriétaire avec <span class="mono">chown</span>. Les chiffres classiques : <span class="mono">600</span> = moi seul lis/écris ; <span class="mono">644</span> = moi lis/écris, les autres lisent ; <span class="mono">755</span> = moi tout, les autres lisent/exécutent.</p>
+<div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">Le piège 777</div><p style="margin:6px 0 0"><span class="mono">chmod 777</span> donne <strong>tous les droits à tout le monde</strong>. C'est le « je désactive la sécurité pour que ça marche » : à bannir sur tout ce qui compte. Une clé SSH, elle, se met en <span class="mono">600</span>.</p></div>` },
+      { t:"root et le moindre privilège", h:`
+<p>Le compte <strong>root</strong> (administrateur) peut absolument tout : lire n'importe quel fichier, tout casser, tout installer. C'est indispensable… et c'est exactement pourquoi on n'y reste pas.</p>
+<ul>
+<li>On travaille en <strong>utilisateur normal</strong>.</li>
+<li>Quand il faut un pouvoir d'admin, on préfixe la commande par <span class="mono">sudo</span> : le système demande ton mot de passe, exécute cette commande-là en root, puis c'est fini.</li>
+<li>C'est le <strong>moindre privilège</strong> : on n'a de pouvoir que le temps où on en a besoin.</li>
+</ul>
+<div class="tipbox"><div class="eyebrow">Le bit SUID</div><p style="margin:6px 0 0">Certains programmes s'exécutent avec les droits de leur propriétaire (souvent root), pas les tiens : c'est le bit <strong>SUID</strong>. Utile pour quelques outils système, mais un SUID mal choisi est une porte royale vers root — on le verra côté attaque.</p></div>` }
+    ],
+    retenir:["r = lire, w = écrire, x = exécuter (ou entrer, pour un dossier).","chmod change les droits, chown le propriétaire.","600 pour une clé privée ; 777 = danger, presque jamais.","root peut tout : on n'y vit pas, on passe par sudo.","Moindre privilège : le pouvoir juste quand il le faut."]
+  },
+  jeuData:{
+    kind:'tri',
+    titre:"Sûr, risqué, dangereux",
+    intro:"Chaque choix de droits ou d'usage a une conséquence de sécurité. Range-le : bon réflexe, risqué, ou à éviter absolument.",
+    cats:[
+      { n:"Bon réflexe", d:"sûr et recommandé" },
+      { n:"Risqué", d:"à n'utiliser qu'en connaissance" },
+      { n:"À éviter", d:"presque toujours dangereux" }
+    ],
+    items:[
+      { t:"Mettre ta clé SSH privée en chmod 600.", c:0, e:"Toi seul peux la lire et l'écrire : c'est exactement ce qu'il faut pour un secret." },
+      { t:"Faire chmod 777 sur un dossier « pour que ça marche ».", c:2, e:"Tous les droits à tout le monde : on ouvre grand la porte. On cherche le vrai droit nécessaire à la place." },
+      { t:"Travailler connecté en root toute la journée.", c:2, e:"La moindre erreur ou le moindre programme malveillant a alors tous les pouvoirs. On vit en utilisateur normal." },
+      { t:"Utiliser sudo pour une commande d'admin ponctuelle.", c:0, e:"Le pouvoir juste le temps nécessaire : c'est le moindre privilège bien appliqué." },
+      { t:"Mettre un script à toi en chmod 700.", c:0, e:"Toi seul lis, écris et exécutes : sobre et sûr pour un fichier personnel." },
+      { t:"Ajouter le bit SUID à un éditeur de texte.", c:2, e:"Un éditeur SUID root permet d'ouvrir et modifier n'importe quel fichier système : élévation directe. À proscrire." },
+      { t:"Donner temporairement w à un collègue sur un fichier partagé, via le groupe.", c:1, e:"Parfois nécessaire, mais à cadrer : le bon outil est un groupe, pas 777, et on retire le droit ensuite." },
+      { t:"Laisser un fichier de mots de passe en lecture pour tous (644).", c:2, e:"Tout le monde peut le lire : un secret lisible par tous n'est plus un secret." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Le droit « x » sur un fichier permet de :", c:["Le lire","L'exécuter (le lancer)","L'effacer","Le cacher"], a:1, e:"x = execute : lancer le programme (ou, pour un dossier, y entrer)." },
+    { t:1, q:"chmod 600 sur un fichier signifie :", c:["Tout le monde peut tout","Le propriétaire lit et écrit, personne d'autre","Lecture seule pour tous","Exécutable par tous"], a:1, e:"600 = rw pour le propriétaire, rien pour le groupe ni les autres. Idéal pour un secret." },
+    { t:1, q:"root, c'est :", c:["Un dossier","Le compte administrateur qui peut tout","Un logiciel","Un mot de passe"], a:1, e:"root est le super-utilisateur : tous les pouvoirs, donc à n'utiliser qu'avec parcimonie." },
+    { t:2, q:"Pourquoi éviter chmod 777 ?", c:["C'est lent","Ça donne tous les droits à tout le monde","Ça efface le fichier","C'est réservé à root"], a:1, e:"777 ouvre lecture, écriture ET exécution à tous : une porte grande ouverte." },
+    { t:2, q:"Le principe du moindre privilège dit :", c:["Toujours être root","N'avoir de pouvoir que le temps nécessaire","Interdire sudo","Tout mettre en 777"], a:1, e:"On n'accorde le pouvoir d'admin que pour l'action précise qui le nécessite, puis on le rend." },
+    { t:3, q:"Un programme avec le bit SUID appartenant à root :", c:["Ne peut rien faire","S'exécute avec les droits de root, pas les tiens","Est forcément un virus","Est illisible"], a:1, e:"SUID fait tourner le programme avec les droits du propriétaire (root) : utile parfois, dangereux si mal choisi." }
+  ]
+},
+{
+  id:'lx4', g:'IV', titre:"Les Rouages", theme:"Processus, services, paquets", skill:'linuxsys',
+  relique:{ nom:"Les Rouages", em:'⚙️' }, jeu:'terminal', duree:18,
+  accroche:"Une machine vivante : des processus qui tournent, des services surveillés, des journaux qui racontent tout.",
+  scenes:[
+    { qui:'hephaistos', t:"Une forge, ce sont des mécanismes en mouvement. Un Linux aussi : à chaque seconde, des dizaines de programmes travaillent. Apprends à les voir." },
+    { qui:'kryptos', t:"Les processus, les services, les journaux. Diagnostiquer, c'est d'abord regarder. Un service se cache dans la console : retrouve son drapeau." }
+  ],
+  cours:{
+    objectifs:["Observer les processus (ps, top)","Piloter un service avec systemctl","Lire les journaux avec journalctl","Installer et mettre à jour avec apt"],
+    sections:[
+      { t:"Processus et services", h:`
+<p>Un <strong>processus</strong> est un programme en train de tourner. Un <strong>service</strong> (ou démon) est un processus lancé au démarrage et surveillé par le système.</p>
+<ul>
+<li><span class="mono">ps aux</span> — la liste des processus. <span class="mono">top</span> (ou <span class="mono">htop</span>) — la même chose, en direct.</li>
+<li><span class="mono">systemctl status ssh</span> — l'état d'un service.</li>
+<li><span class="mono">sudo systemctl start / stop / restart ssh</span> — le piloter.</li>
+<li><span class="mono">sudo systemctl enable ssh</span> — le lancer automatiquement au démarrage.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">systemd, le chef d'atelier</div><p style="margin:6px 0 0">Sur la plupart des distributions, c'est <strong>systemd</strong> qui démarre, arrête et surveille les services. <span class="mono">systemctl</span> est la télécommande. Savoir activer/désactiver un service, c'est déjà réduire la surface d'attaque.</p></div>` },
+      { t:"Journaux et paquets", h:`
+<p>Tout ce qui se passe laisse une trace :</p>
+<ul>
+<li><span class="mono">journalctl</span> — les journaux du système. <span class="mono">journalctl -u ssh</span> filtre sur un service ; <span class="mono">journalctl -xe</span> montre les erreurs récentes.</li>
+</ul>
+<p>Et on installe les logiciels via le <strong>gestionnaire de paquets</strong> (sur Debian/Ubuntu, c'est <span class="mono">apt</span>) :</p>
+<ul>
+<li><span class="mono">sudo apt update</span> puis <span class="mono">sudo apt upgrade</span> — mettre à jour.</li>
+<li><span class="mono">sudo apt install nom</span> — installer. <span class="mono">apt remove nom</span> — retirer.</li>
+</ul>
+<div class="tipbox"><div class="eyebrow">Pourquoi c'est plus sûr</div><p style="margin:6px 0 0">On installe depuis les <strong>dépôts officiels</strong> de la distribution, signés et vérifiés — pas en téléchargeant un .exe au hasard. C'est une des grandes forces de sécurité de Linux.</p></div>` }
+    ],
+    retenir:["ps / top : voir les processus en cours.","systemctl status / start / stop / enable pilote les services.","journalctl lit les journaux ; -u filtre un service.","apt update && apt upgrade met à jour tout le système.","On installe depuis les dépôts officiels, signés."]
+  },
+  jeuData:{
+    kind:'terminal',
+    titre:"Les Rouages",
+    intro:"Diagnostique une machine de labo. Observe les services, trouve celui qui expose un drapeau dans son état ou ses journaux. help, hint, submit <drapeau>.",
+    prompt:"tux@rouages",
+    cible:"machine de labo",
+    objectifs:["Lister les processus en cours","Repérer un service inconnu","Lire l'état ou le journal de ce service","Récupérer le drapeau qu'il expose"],
+    flags:["KRYPTOS{l3s_s3rv1c3s_s0nt_v1v4nts}"],
+    aide:[
+      "Commence par 'ps aux' pour voir ce qui tourne.",
+      "Un service au nom étrange apparaît : 'systemctl status oracle-lab'.",
+      "S'il ne dit pas tout, lis son journal : 'journalctl -u oracle-lab'.",
+      "Le drapeau est dans le journal du service. Copie-le, puis 'submit'."
+    ],
+    commandes:"ps aux · systemctl status <service> · journalctl -u <service> · apt list",
+    rep:[
+      { c:/^ps\s+aux\b|^ps\b/i, o:"USER  PID  COMMAND\nroot    1  /sbin/init\ntux   842  bash\nroot  910  sshd\nroot  977  oracle-lab --daemon\n\n→ Un service inhabituel tourne : oracle-lab.", set:'ps' },
+      { c:/^systemctl\s+status\s+oracle-lab/i, o:"● oracle-lab.service — Oracle de laboratoire\n   Active: active (running)\n   Note: le message secret est écrit dans le journal (journalctl -u oracle-lab).", set:'stat' },
+      { c:/^journalctl\s+-u\s+oracle-lab/i, o:"oracle-lab[977]: démarrage...\noracle-lab[977]: drapeau du jour = KRYPTOS{l3s_s3rv1c3s_s0nt_v1v4nts}\noracle-lab[977]: prêt.\n\n→ Le drapeau est là. 'submit <drapeau>'.", set:'jrn', flag:"KRYPTOS{l3s_s3rv1c3s_s0nt_v1v4nts}" },
+      { c:/^systemctl\s+status\s+ssh/i, o:"● ssh.service — OpenSSH server\n   Active: active (running)\n\n→ Service normal. Cherche plutôt le service inhabituel vu dans ps.", set:'ssh' },
+      { c:/^journalctl\b/i, o:"Trop de lignes. Filtre sur un service : 'journalctl -u oracle-lab'.", set:'jall' },
+      { c:/^apt\s+list/i, o:"nmap/stable, installé\nopenssh-server/stable, installé\noracle-lab/local, installé\n\n→ oracle-lab est installé localement : intéressant.", set:'apt' }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Quelle commande liste les processus en cours ?", c:["ls -p","ps aux","cd proc","cat process"], a:1, e:"ps aux affiche les processus ; top/htop le font en direct." },
+    { t:1, q:"Pour connaître l'état du service SSH :", c:["ssh status","systemctl status ssh","service ssh?","journal ssh"], a:1, e:"systemctl status <service> donne l'état d'un service géré par systemd." },
+    { t:1, q:"journalctl sert à :", c:["Installer des logiciels","Lire les journaux du système","Changer les droits","Créer un utilisateur"], a:1, e:"journalctl lit les journaux ; l'option -u filtre sur un service précis." },
+    { t:2, q:"Pour qu'un service démarre automatiquement au boot :", c:["systemctl start","systemctl enable","systemctl status","systemctl mask tout"], a:1, e:"enable l'active au démarrage ; start le lance seulement pour l'instant présent." },
+    { t:2, q:"On installe un logiciel sur Ubuntu avec :", c:["download.exe","sudo apt install nom","install nom","get nom"], a:1, e:"apt installe depuis les dépôts officiels signés : sûr et propre." },
+    { t:3, q:"Pourquoi installer depuis les dépôts officiels plutôt qu'un fichier trouvé en ligne ?", c:["C'est plus joli","Les paquets sont signés et vérifiés","C'est plus lent mais obligatoire","Ça évite d'avoir root"], a:1, e:"Les dépôts sont signés : on sait que le logiciel n'a pas été altéré. Un fichier au hasard, non." }
+  ]
+},
+{
+  id:'lx5', g:'V', titre:"Le Bouclier de Bronze", theme:"Durcir Linux (défense)", skill:'linuxdef',
+  relique:{ nom:"Le Bouclier", em:'🛡️' }, jeu:'tri3', duree:17,
+  accroche:"Défendre, c'est refermer les portes qu'on n'utilise pas. Les mêmes gestes sauvent un serveur et ton portable.",
+  scenes:[
+    { qui:'hephaistos', t:"J'ai forgé le bouclier d'Achille. Un bon bouclier n'est pas énorme : il est bien placé. Durcir un Linux, c'est ça — retirer le superflu, verrouiller l'essentiel." },
+    { qui:'kryptos', t:"Chaque réglage rapproche ou éloigne du danger. Sépare les bons réflexes de ceux qui affaiblissent." }
+  ],
+  cours:{
+    objectifs:["Réduire la surface d'attaque (mises à jour, services)","Configurer un pare-feu simple (UFW)","Verrouiller l'accès distant (SSH)","Ajouter fail2ban et garder le moindre privilège"],
+    sections:[
+      { t:"Réduire la surface, filtrer l'entrée", h:`
+<p>La <strong>surface d'attaque</strong>, c'est tout ce par quoi on peut entrer. On la réduit :</p>
+<ul>
+<li><strong>Mises à jour</strong> — <span class="mono">sudo apt update && sudo apt full-upgrade</span>. La majorité des intrusions exploitent un logiciel non corrigé.</li>
+<li><strong>Services inutiles</strong> — chaque service qui écoute est une porte. On désactive ceux qu'on n'utilise pas (<span class="mono">systemctl disable</span>).</li>
+<li><strong>Pare-feu</strong> — avec <span class="mono">ufw</span> : <span class="mono">sudo ufw default deny incoming</span>, puis on n'ouvre que le nécessaire (<span class="mono">sudo ufw allow ssh</span>), enfin <span class="mono">sudo ufw enable</span>.</li>
+</ul>
+<div class="keybox"><div class="eyebrow">Le principe</div><p style="margin:6px 0 0">Par défaut, on <strong>refuse</strong> tout ce qui entre, et on ouvre au cas par cas. L'inverse — tout ouvert, on ferme les problèmes après — perd toujours.</p></div>` },
+      { t:"Verrouiller l'accès et surveiller", h:`
+<p>L'accès distant (SSH) est la cible favorite. On le durcit dans <span class="mono">/etc/ssh/sshd_config</span> :</p>
+<ul>
+<li><span class="mono">PermitRootLogin no</span> — pas de connexion directe en root.</li>
+<li><span class="mono">PasswordAuthentication no</span> — connexion par <strong>clé</strong> uniquement, jamais par mot de passe.</li>
+<li><strong>fail2ban</strong> bannit automatiquement une adresse qui multiplie les échecs : une protection gratuite contre la force brute.</li>
+</ul>
+<p>Et toujours : <strong>moindre privilège</strong> (pas de root permanent), et une <strong>sauvegarde</strong>, car une machine durcie mais sans sauvegarde reste fragile.</p>
+<div class="tipbox"><div class="eyebrow">Le même geste partout</div><p style="margin:6px 0 0">Ces réflexes valent pour un serveur d'entreprise comme pour ta VM d'entraînement. Défendre Linux, c'est une hygiène, pas un logiciel magique.</p></div>` }
+    ],
+    retenir:["Mettre à jour d'abord : le vieux logiciel est la porte n°1.","Pare-feu : refuser tout ce qui entre, ouvrir au cas par cas.","SSH : pas de root, connexion par clé uniquement.","fail2ban bannit les attaques par force brute.","Moindre privilège + sauvegarde : jamais l'un sans l'autre."]
+  },
+  jeuData:{
+    kind:'tri',
+    titre:"Durcit, affaiblit, neutre",
+    intro:"Pour chaque choix de configuration, décide : est-ce que ça durcit la machine, ça l'affaiblit, ou c'est neutre pour la sécurité ?",
+    cats:[
+      { n:"Durcit", d:"renforce la défense" },
+      { n:"Affaiblit", d:"crée un risque" },
+      { n:"Neutre", d:"sans effet de sécurité" }
+    ],
+    items:[
+      { t:"Activer UFW avec « deny » par défaut sur l'entrée.", c:0, e:"On refuse tout ce qui entre par défaut : la base d'un bon pare-feu." },
+      { t:"Mettre PermitRootLogin yes dans SSH.", c:1, e:"Autoriser root en direct offre à l'attaquant la cible la plus précieuse. On met « no »." },
+      { t:"Faire les mises à jour de sécurité.", c:0, e:"La majorité des intrusions exploitent un logiciel non mis à jour : c'est prioritaire." },
+      { t:"Désactiver le pare-feu « parce qu'un truc ne marche pas ».", c:1, e:"On ouvre alors toutes les portes. On corrige la vraie règle, on ne coupe pas le pare-feu." },
+      { t:"Changer le fond d'écran du bureau.", c:2, e:"Aucun effet sur la sécurité : purement cosmétique." },
+      { t:"Passer SSH en connexion par clé uniquement.", c:0, e:"Une clé ne se devine pas comme un mot de passe : gros gain contre la force brute." },
+      { t:"Installer fail2ban.", c:0, e:"Il bannit automatiquement les adresses qui multiplient les tentatives ratées." },
+      { t:"Réutiliser le même mot de passe pour root et pour ta session.", c:1, e:"Une seule fuite compromet tout : des secrets distincts, toujours." }
+    ]
+  },
+  quiz:[
+    { t:1, q:"La toute première mesure de durcissement, c'est :", c:["Changer le thème","Mettre le système à jour","Ajouter des logiciels","Désactiver l'écran"], a:1, e:"La plupart des intrusions visent du logiciel non corrigé : la mise à jour d'abord." },
+    { t:1, q:"Un pare-feu bien réglé, par défaut :", c:["Ouvre tout","Refuse ce qui entre et n'ouvre que le nécessaire","Bloque Internet","Ne sert à rien"], a:1, e:"Deny par défaut sur l'entrée, puis on autorise au cas par cas : le bon modèle." },
+    { t:1, q:"Pour SSH, on recommande :", c:["Root autorisé, mot de passe simple","Pas de root, connexion par clé uniquement","Aucune protection","Mot de passe changé chaque heure"], a:1, e:"PermitRootLogin no + clés uniquement : deux réglages qui bloquent l'essentiel des attaques." },
+    { t:2, q:"fail2ban sert à :", c:["Accélérer le disque","Bannir les adresses qui multiplient les échecs de connexion","Chiffrer les fichiers","Installer des paquets"], a:1, e:"Il détecte les tentatives répétées et bannit l'attaquant : anti-force-brute gratuit." },
+    { t:2, q:"Désactiver un service inutile qui écoute sur le réseau :", c:["Affaiblit la machine","Réduit la surface d'attaque","N'a aucun effet","Casse le système"], a:1, e:"Moins de services qui écoutent = moins de portes = moins de risque." },
+    { t:3, q:"« Défendre Linux », au fond, c'est surtout :", c:["Acheter un antivirus cher","Une hygiène : mises à jour, moindre privilège, sauvegardes","Un logiciel magique","Débrancher le réseau"], a:1, e:"La sécurité est une discipline de gestes réguliers, pas un produit qu'on installe une fois." }
+  ]
+},
+{
+  id:'lx6', g:'VI', titre:"L'Ombre du Forgeron", theme:"Linux vu par l'attaquant (labo)", skill:'linuxatt',
+  relique:{ nom:"La Clé volée", em:'🗝️' }, jeu:'terminal', duree:22,
+  accroche:"Épreuve du feu : voir la machine comme un attaquant — pour refermer avant lui. En labo isolé, uniquement.",
+  scenes:[
+    { qui:'kryptos', t:"Dernière salle, et la plus délicate. On regarde Linux avec les yeux de l'attaquant : non pour nuire, mais pour trouver les failles avant lui." },
+    { qui:'hephaistos', t:"Tout ce que tu fais ici se passe dans ta forge à toi — une VM isolée. Sur la machine d'autrui, sans accord écrit, ce serait un délit. Ici, c'est de l'entraînement." },
+    { qui:'kryptos', t:"Tu as un petit accès. Énumère, trouve le maillon faible, deviens root — puis souviens-toi comment tu l'aurais empêché." }
+  ],
+  cours:{
+    objectifs:["Énumérer une machine après un premier accès","Repérer une élévation de privilège classique (sudo, SUID)","Comprendre le lien attaque → correction","Rester strictement dans un cadre légal (labo)"],
+    sections:[
+      { t:"Énumérer, puis élever ses privilèges", h:`
+<p>Après un premier accès (un compte simple), l'attaquant <strong>énumère</strong> : il cherche ce qui traîne et pourrait le faire passer root.</p>
+<ul>
+<li><span class="mono">id</span> — qui suis-je, dans quels groupes.</li>
+<li><span class="mono">sudo -l</span> — qu'ai-je le droit de faire en sudo ? Une règle trop large est souvent la faille.</li>
+<li><span class="mono">find / -perm -4000 2>/dev/null</span> — la liste des programmes <strong>SUID</strong> (qui tournent en root).</li>
+<li>Les tâches planifiées (<span class="mono">cron</span>) et les fichiers modifiables au mauvais endroit.</li>
+</ul>
+<div class="warnbox"><div class="eyebrow" style="color:var(--porphyry)">La faille classique</div><p style="margin:6px 0 0">Un <span class="mono">sudo</span> qui autorise une commande puissante <strong>sans mot de passe</strong> (ou un binaire SUID détourné) permet souvent de devenir root en une ligne. C'est l'erreur de configuration la plus courante, et la plus facile à corriger.</p></div>` },
+      { t:"L'attaque au service de la défense", h:`
+<p>Chaque faille trouvée est une <strong>consigne de durcissement</strong> :</p>
+<ul>
+<li>Un <span class="mono">sudo</span> trop large → on le restreint à la commande stricte nécessaire.</li>
+<li>Un SUID inutile → on retire le bit.</li>
+<li>Un fichier système modifiable par tous → on corrige les droits.</li>
+</ul>
+<p>C'est tout le sens de ce parcours : on apprend l'attaque <strong>pour mieux défendre</strong>. Et on ne la pratique que là où on en a le droit.</p>
+<div class="keybox"><div class="eyebrow">Le cadre, toujours</div><p style="margin:6px 0 0">Ces techniques ne se pratiquent que sur <strong>ta propre machine de labo</strong>, un exercice (TryHackMe, HTB) ou une cible sous accord écrit. Ailleurs, c'est illégal — voir le parcours <em>La Lance d'Arès</em> pour le cadre complet.</p></div>` }
+    ],
+    retenir:["Après un accès : énumérer (id, sudo -l, SUID, cron).","Un sudo « sans mot de passe » trop large = root facile.","Chaque faille trouvée devient une consigne de durcissement.","On attaque pour mieux défendre.","Uniquement en labo isolé ou sous autorisation écrite."]
+  },
+  jeuData:{
+    kind:'terminal',
+    titre:"L'Ombre du Forgeron",
+    intro:"Machine de labo (à toi), accès « tux » obtenu. Énumère, trouve l'élévation de privilège, deviens root et lis le drapeau. Puis retiens comment l'empêcher. help, hint, submit <drapeau>.",
+    prompt:"tux@labo",
+    cible:"machine de labo isolée",
+    objectifs:["Vérifier ton identité et tes groupes","Lister tes droits sudo","Repérer la commande sudo mal configurée","Devenir root et lire le drapeau"],
+    flags:["KRYPTOS{sud0_m4l_c0nf1gur3_3st_r00t}"],
+    aide:[
+      "Commence par 'id' pour voir qui tu es.",
+      "Puis 'sudo -l' : que peux-tu lancer en sudo ?",
+      "Une règle autorise 'find' en root sans mot de passe. find peut lancer une commande...",
+      "Tape 'sudo find' (le labo simule l'exploitation) pour obtenir un shell root, puis 'cat /root/flag.txt'."
+    ],
+    commandes:"id · sudo -l · find / -perm -4000 · sudo find · cat <fichier>",
+    rep:[
+      { c:/^id\b/i, o:"uid=1000(tux) gid=1000(tux) groups=1000(tux)\n\n→ Utilisateur normal, sans groupe privilégié. Regarde du côté de sudo.", set:'id' },
+      { c:/^sudo\s+-l\b/i, o:"L'utilisateur tux peut lancer, sur cette machine :\n    (root) NOPASSWD: /usr/bin/find\n\n→ 'find' en root, SANS mot de passe. Or find peut exécuter des commandes (-exec). C'est la faille.", set:'sudol' },
+      { c:/^find\s+\/\s+-perm\s+-4000/i, o:"/usr/bin/passwd\n/usr/bin/sudo\n/usr/bin/find\n\n→ find est SUID/autorisé : détournable pour élever ses privilèges.", set:'suid' },
+      { c:/^sudo\s+find\b/i, o:"# (find -exec lance un shell en root)\n# whoami\nroot\n# tu es root sur la machine de labo.\n\n→ Le cœur du système t'est ouvert : 'cat /root/flag.txt'.", set:'root' },
+      { c:/^cat\s+\/root\/flag\.txt/i, o:"KRYPTOS{sud0_m4l_c0nf1gur3_3st_r00t}\n\n→ Drapeau obtenu. Correction : retirer la règle NOPASSWD sur find, ou la restreindre. 'submit <drapeau>'.", set:'flag', flag:"KRYPTOS{sud0_m4l_c0nf1gur3_3st_r00t}" },
+      { c:/^cat\s+\/root\//i, o:"cat: permission refusée. Tu n'es pas encore root : exploite la règle sudo d'abord.", set:'denied' }
+    ]
+  },
+  quiz:[
+    { t:1, q:"Après un premier accès, l'attaquant commence par :", c:["Tout effacer","Énumérer : chercher ce qui pourrait l'élever","Éteindre la machine","Changer le fond d'écran"], a:1, e:"L'énumération (id, sudo -l, SUID, cron) révèle les chemins vers root." },
+    { t:1, q:"La commande 'sudo -l' montre :", c:["La liste des fichiers","Ce que tu as le droit de lancer en sudo","Les processus","Les journaux"], a:1, e:"Elle liste tes autorisations sudo : une règle trop large y saute aux yeux." },
+    { t:1, q:"Un bit SUID sur un programme signifie qu'il :", c:["Est caché","S'exécute avec les droits de son propriétaire (souvent root)","Est chiffré","Est en lecture seule"], a:1, e:"SUID = exécution avec les droits du propriétaire : détourné, il mène à root." },
+    { t:2, q:"Une règle sudo « NOPASSWD » sur une commande puissante est :", c:["Pratique et sûre","Une faille d'élévation classique","Obligatoire","Sans risque"], a:1, e:"Sans mot de passe, une commande capable de lancer d'autres commandes donne root en une ligne." },
+    { t:2, q:"À quoi sert d'apprendre l'attaque, dans ce parcours ?", c:["À pirater des inconnus","À trouver et corriger les failles avant l'attaquant","À rien","À gagner des points"], a:1, e:"Chaque faille repérée devient une consigne de durcissement : attaquer pour mieux défendre." },
+    { t:3, q:"Ces techniques d'élévation, on les pratique :", c:["Sur n'importe quelle machine","Uniquement en labo isolé ou sous autorisation écrite","Sur le serveur du collège","En cachette"], a:1, e:"Hors d'un cadre autorisé, c'est un délit. Labo, CTF, ou accord écrit : jamais autre chose." }
+  ]
+}
+];
+
+/* le guide Héphaïstos (déjà connu de voix()) accompagne ce parcours */
+(function () {
+  if (typeof guideDe === 'function') {
+    var _gd0 = guideDe;
+    guideDe = function (p) { return (p && p.id === 'linux') ? 'hephaistos' : _gd0(p); };
+  }
+})();
+
+/* Le Feu d'Héphaïstos rejoint les parcours LIBRES (hors trilogie) */
+(function () {
+  if (PARCOURS.some(function (p) { return p.id === 'linux'; })) return;
+  PARCOURS.push({
+    id:'linux', route:'linux', nom:"Le Feu d'Héphaïstos", sous:"Linux : attaque & défense",
+    hors:true, em:'🐧',
+    intro:{ id:'linux-intro', scenes:LINUXP_INTRO, titre:"La forge d'Héphaïstos" }, mods:LINUXP,
+    pitch:"Six salles à choix multiples pour maîtriser Linux, de débutant à pro : les fondations, le terminal, les permissions, les rouages du système, puis deux salles jumelles — durcir la machine (défense) et la voir comme un attaquant (offensive, en labo). Deux consoles simulées et un guide d'installation à part."
+  });
+})();
+
+/* on insère les entrées avant le Panthéon, dans la partie libre :
+   le parcours Linux, puis le tuto d'installation (une page à part) */
 (function () {
   if (NAV.some(function (n) { return n.k === 'linux'; })) return;
   var i = NAV.findIndex(function (n) { return n.k === 'panth'; });
-  NAV.splice(i < 0 ? NAV.length : i, 0, { k:'linux', i:'linux', l:"Installer Linux", s:"Tuto pas à pas" });
+  NAV.splice(i < 0 ? NAV.length : i, 0,
+    { k:'linux',   i:'linux', l:"Linux",           s:"Attaque & défense" },
+    { k:'install', i:'linux', l:"Installer Linux", s:"Machine virtuelle" });
 })();
 
 function etapesHTML(liste) {
@@ -11892,8 +12436,11 @@ function vueLinux() {
     <header class="stack gap-12">
       <div class="eyebrow" style="color:var(--verdigris)">Tuto libre · pratique</div>
       <h1>Installer Linux</h1>
-      <p class="lede">Pour t'entraîner pour de vrai — et parce que la plupart des outils de sécurité vivent dessus — il te faut Linux. Ce guide couvre les quatre façons de l'obtenir, de la plus sûre à la plus avancée, pas à pas. Aucune n'exige d'être expert.</p>
-      <button class="btn btn-sm no-print" style="align-self:flex-start" onclick="window.print()">Imprimer le tuto</button>
+      <p class="lede">Pour t'entraîner pour de vrai — et parce que la plupart des outils de sécurité vivent dessus — il te faut Linux. Ce guide couvre les quatre façons de l'obtenir, de la plus sûre à la plus avancée, pas à pas. Aucune n'exige d'être expert. Une fois Linux en place, le parcours <b>Le Feu d'Héphaïstos</b> t'apprend à le maîtriser, de débutant à pro.</p>
+      <div class="row gap-10 wrap">
+        <button class="btn btn-primary btn-sm" data-go="linux">Le parcours Linux →</button>
+        <button class="btn btn-sm no-print" onclick="window.print()">Imprimer le tuto</button>
+      </div>
     </header>
 
     ${voix('kryptos', "Ne te lance pas dans la méthode la plus impressionnante. Commence par la machine virtuelle : Linux tourne dans une fenêtre, tu peux tout casser puis tout restaurer, et ton Windows n'est jamais touché. C'est là que se forment les débutants.")}
@@ -12132,7 +12679,7 @@ function rendre() {
   else if (b[0] === 'sanct')  v.innerHTML = b[1] ? vueCure(b[1]) : vueSanctuaire();
   else if (b[0] === 'panth')  v.innerHTML = vuePantheon();
   else if (b[0] === 'compte') v.innerHTML = vueCompte();
-  else if (b[0] === 'linux')  v.innerHTML = vueLinux();
+  else if (b[0] === 'install') v.innerHTML = vueLinux();
   else if (b[0] === 'chap')   { lancerChapitre(b[1]); return; }
   else if (b[0] === 'jeu')    { lancerJeuLibre(b[1]); return; }
   else if (b[0] === 'pro') {
